@@ -36,7 +36,11 @@ function renderDeals(deals) {
     dealGrid.innerHTML = deals.map((deal, index) => `
         <div class="deal-card" style="animation-delay: ${index * 0.05}s">
             <div class="image-container">
-                <img src="${deal.img_url || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${deal.title}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <img src="${deal.img_url ? deal.img_url : 'https://via.placeholder.com/300x200?text=No+Image'}" 
+                     alt="${deal.title}" 
+                     loading="lazy"
+                     referrerpolicy="no-referrer"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';">
             </div>
             <div class="card-content">
                 <div class="deal-source">${deal.source}</div>
