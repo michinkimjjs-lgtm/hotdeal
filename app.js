@@ -1,7 +1,7 @@
 // Supabase Configuration
 const SUPABASE_URL = 'https://zvlntvovzffizoruwxqx.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_QQaxPklEyj2C7IVhtmspMg_AQmHkQKV';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const dealGrid = document.getElementById('deal-grid');
 const searchInput = document.getElementById('search-input');
@@ -11,7 +11,7 @@ let allDeals = [];
 // Fetch deals from Supabase
 async function fetchDeals() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('hotdeals')
             .select('*')
             .order('id', { ascending: false });
@@ -64,7 +64,7 @@ searchInput.addEventListener('input', (e) => {
 fetchDeals();
 
 // Real-time updates
-const channel = supabase
+const channel = supabaseClient
     .channel('hotdeals_changes')
     .on('postgres_changes', { event: '*', table: 'hotdeals' }, (payload) => {
         console.log('Change received!', payload);
