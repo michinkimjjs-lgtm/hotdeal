@@ -5,10 +5,11 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const dealGrid = document.getElementById('deal-grid');
 const searchInput = document.getElementById('search-input');
+const categoryBtns = document.querySelectorAll('.cat-btn');
 
 let allDeals = [];
+let currentCategory = 'ALL';
 
-// Fetch deals from Supabase
 // Pagination State
 let currentPage = 1;
 const ITEMS_PER_PAGE = 20;
@@ -24,11 +25,24 @@ async function fetchDeals(page = 1) {
     const to = from + ITEMS_PER_PAGE - 1;
 
     try {
-        const { data, error, count } = await supabaseClient
+        let query = supabaseClient
             .from('hotdeals')
-            .select('*', { count: 'exact' })
-            .order('id', { ascending: false })
-            .range(from, to);
+            .select('*', { count: 'exact' });
+
+        // Apply Category Filter
+        if (currentCategory === 'HOT') {
+            // 인기: 댓글 많은 순
+            query = query.order('comment_count', { ascending: false });
+        } else {
+            // 일반 카테고리 필터
+            if (currentCategory !== 'ALL') {
+                query = query.eq('category', currentCategory);
+            }
+            // 기본 정렬: 최신순
+            query = query.order('id', { ascending: false });
+        }
+
+        const { data, error, count } = await query.range(from, to);
 
         if (error) throw error;
 
@@ -43,10 +57,28 @@ async function fetchDeals(page = 1) {
     }
 }
 
+// Category Button Event Listeners
+categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Update Active State
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update State
+        currentCategory = btn.dataset.category;
+
+        // Reset Search Input when changing category
+        searchInput.value = '';
+
+        // Fetch
+        fetchDeals(1);
+    });
+});
+
 // Render deals to the grid
 function renderDeals(deals) {
     if (deals.length === 0) {
-        dealGrid.innerHTML = `<div class="loading">데이터가 없습니다.</div>`;
+        dealGrid.innerHTML = `<div class="loading">해당하는 핫딜이 없습니다.</div>`;
         return;
     }
 

@@ -1,0 +1,974 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="PPOMPPU CO.">
+<meta name="description" content="뽐뿌게시판은 국내 쇼핑몰에서 판매중인 가성비 좋은 상품과 쇼핑정보를 공유하는 공간입니다.">
+<meta name="keywords" content="">
+<script src="https://www.googleoptimize.com/optimize.js?id=OPT-N6TJ7LN"></script>
+<script async='async' src='//www.googletagservices.com/tag/js/gpt.js'></script>
+<script>var googletag = googletag || {};googletag.cmd = googletag.cmd || [];var display_googletags = display_googletags || [];</script>
+<meta property="og:image" content="//cdn2.ppomppu.co.kr/images/icon_app_20160427.png" />
+<meta property="og:site_name" content="뽐뿌" />
+<meta name="google-adsense-account" content="ca-pub-3252008906353786">
+<title>뽐뿌 - 뽐뿌게시판</title>
+<link rel="stylesheet" type="text/css" href="//cdn3.ppomppu.co.kr/css/stylesheet_newest.css?v=2026020300" />
+<!--[if IE]><link rel="stylesheet" type="text/css" href="//www.ppomppu.co.kr/css/stylesheet_ms.css?v=2026020300" /><![endif]-->
+<link rel="shortcut icon" href="//img.ppomppu.co.kr/favicon.ico" />
+<link rel="apple-touch-icon" href="//img.ppomppu.co.kr/images/nn128.jpeg" />
+<script>
+var G_HOME_URL    = "https://www.ppomppu.co.kr";
+var G_WWW_URL     = "https://www.ppomppu.co.kr";
+var G_WWW_REL_URL = "//www.ppomppu.co.kr";
+var G_MOB_URL     = "https://m.ppomppu.co.kr";
+var G_MOB_REL_URL = "//m.ppomppu.co.kr";
+var G_NIC_URL     = "//nic.ppomppu.co.kr";
+var G_MEMO_URL    = "https://memo.ppomppu.co.kr";
+var G_S_URL       = "https://s.ppomppu.co.kr";
+var G_HOME_SSL_URL= "https://www.ppomppu.co.kr";
+var G_WWW_SSL_URL = "https://www.ppomppu.co.kr";
+var G_MOB_SSL_URL = "https://m.ppomppu.co.kr";
+var G_MEMO_SSL_URL= "https://memo.ppomppu.co.kr";
+var G_S_SSL_URL   = "https://s.ppomppu.co.kr";
+var G_STATIC_URL  = "//static.ppomppu.co.kr";
+var G_IMG_URL     = "//img.ppomppu.co.kr";
+var G_CDN_URL     = "//cdn2.ppomppu.co.kr";
+var G_WWW_HREF_URL = "";
+var G_IS_MOB      = "";
+var G_IS_DARK = "";
+var G_HOTKEY_ENABLE = "1";
+var G_HOTKEY_STR = "";
+var G_SKIN_DIR = "skin/DQ_Revolution_BBS_New1";
+var G_BBS_ID = "ppomppu";
+var G_IS_GUEST = 1;
+var G_IS_GUEST_BOARD = false;
+var G_IS_MAIN = false;
+var CSS_PC = "2026020300";
+var G_USE_VIEW_LIST = 0;
+</script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/default3.js?v=2026020301"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery.rolling.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery.elipsis.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/writeCapture.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery.writeCapture.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/jquery.lazyload.js?v=2"></script>
+<script type="text/javascript" src="/js/header.js?v=2026020301"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-1778193-1', {'cookieDomain': 'ppomppu.co.kr'});
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+</script>
+
+<!-- GA4 -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-641CFJ8BV0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  
+  gtag('config', 'G-641CFJ8BV0', {'cookieDomain': 'ppomppu.co.kr'});
+  gtag('require', 'linkid', 'linkid.js');
+  gtag('send', 'pageview');
+</script></head>
+<body>
+<div class="wrapper">
+<div class="sidebar">
+<div class="floating-banner">
+<div id="pp_ban_right" class="ad-banner" style="min-width:160px;min-height:600px;">
+  <script>
+                        googletag.cmd.push(function() {
+                        googletag.defineSlot('/65120695/r_banner_f', [[200, 600],[160, 600]], 'r_banner_f_1').addService(googletag.pubads());
+                        });
+                        </script>
+                        <div id='r_banner_f_1' class='JS-div_gpt_ad' style=' min-width:160px;min-height:600px;margin:0 auto'></div>
+                        </div>
+<div style='height:30px'></div></div><!--/.floating-banner-->
+</div><!--/.aside-->
+<div class="contents">
+<div class="contents_header_sub_space off ">&nbsp;</div>
+<div class="contents_header abs">
+<div class="header">
+<div class="wrap">
+<a href="https://www.ppomppu.co.kr/index.php" class="logo-sm"><img src="//cdn2.ppomppu.co.kr/images/logo.png" alt="뽐뿌" /> </a>
+<a href="/zboard/zboard.php?id=ppomppu" class="title-image">뽐뿌</a>
+<div class="ad-banner header-banner" id="pp_ban_top" style="min-width:1px;min-height:60px;">
+<div style='text-align:center;width:100%;'><div class="w2g-slot" data-domain="ppomppu.co.kr" data-slot="w2g-slot7"></div></div></div>
+</div><!--/.header-->
+</div><!--/.wrap-->
+
+            <!-- Top navigation -->
+            <div class="top-nav">
+                <ul>
+                    <li class="menu01 active"><a href="/zboard/zboard.php?id=ppomppu" class="menu">뽐뿌</a>
+                                                        <div class="sub-menu">
+                                    
+                                    <ul>
+                                        <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=ppomppu">뽐뿌게시판</a></li>
+                                                                                <li><a href="/zboard/zboard.php?id=ppomppu2">휴대폰뽐뿌</a></li>
+                                        <li><a href="/zboard/zboard.php?id=ppomppu4">해외뽐뿌</a></li>
+                                        <li class=""><a href="/zboard/zboard.php?id=ppomppu8">알리뽐뿌</a></li>
+                                        <li class="new"><a href="/hotdeal/">뽐뿌핫딜</a></li>
+                                        <li><a href="/zboard/zboard.php?id=pmarket">쇼핑뽐뿌</a></li>
+
+                                        <li class="divider strong"><a href="/zboard/zboard.php?id=pmarket2">휴대폰업체</a></li>
+                                        <li class="new"><a href="/zboard/zboard.php?id=pmarket3">인터넷가입업체</a></li>
+                                        <li><a href="/zboard/zboard.php?id=card_market">카드업체</a></li>
+                                        <li><a href="/zboard/zboard.php?id=pmarket7">렌탈업체</a></li>
+                                        <li><a href="/zboard/zboard.php?id=pmarket8">보험업체</a></li>
+                                        
+                                        
+                                        
+                                        
+																				                                    </ul>
+                                </div>
+
+                    </li>
+                    <li class="menu02 "><a href="/recent_main_article.php?type=event"
+                        class="menu">이벤트</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=event2">이벤트게시판</a></li>
+                                <li><a href="/zboard/zboard.php?id=coupon">쿠폰게시판</a></li>
+                                <li><a href="/zboard/zboard.php?id=experience">체험단모집</a></li>
+                                <li><a href="/zboard/zboard.php?id=wcoupon">다운로드 쿠폰</a></li>
+                                <!-- <li class="divider"><a href="/zboard/zboard.php?id=love">사랑공간</a></li> -->
+                                <li class="divider strong"><a href="/zboard/zboard.php?id=event_ppomppu">뽐뿌이벤트</a></li>
+                                                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu03 "><a href="/recent_main_article.php?type=info" class="menu">정보</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=etc_info">이것저것공유</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=youtube_info">유튜브/숏폼</a></li>
+                                <li><a href="/books/index.php">도서정보</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=restaurant">맛집정보</a></li>
+                                <li><a href="/alcohol_info.php">주류정보</a></li>                                <li class="divider strong"><a href="/zboard/zboard.php?id=review2">사용기</a></li>
+                                <li><a href="/zboard/zboard.php?id=receive">구매후기</a></li>
+                                <li class="divider"><a href="/zboard/zboard.php?id=ppomapp">앱정보</a></li>
+                                <li><a href="/zboard/zboard.php?id=guin">구인정보</a></li>
+                                <li class="divider strong"><a href="/fortune/index.html">무료운세</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=ppom_game">뽐뿌게임</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu04 "><a href="/zboard/zboard.php?id=freeboard" class="menu">커뮤니티</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/all_bbs.php">최신글</a></li>
+                                <li><a href="/zboard/zboard.php?id=freeboard">자유게시판</a></li>
+                                <li ><a href="/zboard/zboard.php?id=issue">정치자유게시판</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=pol_left">진보공감게시판</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=pol_right">보수공감게시판</a></li>
+                                <li class="strong"><a href="/zboard/zboard.php?id=humor">유머/감동</a></li>
+                                <li class="divider"><a href="/zboard/zboard.php?id=grade">신입게시판</a></li>
+                                
+                                <!-- <li class="new"><a href="/zboard/zboard.php?id=campaign">뽐뿌미션</a></li> -->
+                                <li class="divider strong"><a href="/hot.php">HOT게시글</a></li>
+                                <li><a href="/hot_comment.php">HOT코멘트</a></li>
+                                                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu05 "><a href="/zboard/zboard.php?id=free_gallery" class="menu">갤러리</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=free_gallery">자유갤러리</a></li>
+                                                                <li><a href="/zboard/zboard.php?id=star">연예인갤러리</a></li>
+                                <li><a href="/zboard/zboard.php?id=announcer">아나운서갤러리</a></li>
+                                <li class="divider"><a href="/zboard/zboard.php?id=sketch_gallery">그림갤러리</a></li>
+                                <li><a href="/zboard/zboard.php?id=bg_gallery">바탕화면갤러리</a></li>
+                                <li><a href="/zboard/zboard.php?id=jjalbang">짤방갤러리</a></li>
+                                <!--<li><a href="/zboard/zboard.php?id=review_gallery">닉콘신청갤러리</a></li>-->
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu06 "><a href="/recent_main_article.php?type=market" class="menu">장터</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=market">뽐뿌장터</a></li>
+                                <li><a href="/zboard/zboard.php?id=market_phone">휴대폰장터</a></li>
+                                <li class=""><a href="/zboard/zboard.php?id=market_data">데이터장터</a></li>
+                                <li><a href="/zboard/zboard.php?id=onmarket">온라인장터</a></li>
+                                                                <li class=""><a href="/zboard/zboard.php?id=market_ecig">전자담배장터</a></li>
+                                                                                                <li class="divider strong new"><a href="/zboard/zboard.php?id=gonggu">OTT/멤버십</a></li>
+                                <li><a href="/zboard/zboard.php?id=market_agent">해외구매대행</a></li>
+                                <li class="divider strong"><a href="/zboard/zboard.php?id=market_story">장터이야기</a></li>
+                                <li><a href="/zboard/zboard.php?id=relay">추천릴레이</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu07 extand "><a href="/recent_forum_article.php" class="menu">포럼</a>
+                    <i class="caret"></i>
+                    <!-- 공식 -->
+                    <div class="sub-menu forum-favourite official" id="favorite-forum-panel"></div>
+                    </li>
+                    <li class="menu08 "><a href="/recent_main_article.php?type=news" class="menu">뉴스</a>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="strong"><i class="caret"></i><a href="/zboard/zboard.php?id=news_broadcast">방송/연예</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_sports">스포츠</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_pol_eco">정치</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_economy">경제</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_society">사회</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_culture">문화</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_life">라이프</a></li>
+                                <li><a href="/zboard/zboard.php?id=news_travel">여행</a></li>
+                                <li><a href="/zboard/zboard.php?id=news2">IT/테크</a></li>
+                                <li><a href="/zboard/zboard.php?id=news">지역</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu09 extand02 "><a href="/recent_main_article.php?type=consult" class="menu">상담실</a>
+                        <i class="caret"></i>
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="title">경제/자동차</li>
+                                <li class="strong"><a href="/zboard/zboard.php?id=consulting">보험상담</a></li>
+                                <li><a href="/zboard/zboard.php?id=loan_consult">대출상담</a></li>
+                                <li class="new"><a href="/zboard/zboard.php?id=phone_consult">휴대폰상담</a></li>
+                                <li class="strong"><a href="/zboard/zboard.php?id=tele_consult">인터넷가입상담</a></li>
+                                <li><a href="/zboard/zboard.php?id=card_consult">카드상담</a></li>
+                                <li><a href="/zboard/zboard.php?id=rental_consult">렌탈상담</a></li>
+                                <li class="divider strong"><a href="/zboard/zboard.php?id=car_service">신차견적상담</a></li>
+                                <li class="divider new"><a href="/zboard/zboard.php?id=pc_consult">PC견적상담</a></li>
+
+                            </ul>
+                            <ul>
+                                <li class="title">생활/전문가</li>
+                                <li><a href="/zboard/zboard.php?id=wedding_consult">웨딩상담</a></li>
+                                <li><a href="/zboard/zboard.php?id=move_consult">이사상담</a></li>
+                                <li><a href="/zboard/zboard.php?id=aircon_consult">에어컨설치상담</a></li>
+                                <li style="letter-spacing:-2px !important;"><a href="/zboard/zboard.php?id=security_guard_consult">보안경비상담</a></li>
+                                <li class="strong"><a href="/zboard/zboard.php?id=etc_consult">가전견적상담</a></li>
+                                <li class="divider"><a href="/zboard/zboard.php?id=law_consult">법률상담</a></li>
+                                <li ><a href="/zboard/zboard.php?id=tax_consult">경영지원상담</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- //Top navigation -->
+            
+        <div class="sub-nav">
+                            <form method="get" name="search1" action="https://www.ppomppu.co.kr/search_bbs.php">
+                    <input type="hidden" name="bbs_cate" value="">
+                    <div class="input-search" style="width:290px;">
+                                                    <input type="text" name="keyword" value="" />
+                                            </div>
+                                            <div id="subpage-hot-keyword" class="hot-keyword">
+                            <span id="subpage-hot-keyword-toggle-btn" style="">▼</span>
+                            <div id="subpage-hot-keyword-wrapper" class="hot-keyword-wrapper">
+                                                                    <a href="/search_bbs.php?order_type=date&keyword=%BF%C0%C7%F6%B1%D4" ><span> 오현규</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%B1%E8%BA%B4%C7%E5" ><span> 김병헌</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%C0%FC%C7%D1%B1%E6" ><span> 전한길</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%C7%D0%C0%DA%B1%DD%B4%EB%C3%E2" ><span> 학자금대출</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%B9%CC%B7%A1%BF%A1%BC%C2%C1%F5%B1%C7+%C1%D6%B0%A1" ><span> 미래에셋증권 주가</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%C7%D1%C8%AD%BD%C3%BD%BA%C5%DB" ><span> 한화시스템</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%B1%B9%C0%E5" ><span> 국장</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%C7%D1%BA%B4%B5%B5" ><span> 한병도</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%BF%AC%BC%BC%B4%EB%C7%D0%B1%B3" ><span> 연세대학교</span></a>
+
+                                                                                                        <a href="/search_bbs.php?order_type=date&keyword=%BD%C7%B8%AE%C4%DC%C5%F5" ><span> 실리콘투</span></a>
+
+                                                                                                </div>
+                        </div>
+                                        <button type="submit" class="btn btn-search"></button>
+                </form>
+
+                                        <script>/* header.js 로 이관 */</script>
+
+
+<div class="sm_loginwrap" >
+    <span class="smloginbtnbox"><a href="javascript:toggleHelpLayerOn('loginsm');" class="loginsmbtn">로그인</a></span>
+    <span><a href="/https_redirect.php"  class="memrog" >회원가입</a>|<a href="https://www.ppomppu.co.kr/auth/auth.php?tab=id" target=_blank class="idpw">아이디</a><img src="/images/main/dot03.gif"><a href="https://www.ppomppu.co.kr/auth/auth.php?tab=pwd" target=_blank class="idpw" >비번찾기</a></span>
+</div>
+<div class="loginbox02" id="loginsm" style="display:none;">
+<form name="zb_login" method="post" action="https://www.ppomppu.co.kr/zboard/login_check.php" onsubmit="return zb_login_check_submit();">
+    <input type="hidden" name="s_url" value="/zboard/zboard.php?id=ppomppu">
+    <input type="hidden" name="secure1" checked=checked value="1">
+    <div class="secuopt"><!--span class="secubtn"><font color="#FF7713">보안접속 <a href="#" id="secure_name" onclick='javascript:change_ssl()'><strong>ON</strong></a></font></span--> <span class="autologin"><label><input type="checkbox" name="auto_login" value="1" onclick="check_autologin()" /> </label>자동로그인</span><span class="closebox"  style="float:right; padding-right:5px;"><a href="javascript:toggleHelpLayerOff('loginsm');"><img src="/images/main/close01.gif" alt="닫기" /></a></span></div>
+        <ul class="loginput">
+            <li><INPUT class="idinput" title="아이디입력" type=text  name="user_id" id="user_id" maxlength="20" style="background:url('/images/main/ppimg_20100617_007.gif') no-repeat; background-position:4px 5px;background-color:#fff;"/></li>
+            <li><INPUT class="pwinput" title="비밀번호입력" type="password"  name="password" maxlength="20" style="background:url('/images/main/ppimg_20100617_008.gif') no-repeat; background-position:4px 5px;background-color:#fff;" /></li>
+            <li class="loginbtn"><input type=image src="/images/main/login_mainbtn.gif" alt="로그인"></li>
+        </ul>
+</form>
+</div>
+        </div>
+            </div>
+            <!-- ST container ST -->
+            <div class="container">
+
+                <div align="center"><div id="header_box"><div class="bbs_title">
+<span class="bname"><a href="/zboard/zboard.php?id=ppomppu">뽐뿌게시판</a>&nbsp;입니다.</span>
+<ul class="title-add">
+<li><a href="/zboard/zboard.php?id=review2">사용기</a></li>
+<li><a href="/zboard/zboard.php?id=receive">구매후기</a></li>
+<li><a href="/zboard/zboard.php?id=coupon">쿠폰게시판</a></li>
+<li><a href="/zboard/zboard.php?id=social">쇼핑포럼</a></li>
+<li><a href="/hotdeal/">뽐뿌핫딜</a></li>
+<li><a href="/myinfo/member_bookmark.php"><img src="//cdn2.ppomppu.co.kr/images/bookmark_icon_button.png" alt="북마크 아이콘" title="북마크"></a></li>
+</ul>
+</div>
+<div class="desc">
+가성비 좋은 상품과 쇼핑정보를 공유하는 공간입니다. <a href='/zboard/view.php?id=regulation&page=2&divpage=1&no=7' target='_blank'>[뽐뿌게시판 이용규칙]</a> 
+</div></div>  <script>
+                        googletag.cmd.push(function() {
+                        googletag.defineSlot('/65120695/list2_f', [[800, 100], [728, 90]], 'div-gpt-ad-1683858142480-0').addService(googletag.pubads());
+                        });
+                        </script>
+                        <div class='ad_container'>
+                        <div id='div-gpt-ad-1683858142480-0' class='JS-div_gpt_ad' style=' min-width:728px;height:100px;margin:0 auto'></div>
+                        </div>
+                        	<style type="text/css">
+	.ajaxtooltip{
+	position: absolute; /*leave this alone*/
+	display: none; /*leave this alone*/
+	left: 0; /*leave this alone*/
+	top: 0; /*leave this alone*/
+	background: lightyellow;
+	border: 1px solid #000000;
+	padding: 0px;
+	}
+	</style>
+	<script> var mouseover_noimage_path = "//static.ppomppu.co.kr/www/img/noimage/noimage_400x300.jpg"; </script>
+	<script type="text/javascript" src="/js/ajaxtooltip.js?v=2026020301"></script>
+
+
+
+<SCRIPT LANGUAGE="JavaScript" type="text/JavaScript">
+var id="ppomppu", no="", page="1", select_arrange="headnum", desc="asc", page_num="20", keyword="", category="", sn="off", ss="off", sc="off", su="", url="/zboard/zboard.php?id=ppomppu", pic_overLimit1="900", pic_overLimit2="900", dir="skin/DQ_Revolution_BBS_New1";
+</SCRIPT>
+
+
+
+	<script language="JavaScript" src="/js/default.js?v=2026020301" type="text/JavaScript"></script>
+
+
+
+
+
+
+<div class="hot_tag" >
+	<span> <b>인기</b> 검색어</span>
+	<span><a href='/zboard/zboard.php?id=ppomppu&keyword=%BD%D2'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >쌀</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%BE%CB%B6%E3%C6%F9'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >알뜰폰</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%BE%CB%B6%E3'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >알뜰</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%BB%EF%B4%D9%BC%F6'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >삼다수</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%B9%B0%C6%BC%BD%B4'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >물티슈</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%C7%D1%BF%EC'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >한우</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%B9%D9%C1%F6'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >바지</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%B3%EB%C6%AE%BA%CF'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >노트북</span></a><a href='/zboard/zboard.php?id=ppomppu&keyword=%B8%AE%C0%FC%B0%ED'><span class="h_tag" style='line-height:21px;'><img src='/images/serch_ico.png' alt='돋보기아이콘' >리전고</span></a></span>
+</div>
+<script>
+	$(document).ready(function(){
+
+		$('.hot_tag span:last-child span.h_tag').on('mouseover',function(){
+    		$(this).children().attr('src','/images/serch_ico2.png');
+    		$(this).css({'background':'#ffab36','color':'#fff','border-color':'#ffab36'});
+   		});
+
+		$('.hot_tag span:last-child span.h_tag').on('mouseout',function(){
+    		$(this).children().attr('src','/images/serch_ico.png');
+    		$(this).css({'background':'#fff','color':'#606060','border-color':'#c9c6c6'});
+   		});
+
+	});
+</script>
+
+
+
+<table cellpadding=0 cellspacing=0 width=900 border=0><tr><td colspan=11 height=5>
+<div class="navcontainer"><ul id="navlist"><li><a id=current href=zboard.php?id=ppomppu onfocus='blur()'><b>전체</b></a></li><li><a  href=zboard.php?id=ppomppu&category=1 onfocus='blur()' >기타</a></li><li><a  href=zboard.php?id=ppomppu&category=4 onfocus='blur()' >컴퓨터</a></li><li><a  href=zboard.php?id=ppomppu&category=5 onfocus='blur()' >디지털</a></li><li><a  href=zboard.php?id=ppomppu&category=6 onfocus='blur()' >식품/건강</a></li><li><a  href=zboard.php?id=ppomppu&category=9 onfocus='blur()' >가전/가구</a></li><li><a  href=zboard.php?id=ppomppu&category=12 onfocus='blur()' >의류/잡화</a></li>    	<script>
+    	$(document).ready(function(){
+    		$('#cate_select').change(function() {
+        		location.href = $('#cate_select option:selected').val();
+    		});
+    	});
+    	</script>
+<li><a  href="/zboard/zboard.php?id=ppomppu&hotlist_flag=999" onfocus="blur()"><mark><em>핫</em>/인기</mark></a></li></ul></div></td></tr></table>
+<table id=revolution_main_table border=0 cellspacing=0 cellpadding=0 width=900 class="info_bg bbs_new1 bid_ppomppu " >
+    <colgroup>
+	<col width=60></col><col width=3></col>		<!--<col width=20></col><col width=3></col>-->		<col width=></col>	<col width=3></col><col width=80></col>	<col width=3></col><col width=60></col>	<col width=3></col><col width=40></col>	<col width=3></col><col width=35></col>    </colgroup>
+
+<form method=post name=list action=list_all.php>
+<input type=hidden name=page value=1>
+<input type=hidden name=id value=ppomppu>
+<input type=hidden name=select_arrange value=headnum>
+<input type=hidden name=desc value=asc>
+<input type=hidden name=page_num value=20>
+<input type=hidden name=selected>
+<input type=hidden name=exec>
+<input type=hidden name=keyword value="">
+<input type=hidden name=sn value="off">
+<input type=hidden name=ss value="Array">
+<input type=hidden name=sc value="off">
+
+<tr>
+	<td colspan="11" class="title_bg_02"></td>
+</tr>
+
+
+<tr align=center valign=middle class='title_bg' style='height:27px;'>
+	<td class='list_tspace' style="text-align:center;"><nobr>&nbsp;&nbsp;&nbsp;<font class=title_text>번호&nbsp;&nbsp;&nbsp;</nobr></td><td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td>    	<!--<td class='list_tspace' style="text-align:center;"><font class=title_text>C</font></a></td><td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td>-->		<td class='list_tspace' style="text-align:center;"><font class=title_text>제목</td>	<td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td><td class='list_tspace' style="text-align:center;"><nobr><font class=title_text>글쓴이</nobr></td>	<td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td><td class='list_tspace' style="text-align:center;"><nobr><font class=title_text>등록일</nobr></td>	<td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td><td class='list_tspace' style="text-align:center;"><nobr><font class=title_text2>추천</font></nobr></td>	<td style='padding-top:5px'><img src=/zboard/dq_css/separator.gif></td><td class='list_tspace' style="text-align:center;"><nobr><font class=title_text2>&nbsp;&nbsp;&nbsp;조회&nbsp;&nbsp;&nbsp;</font></nobr></td></tr>
+<tr>
+	<td colspan="11" class="title_bg_03"></td>
+</tr>
+<tr align="center" id=page_show_noti_1 class="baseNotice" name="page_show_noti_1" style="">
+        <td class="baseList-space baseList-numb" colspan="2"><span id="notice_con">공지</span></td>
+                
+            <td class="baseList-space" align="left"><a class="baseList-title" href="view.php?id=regulation&page=1&divpage=202&no=6">전체 게시판 이용 규칙</a></td>
+    
+    <td colspan=2 class='list_vspace' align="left"><div class='list_name'><nobr class='list_vspace'><a class='baseList-name' href=# onClick="return false"><span class=list_name><i class="nlevel lvP"></i>관리자3</span></a></nobr></div></td>    <td class="baseList-space" colspan="2"  title="13.10.24 13:24:54" ><time class="baseList-time">13/10/24</time></td>
+    <td class="baseList-space baseList-rec" colspan="2">0</td>    <td class="baseList-space baseList-views" colspan="2">6812949</td></tr>
+
+<tr align="center" class="baseNotice " >
+    <td class="baseList-space baseList-numb" colspan="2"><span id="alert_con">알림</span></td>
+                <td class="baseList-space" align="left"><a href="/zboard/view.php?id=notice&no=1060" class="baseList-title"   onClick="informAdClick('https://s.ppomppu.co.kr/inform_ad_click.php?p=aW5mb3JtX2FkX3B2X2NsaWNrfDE0MTk%3D')">[키워드 알림] 관심 키워드 등록하고, 앱push 알림 받자!</a></td>
+    <td colspan="2" class="baseList-space" align="left"><a class="baseList-name" href="#" onclick="return false"><span class="list_name"><i class="nlevel lvP"></i>관리자5</span></a></td>    <td class="baseList-space" colspan="2"><time class="baseList-time">24/11/14</time></td>
+    <td class="baseList-space baseList-rec" colspan="2"></td>
+    <td class="baseList-space baseList-views" colspan="2"></td>
+</tr>
+<tr align="center" class="baseList bbs_new1  hotpop_bg_color" >
+    <td class="baseList-space baseList-numb" colspan="2">681227</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681227" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0202/m_20260202185643_U2UKukL50N.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/7/small_681227.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <img src="/images/menu/pop_icon2.jpg" class="icons_vertical">  <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681227"  ><span><em class="baseList-head subject_preface">[지마켓]</em>휠라 초경량 워킹화 TREXLER (37,910원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681227");'>9</span>
+                        </div>
+                        <small class="baseList-small">[의류/잡화]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>오늘도좋은하루영</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.02 18:56:47" ><time class="baseList-time">26/02/02</time></td>    <td class='baseList-space baseList-rec' colspan=2>2 - 0</td>    <td class='baseList-space baseList-views' colspan=2>11921</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681443</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681443" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203135421_rNJEZQiDEn.jpeg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/3/small_681443.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681443"  ><span><em class="baseList-head subject_preface">[옥션]</em>BANGE 4in1 여행용 백팩(41,890원/무료)</span></a>
+                        </div>
+                        <small class="baseList-small">[컴퓨터]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>shRkd</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:54:37" ><time class="baseList-time">13:54:37</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>267</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681442</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681442" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203135146_ZsUziWMk3j.png><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/2/small_681442.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681442"  ><span><em class="baseList-head subject_preface">[SSG몰]</em>스너글 햇빛건조 섬유유연제 허거블 선샤인 4L+2.6L 세탁망증정(24,225원/무배)</span></a>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv3"></i>sand0123</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:51:50" ><time class="baseList-time">13:51:50</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>154</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681441</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681441" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203134648_Q5ZrIqIZsV.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/1/small_681441.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681441"  ><span><em class="baseList-head subject_preface">[무신사]</em>닉앤니콜 숏패딩 헤비 아우터 (12,080원/무배)</span></a>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv5"></i>밴프</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:48:14" ><time class="baseList-time">13:48:14</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>712</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681440</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681440" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203134654_9tlUMe0I.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/0/small_681440.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681440"  ><span><em class="baseList-head subject_preface">[롯데온]</em>고시히카리 품종 식가미 10kg 25년 햅쌀 (29,760원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681440");'>1</span>
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv3"></i>네거티브스페이스</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:46:53" ><time class="baseList-time">13:46:53</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>309</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681439</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681439" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203132738_a2oYrlZb.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/9/small_681439.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681439"  ><span><em class="baseList-head subject_preface">[롯데온]</em>오뚜기 뿌셔뿌셔 12개+12개(총 24개) 골라담기 (카드) (12,730원) (무배)</span></a>
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>우리는치킨</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:27:36" ><time class="baseList-time">13:27:36</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>588</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681438</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681438" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203132303_Xj3NoG2Gbt.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/8/small_681438.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681438"  ><span><em class="baseList-head subject_preface">[지마켓]</em>아기물티슈 시그니앙 오가든 77매 20개 (16,870원/무배)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681438");'>1</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>파히링</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:23:59" ><time class="baseList-time">13:23:59</time></td>    <td class='baseList-space baseList-rec' colspan=2>2 - 0</td>    <td class='baseList-space baseList-views' colspan=2>870</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681437</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681437" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203131753_8OFC1zZkfA.jpeg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/7/small_681437.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681437"  ><span><em class="baseList-head subject_preface">[지마켓]</em>한우 등심600g+채끝등심400g+안심200g 86460원</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681437");'>2</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>kimhwa</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:18:07" ><time class="baseList-time">13:18:07</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>737</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681436</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681436" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203131533_qfSIv6iT.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/6/small_681436.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681436"  ><span><em class="baseList-head subject_preface">[조이풀푸드]</em>종근당 실크 알부민 골드1박스 25ml 30병 쇼핑백증정 (43,500원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681436");'>4</span>
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>djembeat</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:15:31" ><time class="baseList-time">13:15:31</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>376</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681435</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681435" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203130112_iVFw0lpG.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/5/small_681435.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681435"  ><span><em class="baseList-head subject_preface">[G마켓]</em>위프 WHIFF 패브릭 모먼트 섬유탈취제 200ml Pine Shot 1개+Bloomsy 1개 (21,240원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681435");'>1</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv5"></i>Xlanma</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 13:01:12" ><time class="baseList-time">13:01:12</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>697</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681434</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681434" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203125718_RQlAahoo8g.jpeg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/4/small_681434.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681434"  ><span><em class="baseList-head subject_preface">[자사몰]</em>1등급 한우 선물세트 (104730원 / 무배</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681434");'>5</span>
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv3"></i>enoeno1</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:57:58" ><time class="baseList-time">12:57:58</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>719</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681433</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681433" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203124810_Xw8QY1ODEX.png><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/3/small_681433.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681433"  ><span><em class="baseList-head subject_preface">[지마켓]</em>스케쳐스 운동화 모음 (38,600/무배)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681433");'>5</span>
+                        </div>
+                        <small class="baseList-small">[의류/잡화]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>Soona</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:48:17" ><time class="baseList-time">12:48:17</time></td>    <td class='baseList-space baseList-rec' colspan=2>4 - 0</td>    <td class='baseList-space baseList-views' colspan=2>3216</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681432</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681432" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203123619_IyDnXOJ5.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/2/small_681432.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681432"  ><span><em class="baseList-head subject_preface">[올리브영]</em>도루코 PACE7 면도기 핸들+7입날 (15,800원)</span></a>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv3"></i>사르르</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:36:17" ><time class="baseList-time">12:36:17</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>1036</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681430</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681430" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203122203_vVg5lZoiPW.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/0/small_681430.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681430"  ><span><em class="baseList-head subject_preface">[지마켓]</em>새부리형 KF94 대형 중형 소형 100매 (유클7,480원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681430");'>1</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>Q아이</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:22:07" ><time class="baseList-time">12:22:07</time></td>    <td class='baseList-space baseList-rec' colspan=2>1 - 0</td>    <td class='baseList-space baseList-views' colspan=2>1360</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681429</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681429" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203121051_G7oiWQmZTT.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/9/small_681429.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681429"  ><span><em class="baseList-head subject_preface">[지마켓]</em>자일리톨스톤 브레드이발소 초코맛+사과+바나나+오렌지 60g(19,130원/무료)</span></a>
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>첼쉬이판</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:16:09" ><time class="baseList-time">12:16:09</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>1735</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681428</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681428" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203121428_UJ9QfDPxH5.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/8/small_681428.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681428"  ><span><em class="baseList-head subject_preface">[카카오쇼핑]</em>진공밀폐용기 13종+증정(144,150원/무배)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681428");'>1</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>도다리농어</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:14:58" ><time class="baseList-time">12:14:58</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>1228</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681427</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681427" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203121341_UkCf8qDycS.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/7/small_681427.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681427"  ><span><em class="baseList-head subject_preface">[네이버]</em>예가한복 유아동 한복 (29,440원~/무료)</span></a>
+                        </div>
+                        <small class="baseList-small">[의류/잡화]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>세러데이123</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:13:49" ><time class="baseList-time">12:13:49</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>1022</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681425</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681425" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203120139_NEzsJHUs.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/5/small_681425.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <img src="/images/menu/pop_icon2.jpg" class="icons_vertical">  <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681425"  ><span><em class="baseList-head subject_preface">[롯데온]</em>프리미엄 LA갈비 선물세트 1.5kg 사은품유 (46,380/무배)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681425");'>10</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>주마등</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 12:01:39" ><time class="baseList-time">12:01:39</time></td>    <td class='baseList-space baseList-rec' colspan=2>8 - 1</td>    <td class='baseList-space baseList-views' colspan=2>7562</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681424</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681424" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203115733_JOE5im4SLb.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/4/small_681424.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681424"  ><span><em class="baseList-head subject_preface">[11번가]</em>드리미 Mova V50 Ultra 로봇청소기 (749,000원/무료)</span></a>
+                        </div>
+                        <small class="baseList-small">[가전/가구]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv4"></i>독수리오형젱</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 11:58:09" ><time class="baseList-time">11:58:09</time></td>    <td class='baseList-space baseList-rec' colspan=2></td>    <td class='baseList-space baseList-views' colspan=2>1206</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681423</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681423" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203115455_xUH6dfeVAH.png><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/3/small_681423.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                         <a class='baseList-title' href="view.php?id=ppomppu&page=1&divpage=108&no=681423"  ><span><em class="baseList-head subject_preface">[옥션]</em>리츠 어니언 크래커 73g 12개 + 오레오 키링 (10,450원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681423");'>6</span>
+                        </div>
+                        <small class="baseList-small">[기타]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv3"></i>햇쌀짱굴</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 11:57:55" ><time class="baseList-time">11:57:55</time></td>    <td class='baseList-space baseList-rec' colspan=2>1 - 0</td>    <td class='baseList-space baseList-views' colspan=2>1740</td></tr>
+
+<tr align="center" class="baseList bbs_new1 " >
+    <td class="baseList-space baseList-numb" colspan="2">681422</td>
+                    <td align="left" class="baseList-space title">
+    <a class="baseList-thumb" href="view.php?id=ppomppu&page=1&divpage=108&&no=681422" tooltip=P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203115054_np8IKfFlYI.jpg><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/2/small_681422.jpg?t=20260203" onFocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <img src="/images/menu/pop_icon2.jpg" class="icons_vertical">  <a class='baseList-title end2' href="view.php?id=ppomppu&page=1&divpage=108&no=681422"  ><span><em class="baseList-head subject_preface">[남도장터]</em>한돈 목살 수육용 1kg (13,520원/무료)</span></a><span class="baseList-c" onclick='win_comment("?id=ppomppu&page=1&divpage=108&no=681422");'>21</span>&nbsp;<img src='/zboard/skin/DQ_Revolution_BBS_New1/end_icon.PNG' />
+                        </div>
+                        <small class="baseList-small">[식품/건강]</small>
+                    </div>    </td>
+        <td class='baseList-space' colspan=2 align="left"><div class='list_name'><nobr class='list_name'><a class='baseList-name' href=# onClick="return false"><span class="baseList-name"><i class="nlevel lv5"></i>댕냥꿍</span></a></nobr></div></td>    <td class='baseList-space' colspan=2  title="26.02.03 11:51:27" ><time class="baseList-time">11:51:27</time></td>    <td class='baseList-space baseList-rec' colspan=2>14 - 0</td>    <td class='baseList-space baseList-views' colspan=2>5712</td></tr>
+
+    <script>
+    $('.list-notice-alarm-tr').last().css('border-bottom', '0');
+    $('.notice_separator').css({ 'width':'900px', 'height':'1px'});
+    </script>
+        <tr align="center" class="baseList bbs_new1">
+        <td class="baseList-space baseList-numb" colspan="2"><img src="/images/shopping_ppom.png?v=2" alt="쇼핑뽐뿌 아이콘"></td>
+                <td align="left" class="baseList-space title">
+            <a class="baseList-thumb" href="/zboard/view.php?id=pmarket&&no=301097"><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/pmarket/7/small_301097.jpg" onfocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+            <div class="baseList-box">
+                <div class="baseList-cover">
+                 <a class="baseList-title" href="/zboard/view.php?id=pmarket&&no=301097"><span><img src="//img.ppomppu.co.kr/images/icon_ppom_coupon_pc.png" style="vertical-align:sub;" /> LG 32인치 OLED 4K 240Hz 32GX870A 9만원 사은품 추가증정 등! 2/3 오후 10시 라이브!</span></a>
+                 <span class="baseList-c" onclick="win_comment('popup_comment.php?id=pmarket&no=301097');">127</span>
+                </div>
+                            </div>
+        </td>
+        <td class="baseList-space" colspan="2" align="left"><a class="baseList-name" href="/zboard/view.php?id=pmarket&&no=301097"><span class="baseList-name"><i class="nlevel lvB"></i>LG모니터총판</span></a></td>
+        <td class="baseList-space" colspan="2"><time class="baseList-time">12:28:58</time></td>
+        <td class="baseList-space baseList-rec" colspan="2">15 - 0</td>
+        <td class="baseList-space baseList-views" colspan="2">1255</td></tr>
+        </tr>
+        <tr align="center" class="baseList bbs_new1">
+        <td class="baseList-space baseList-numb" colspan="2"><img src="/images/shopping_ppom.png?v=2" alt="쇼핑뽐뿌 아이콘"></td>
+                <td align="left" class="baseList-space title">
+            <a class="baseList-thumb" href="/zboard/view.php?id=pmarket&&no=301083"><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/pmarket/3/small_301083.jpg" onfocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+            <div class="baseList-box">
+                <div class="baseList-cover">
+                 <a class="baseList-title" href="/zboard/view.php?id=pmarket&&no=301083"><span><img src="//img.ppomppu.co.kr/images/icon_ppom_coupon_pc.png" style="vertical-align:sub;" /> [1+1] [48타임특가] 홍언니고기 투투 양꼬치 300g + 하나 더!</span></a>
+                 <span class="baseList-c" onclick="win_comment('popup_comment.php?id=pmarket&no=301083');">293</span>
+                </div>
+                            </div>
+        </td>
+        <td class="baseList-space" colspan="2" align="left"><a class="baseList-name" href="/zboard/view.php?id=pmarket&&no=301083"><span class="baseList-name"><i class="nlevel lvB"></i>홍언니고기</span></a></td>
+        <td class="baseList-space" colspan="2"><time class="baseList-time">26/02/02</time></td>
+        <td class="baseList-space baseList-rec" colspan="2">63 - 0</td>
+        <td class="baseList-space baseList-views" colspan="2">2559</td></tr>
+        </tr>
+        <tr align="center" class="baseList bbs_new1">
+        <td class="baseList-space baseList-numb" colspan="2"><img src="/images/shopping_ppom.png?v=2" alt="쇼핑뽐뿌 아이콘"></td>
+                <td align="left" class="baseList-space title">
+            <a class="baseList-thumb" href="/zboard/view.php?id=pmarket&&no=301094"><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/pmarket/4/small_301094.jpg" onfocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+            <div class="baseList-box">
+                <div class="baseList-cover">
+                 <a class="baseList-title" href="/zboard/view.php?id=pmarket&&no=301094"><span><img src="//img.ppomppu.co.kr/images/icon_ppom_coupon_pc.png" style="vertical-align:sub;" /> [마이클] 엔진오일 교환 2만원 쿠폰</span></a>
+                 <span class="baseList-c" onclick="win_comment('popup_comment.php?id=pmarket&no=301094');">178</span>
+                </div>
+                            </div>
+        </td>
+        <td class="baseList-space" colspan="2" align="left"><a class="baseList-name" href="/zboard/view.php?id=pmarket&&no=301094"><span class="baseList-name"><i class="nlevel lvB"></i>Mycle</span></a></td>
+        <td class="baseList-space" colspan="2"><time class="baseList-time">10:06:55</time></td>
+        <td class="baseList-space baseList-rec" colspan="2">30 - 0</td>
+        <td class="baseList-space baseList-views" colspan="2">725</td></tr>
+        </tr>
+        <tr align="center" class="baseList bbs_new1">
+        <td class="baseList-space baseList-numb" colspan="2"><img src="/images/shopping_ppom.png?v=2" alt="쇼핑뽐뿌 아이콘"></td>
+                <td align="left" class="baseList-space title">
+            <a class="baseList-thumb" href="/zboard/view.php?id=pmarket&&no=301085"><img src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/pmarket/5/small_301085.jpg" onfocus="blur()" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+            <div class="baseList-box">
+                <div class="baseList-cover">
+                 <a class="baseList-title" href="/zboard/view.php?id=pmarket&&no=301085"><span><img src="//img.ppomppu.co.kr/images/icon_ppom_coupon_pc.png" style="vertical-align:sub;" /> 자동차와이퍼 1+1+1+1(12,800원/무료)</span></a>
+                 <span class="baseList-c" onclick="win_comment('popup_comment.php?id=pmarket&no=301085');">281</span>
+                </div>
+                            </div>
+        </td>
+        <td class="baseList-space" colspan="2" align="left"><a class="baseList-name" href="/zboard/view.php?id=pmarket&&no=301085"><span class="baseList-name"><i class="nlevel lvB"></i>차세린</span></a></td>
+        <td class="baseList-space" colspan="2"><time class="baseList-time">26/02/02</time></td>
+        <td class="baseList-space baseList-rec" colspan="2">54 - 0</td>
+        <td class="baseList-space baseList-views" colspan="2">2405</td></tr>
+        </tr>
+</td></tr>
+        <tr><td colspan="11" height="1">
+        <div class="bridge_area">
+        <p style="border:0;">
+            <a href="/zboard/zboard.php?id=social" target="_self"><strong>쇼핑포럼</strong><img class="notice_ico" src="/images/puls_icon.gif" alt="뽐뿌상담실 아이콘"></a><span>더 많은 쇼핑 정보와 구매 전 자유로운 쇼핑 이야기는 쇼핑포럼에서!</span>
+        </p>
+        </div>
+        </td></tr>
+
+
+                            <tr align="center" class="baseList bbs_new1" >
+                <td class="baseList-space baseList-numb" colspan="2"><img src="//cdn2.ppomppu.co.kr/zboard/data3/rel_bbs_ico_inuse/rel_bbs_ico_64993c24b5cdd.png" alt="쇼핑포럼 아이콘"></td>
+                                                <td align="left" class="baseList-space title">
+                    <a class="baseList-thumb" href="/zboard/view.php?id=social&no=47919"><img src="//cdn2.ppomppu.co.kr/zboard/data3/2026/0203/20260203122818_4VEU1OohNI.jpg" onfocus="blur()" class="thumb_border" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <a class="baseList-title" href="/zboard/view.php?id=social&no=47919"><span>닥스 헤지스 브랜드</span></a>
+                                                        <span class="baseList-c" onclick="win_comment('popup_comment.php?id=social&no=47919');">3</span>
+                                                    </div>
+                        <small class="baseList-small">[기타]</small>                    </div>
+                <td class="baseList-space" colspan="2" align="left"><a href="/zboard/view.php?id=social&no=47919"><span class="baseList-name"><i class="nlevel lv5"></i>마린이^^</span></a></td>                <td class='baseList-space' colspan=2><time class="baseList-time">12:31:05</time></td>
+                <td class='baseList-space baseList-rec' colspan=2></td>
+                <td class='baseList-space baseList-views' colspan=2>711</td>
+            </tr>
+                        <tr align="center" class="baseList bbs_new1" >
+                <td class="baseList-space baseList-numb" colspan="2"><img src="//cdn2.ppomppu.co.kr/zboard/data3/rel_bbs_ico_inuse/rel_bbs_ico_64993c24b5cdd.png" alt="쇼핑포럼 아이콘"></td>
+                                                <td align="left" class="baseList-space title">
+                    <a class="baseList-thumb" href="/zboard/view.php?id=social&no=47918"><img src="//cdn2.ppomppu.co.kr/zboard/data3/2026/0203/20260203115055_z3rypnKijZ.jpg" onfocus="blur()" class="thumb_border" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <a class="baseList-title" href="/zboard/view.php?id=social&no=47918"><span>이번주 gs25 편의점 사전예약 할인</span></a>
+                                                        <span class="baseList-c" onclick="win_comment('popup_comment.php?id=social&no=47918');">2</span>
+                                                    </div>
+                        <small class="baseList-small">[기타]</small>                    </div>
+                <td class="baseList-space" colspan="2" align="left"><a href="/zboard/view.php?id=social&no=47918"><span class="baseList-name"><i class="nlevel lv5"></i>벙버러벙</span></a></td>                <td class='baseList-space' colspan=2><time class="baseList-time">11:51:23</time></td>
+                <td class='baseList-space baseList-rec' colspan=2>2 - 0</td>
+                <td class='baseList-space baseList-views' colspan=2>1133</td>
+            </tr>
+                        <tr align="center" class="baseList bbs_new1" >
+                <td class="baseList-space baseList-numb" colspan="2"><img src="//cdn2.ppomppu.co.kr/zboard/data3/rel_bbs_ico_inuse/rel_bbs_ico_64993c24b5cdd.png" alt="쇼핑포럼 아이콘"></td>
+                                                <td align="left" class="baseList-space title">
+                    <a class="baseList-thumb" href="/zboard/view.php?id=social&no=47917"><img src="//cdn2.ppomppu.co.kr/zboard/data3/2026/0203/20260203110059_clLMNKuE19.jpg" onfocus="blur()" class="thumb_border" onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'"></a>
+                    <div class="baseList-box">
+                        <div class="baseList-cover">
+                        <a class="baseList-title" href="/zboard/view.php?id=social&no=47917"><span>오늘의집 선착순 7% 최저가보상제 쿠폰</span></a>
+                                                    </div>
+                        <small class="baseList-small">[기타]</small>                    </div>
+                <td class="baseList-space" colspan="2" align="left"><a href="/zboard/view.php?id=social&no=47917"><span class="baseList-name"><i class="nlevel lv1"></i>소상공김</span></a></td>                <td class='baseList-space' colspan=2><time class="baseList-time">11:02:39</time></td>
+                <td class='baseList-space baseList-rec' colspan=2></td>
+                <td class='baseList-space baseList-views' colspan=2>388</td>
+            </tr>
+            
+    <!-- for mouseover tooltip -->
+    <div id="rel_bbs_tooltip" style="display:none; position:absolute;"></div>
+
+    <script>
+    var $tooltip = $("#rel_bbs_tooltip");
+
+    // thumbnail tooltip
+    $(".bridge .bridge_03 img").on("mouseover", function (e) {
+    	if (this.src.match(/\/www\/img\/noimage\/noimage_/)) {
+    		return false;
+    	}
+
+    	$tooltip.html('<img src="' + this.src + '" style="max-width:400px; max-height:300px;">');
+    	$tooltip.offset({top:e.pageY - $tooltip.height() - 5, left:e.pageX + 5});
+    	$tooltip.stop(true).fadeIn('fast');
+
+    }).on("mousemove", function (e) {
+    	$tooltip.offset({top:e.pageY - $tooltip.height() - 5, left:e.pageX + 5});
+
+    }).on("mouseout", function () {
+    	$tooltip.fadeOut();
+    });
+
+    $(document).ready( function () {
+        var $tr = $('#revolution_main_table>tbody>tr.list0,#revolution_main_table>tbody>tr.list1');
+        $tr.each( function (i) {
+            if ( i % 2 == 0 )   $(this).removeClass("list0").addClass("list1");
+            else                $(this).removeClass("list1").addClass("list0");
+        });
+
+        var $tr = $('#revolution_main_table>tbody>tr.common-list0,#revolution_main_table>tbody>tr.common-list1');
+        $tr.each( function (i) {
+            if ( i % 2 == 0 )   $(this).removeClass("common-list0").addClass("common-list1");
+            else                $(this).removeClass("common-list1").addClass("common-list0");
+        });
+    });
+
+        </script>
+
+</form>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="900" class="info_bg">
+<tr><td colspan="11" class="title_bg_03"></td></tr>
+</table>
+<div id="bottom-table">
+<div class="info_bg">
+<a class="next_btn" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=2&divpage=108">다음페이지</a><div class="txtbtn-list">
+</div>
+</div>
+<div class="info_bg2">
+<div class="bottom-list">
+<a class="num on" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=1&divpage=108">1</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=2&divpage=108">2</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=3&divpage=108">3</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=4&divpage=108">4</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=5&divpage=108">5</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=6&divpage=108">6</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=7&divpage=108">7</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=8&divpage=108">8</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=9&divpage=108">9</a><a class="num" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=10&divpage=108">10</a><a class="next" onfocus="blur()" href="/zboard/zboard.php?id=ppomppu&page=11&divpage=108"></a></div>
+<div class="bottom-search">
+<form method="get" name="search" action="/zboard/zboard.php">
+<select name="search_type" id="search_type">
+<option value="sub_memo">제목+본문</option><option value="subject">제목만</option><option value="name">닉네임</option><option value="csubject">코멘트내용</option><option value="cname">코멘트작성자</option>
+</select><span class="default">
+<input type="hidden" name="id" value="ppomppu"><input type="hidden" name="page_num" value="20">
+<input type="text" name="keyword" id="keyword" value="">
+<input type="submit" onfocus="blur()" value="">
+</span></form>
+</div>
+</div>
+</div>
+  <script>
+                        googletag.cmd.push(function() {
+                        googletag.defineSlot('/65120695/list_f', [[900, 200], [728, 90]], 'list_f_1').addService(googletag.pubads());
+                        });
+                        </script>
+                        <div class='ad_container top_margin30'>
+                        <div id='list_f_1' class='JS-div_gpt_ad' style=' min-width:728px;min-height:90px;'></div>
+                        </div>
+                        </div><script language="JavaScript">
+<!--
+$(document).ready(function(){
+PpomHotKey.regist('Period', '/zboard/zboard.php?id=ppomppu&page=2&divpage=108');
+});
+// -->
+</script>
+<style>
+.container .YN_box2>div { width: 22%; }
+.container .YN_box2 ul li { width: 13px;}
+</style>
+
+</div></div></div>
+<!-- ED container ED -->
+</div>  <!--/.contents-->
+    </div> <!--/.wrapper-->
+<!-- Right small banner -->
+
+
+<div class="floating-banner-sm">
+      </div>
+<!-- Footer -->
+<div class="footer">
+
+        <div class="nav">
+    
+        <a href="/zboard/zboard.php?id=propose">운영참여</a>
+
+        
+                    <a href="/service/request.php">게시중단요청</a>
+        
+                <a href="/zboard/view.php?id=regulation&page=2&divpage=1&no=4">이용약관</a>
+        <a href="/zboard/view.php?id=regulation&page=1&divpage=1&no=48"><strong>개인정보처리방침</strong></a>
+        <a href="/zboard/view.php?id=regulation&page=2&divpage=1&no=5">청소년보호정책</a>
+        <a href="/zboard/view.php?id=regulation&page=2&divpage=1&no=19"><strong>불법촬영물등 신고</strong></a>
+        <a href="/zboard/view.php?id=faq&no=17">광고/제휴</a>
+        <a href="mailto:webmaster@ppomppu.co.kr">메일문의</a>
+        
+                                
+                            <a href="/recruit/culture.php">뽐뿌채용</a>
+                <a href="/zboard/zboard.php?id=faq">FAQ</a>
+        <a href="javascript:auth_save_mode('dark');">다크모드</a>
+    </div>
+
+    
+
+
+
+    <div class="info">
+        <div class="wrap">
+                            <div class="addon">
+                <p><strong>뽐뿌는 쇼핑 정보 커뮤니티입니다.</strong> 상품 주문, 배송 및 환불의 의무와 책임은 각 판매 업체에 있습니다.</p>
+                <p>(주)뽐뿌커뮤니케이션 / 대표이사 : 고재성 / 사업자등록번호 : 117-81-66008 / 통신판매업신고번호 : 제2015-서울영등포-1441호</p>
+                <p>주소 : 서울특별시 영등포구 당산로 41길 당산 SK V1센터 W동 1411호
+                                        / 팩스 : 02-6280-7029 / <a href="javascript:;" onclick="window.open('/zboard/zboard.php?id=faq_biz','pop2','top=50px, left=100px, height=900px, width=1050px scrollbars=yes');">사업자회원 FAQ</a></p>
+
+            </div>
+                    
+            <span>Copyright 2005-2026 <strong>ppomppu</strong>. All rights reserved</span>
+                    </div>
+
+    </div>
+</div>
+<div class="game_popup" id="game_release_popup" style="display:none;"></div>
+
+
+
+
+
+<script src="//www.ppomppu.co.kr/js/common.js?v=2025122904"></script>
+
+<script src="//www.ppomppu.co.kr/js/bbs_ui.js?v=2026020301"></script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async src="/js/google_ad.js?v=2026020301"></script>
+<div class="gif_down-layer" style="display:none;">
+    <div class="gif_dimBg"></div>
+    <div class="gif_down_layer gif_pop-layer" id="gif_down_layer">
+        <div class="gif_down_layer_box" id="gif_down_layer_box">
+            <a href="javascript:;" onclick="jfnGifLayerClose()" class="gif_btn-layerClose">X</a>
+            <img id="gif_download_img" src="//cdn2.ppomppu.co.kr/images/lazyloading.jpg">
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="//cdn2.ppomppu.co.kr/js/wtg_ads.js?v=2026020301"></script>
+</body>
+</html>
