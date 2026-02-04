@@ -107,7 +107,10 @@ function renderDeals(deals) {
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';">
             </div>
             <div class="card-content">
-                <div class="deal-source">${deal.source}</div>
+                <div class="deal-source">
+                    <img src="assets/${deal.source === 'Ppomppu' ? 'ppomppu' : 'fmkorea'}_icon.png" alt="${deal.source}" class="source-icon">
+                    ${deal.source}
+                </div>
                 <div class="deal-title" title="${deal.title}">${deal.title}</div>
                 <div class="deal-footer">
                     <div class="deal-info-stats">
