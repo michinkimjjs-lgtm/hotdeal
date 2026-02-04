@@ -297,15 +297,20 @@ h1 {
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .category-nav {
-    justify-content: center;
-    overflow-x: visible;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
     padding: 0 0.5rem;
+    justify-content: center;
   }
 
   .cat-btn {
-    flex: 0 1 auto;
-    font-size: 0.85rem;
-    padding: 6px 12px;
+    width: 100%;
+    font-size: 0.75rem;
+    padding: 8px 2px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
