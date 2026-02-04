@@ -90,6 +90,22 @@ categoryBtns.forEach(btn => {
     });
 });
 
+// Helper to get relative time
+function getRelativeTime(dateString) {
+    const now = new Date();
+    const past = new Date(dateString);
+    const diffInMs = now - past;
+    const diffInMins = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMins / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInMins < 1) return '방금 전';
+    if (diffInMins < 60) return `${diffInMins}분 전`;
+    if (diffInHours < 24) return `${diffInHours}시간 전`;
+    if (diffInDays < 7) return `${diffInDays}일 전`;
+    return past.toLocaleDateString();
+}
+
 // Render deals to the grid
 function renderDeals(deals) {
     if (deals.length === 0) {
@@ -107,9 +123,12 @@ function renderDeals(deals) {
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';">
             </div>
             <div class="card-content">
-                <div class="deal-source">
-                    <img src="assets/${deal.source === 'Ppomppu' ? 'ppomppu' : 'fmkorea'}_icon.png" alt="${deal.source}" class="source-icon">
-                    ${deal.source}
+                <div class="card-header-row">
+                    <div class="deal-source">
+                        <img src="assets/${deal.source === 'Ppomppu' ? 'ppomppu' : 'fmkorea'}_icon.png" alt="${deal.source}" class="source-icon">
+                        ${deal.source}
+                    </div>
+                    <div class="deal-time">${getRelativeTime(deal.created_at)}</div>
                 </div>
                 <div class="deal-title" title="${deal.title}">${deal.title}</div>
                 <div class="deal-footer">
