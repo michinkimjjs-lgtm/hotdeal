@@ -239,9 +239,19 @@ class FMKoreaCrawler(BaseCrawler):
                     c_text = comment_span.get_text().strip('[] ')
                     if c_text.isdigit(): comment_count = int(c_text)
                 
-                # 추천수 추출 (FMKorea는 info div에 '추천' 텍스트로 있을 확률 높음)
+                # 추천수 추출 (FMKorea)
                 like_count = 0
-                if info_div:
+                # 방법 1: .pc_voted_count 요소 확인 (가장 정확)
+                voted_el = item.select_one('.pc_voted_count .count')
+                if voted_el:
+                    try:
+                        v_text = voted_el.get_text().strip()
+                        if v_text.isdigit():
+                            like_count = int(v_text)
+                    except: pass
+                
+                # 방법 2: info_div 내 텍스트 검색 (방법 1 실패 시나 구버전 대응)
+                if like_count == 0 and info_div:
                     info_text = info_div.get_text()
                     # "추천: 10" 형태 검색
                     like_match = re.search(r'추천[:\s]*(\d+)', info_text)
