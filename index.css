@@ -146,13 +146,13 @@ h1 {
   border: 1px solid var(--glass-border);
 }
 
-.deal-source:has(img[alt="PPOMPPU"]) {
+.deal-source:has(img[alt="Ppomppu"]) {
   border-color: rgba(239, 68, 68, 0.4);
   background: rgba(239, 68, 68, 0.1);
   color: #fca5a5;
 }
 
-.deal-source:has(img[alt="FMKOREA"]) {
+.deal-source:has(img[alt="FMKorea"]) {
   border-color: rgba(56, 189, 248, 0.4);
   background: rgba(56, 189, 248, 0.1);
   color: var(--accent-color);
