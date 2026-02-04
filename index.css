@@ -162,6 +162,7 @@ h1 {
   color: var(--price-color);
   font-size: 1.25rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .view-btn {
@@ -330,9 +331,9 @@ h1 {
 
 .deal-info-stats {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
 }
 
 .deal-likes {
