@@ -294,6 +294,65 @@ h1 {
   border-color: #ef4444;
 }
 
+/* Filter Options */
+.filter-options {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 99px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent-color);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.filter-btn.active {
+  background: var(--accent-color);
+  color: #000;
+  border-color: var(--accent-color);
+}
+
+.deal-info-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.deal-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: #fb7185;
+  font-weight: 600;
+}
+
+.deal-comment {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .category-nav {

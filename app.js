@@ -9,6 +9,7 @@ const categoryBtns = document.querySelectorAll('.cat-btn');
 
 let allDeals = [];
 let currentCategory = 'ALL';
+let filterPopular = false;
 
 // Pagination State
 let currentPage = 1;
@@ -49,6 +50,11 @@ async function fetchDeals(page = 1) {
             }
             // 기본 정렬: 최신순
             query = query.order('id', { ascending: false });
+        }
+
+        // Apply Popular Filter (10+ Likes)
+        if (filterPopular) {
+            query = query.gte('like_count', 10);
         }
 
         const { data, error, count } = await query.range(from, to);
@@ -104,6 +110,10 @@ function renderDeals(deals) {
                 <div class="deal-source">${deal.source}</div>
                 <div class="deal-title" title="${deal.title}">${deal.title}</div>
                 <div class="deal-footer">
+                    <div class="deal-info-stats">
+                        <span class="deal-likes">👍 ${deal.like_count || 0}</span>
+                        <span class="deal-comment">💬 ${deal.comment_count || 0}</span>
+                    </div>
                     <div class="deal-price">${deal.price || '가격미상'}</div>
                     <a href="${deal.url}" target="_blank" class="view-btn">보러가기</a>
                 </div>
@@ -181,6 +191,14 @@ searchInput.addEventListener('input', (e) => {
     debounceTimer = setTimeout(() => {
         searchDeals(e.target.value);
     }, 500);
+});
+
+// Popular Filter Toggle
+const popularBtn = document.getElementById('popular-filter');
+popularBtn.addEventListener('click', () => {
+    filterPopular = !filterPopular;
+    popularBtn.classList.toggle('active', filterPopular);
+    fetchDeals(1);
 });
 
 // Initial fetch
