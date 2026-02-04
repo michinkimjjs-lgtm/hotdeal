@@ -168,7 +168,7 @@ class FMKoreaCrawler(BaseCrawler):
                 comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
                 v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
                 if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "FMKorea", "category": category, "price": price, "comment_count": comment, "like_count": like}): count += 1
-                time.sleep(0.1) # 항목 간 대기 시간 단축
+                time.sleep(0.05) # 성능 최적화: 대기 시간 최소화
             except Exception as e: logger.error(f"FMKorea 에러: {e}")
         logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
 
@@ -179,7 +179,7 @@ class RuliwebCrawler(BaseCrawler):
         html = self.fetch_page(url)
         if not html: return
         soup = BeautifulSoup(html, 'html.parser')
-        items = soup.select('tr.list_table_row:not(.notice)')
+        items = soup.select('table.board_list_table tr.table_body:not(.notice)')
         count = 0
         for item in items:
             try:
