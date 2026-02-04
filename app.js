@@ -12,8 +12,17 @@ let currentCategory = 'ALL';
 
 // Pagination State
 let currentPage = 1;
-const ITEMS_PER_PAGE = 20;
+let itemsPerPage = window.innerWidth < 1024 ? 10 : 20;
 let totalCount = 0;
+
+// Update items per page on resize
+window.addEventListener('resize', () => {
+    const newItemsPerPage = window.innerWidth < 1024 ? 10 : 20;
+    if (newItemsPerPage !== itemsPerPage) {
+        itemsPerPage = newItemsPerPage;
+        fetchDeals(1); // Reset to page 1 to avoid range issues
+    }
+});
 
 // Fetch deals from Supabase with Pagination
 async function fetchDeals(page = 1) {
@@ -21,8 +30,8 @@ async function fetchDeals(page = 1) {
     dealGrid.innerHTML = `<div class="loading">데이터를 불러오는 중입니다...</div>`;
 
     // Calculate range
-    const from = (page - 1) * ITEMS_PER_PAGE;
-    const to = from + ITEMS_PER_PAGE - 1;
+    const from = (page - 1) * itemsPerPage;
+    const to = from + itemsPerPage - 1;
 
     try {
         let query = supabaseClient
@@ -111,7 +120,7 @@ function renderPagination() {
     const paginationEl = document.getElementById('pagination');
     if (!paginationEl) return;
 
-    const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(totalCount / itemsPerPage);
 
     paginationEl.innerHTML = `
         <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="fetchDeals(${currentPage - 1})">
@@ -142,7 +151,7 @@ async function searchDeals(query) {
             .select('*', { count: 'exact' })
             .ilike('title', `%${query}%`)
             .order('id', { ascending: false })
-            .range(0, ITEMS_PER_PAGE - 1); // Only show first page of results for now
+            .range(0, itemsPerPage - 1); // Only show first page of results for now
 
         if (error) throw error;
 
