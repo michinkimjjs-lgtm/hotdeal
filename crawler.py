@@ -190,24 +190,32 @@ class RuliwebCrawler(BaseCrawler):
                 if link.startswith('/'): link = "https://bbs.ruliweb.com" + link
                 
                 img_url = ""
-                img_el = item.select_one('.td_img img') or item.select_one('img')
+                # 루리웹 최신 지연 로딩 및 썸네일 구조 대응
+                img_el = item.select_one('td.thumb img') or item.select_one('img.thumb') or item.select_one('.td_img img') or item.select_one('img')
                 if img_el:
-                    img_url = img_el.get('src') or img_el.get('data-src') or ""
+                    # Ruliweb uses data-src or data-original for lazy loading
+                    img_url = img_el.get('data-src') or img_el.get('data-original') or img_el.get('src') or ""
+                
+                # Absolute URL and Protocol Fix
                 if img_url.startswith('//'): img_url = "https:" + img_url
+                if img_url and not img_url.startswith('http'): img_url = "https://bbs.ruliweb.com" + img_url
                 
                 price = "가격미상"
-                # 가격 정보를 타이틀이나 전용 태그에서 추출 시도
-                p_m = re.search(r'([0-9,]+원)', title)
-                if p_m: price = p_m.group(1)
+                # Extract price from title (e.g., [12,345원], 12,345원, [무료])
+                p_match = re.search(r'([0-9,.]+원)', title)
+                if p_match: 
+                    price = p_match.group(1)
+                elif '무료' in title:
+                    price = '무료'
                 
                 like = 0
-                rec = item.select_one('.recomd_count .count') or item.select_one('.recomm')
+                rec = item.select_one('.recomd_count .count') or item.select_one('.recomm') or item.select_one('.recomd')
                 if rec:
                     r_text = rec.get_text().strip()
                     if r_text.isdigit(): like = int(r_text)
                     
                 comment = 0
-                com = item.select_one('.num_comment .num') or item.select_one('.num_comment')
+                com = item.select_one('.num_comment .num') or item.select_one('.num_comment') or item.select_one('.num_reply')
                 if com:
                     c_text = com.get_text().strip('[]() ')
                     if c_text.isdigit(): comment = int(c_text)
