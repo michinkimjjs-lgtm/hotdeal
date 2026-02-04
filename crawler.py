@@ -150,7 +150,7 @@ class FMKoreaCrawler(BaseCrawler):
                 img_url = ""
                 if not getattr(self, 'is_details_blocked', False):
                     try:
-                        time.sleep(3.0 + random.random() * 2.0)
+                        time.sleep(1.0 + random.random() * 1.0) # 속도 개선: 3-5초 -> 1-2초
                         d_html = self.fetch_page(link); d_soup = BeautifulSoup(d_html, 'html.parser') if d_html else None
                         if d_soup:
                             img_el = d_soup.select_one('article img'); img_url = img_el.get('src') or img_el.get('data-original') or ""
@@ -168,7 +168,7 @@ class FMKoreaCrawler(BaseCrawler):
                 comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
                 v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
                 if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "FMKorea", "category": category, "price": price, "comment_count": comment, "like_count": like}): count += 1
-                time.sleep(0.5)
+                time.sleep(0.1) # 항목 간 대기 시간 단축
             except Exception as e: logger.error(f"FMKorea 에러: {e}")
         logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
 
