@@ -185,16 +185,36 @@ class RuliwebCrawler(BaseCrawler):
             try:
                 t_el = item.select_one('a.subject_link')
                 if not t_el: continue
-                title = t_el.get_text().strip(); link = ("https://bbs.ruliweb.com" + t_el['href']) if t_el['href'].startswith('/') else t_el['href']
-                img_el = item.select_one('img.thumb'); img_url = img_el.get('src') or img_el.get('data-src') or ""
+                title = t_el.get_text().strip(); link = t_el.get('href', '')
+                if not link: continue
+                if link.startswith('/'): link = "https://bbs.ruliweb.com" + link
+                
+                img_url = ""
+                img_el = item.select_one('img.thumb')
+                if img_el:
+                    img_url = img_el.get('src') or img_el.get('data-src') or ""
                 if img_url.startswith('//'): img_url = "https:" + img_url
+                
                 price = "가격미상"; p_m = re.search(r'([0-9,]+원)', title)
                 if p_m: price = p_m.group(1)
-                rec = item.select_one('.recomd_count .count') or item.select_one('.recomm'); like = int(rec.get_text()) if rec and rec.get_text().strip().isdigit() else 0
-                com = item.select_one('.num_comment .num') or item.select_one('.num_comment'); comment = int(com.get_text().strip('[]() ')) if com and com.get_text().strip('[]() ').isdigit() else 0
-                cat_el = item.select_one('.category'); category = self.normalize_category(cat_el.get_text()) if cat_el else "기타"
-                if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "Ruliweb", "category": category, "price": price, "comment_count": comment, "like_count": like}): count += 1
-                time.sleep(0.2)
+                
+                like = 0
+                rec = item.select_one('.recomd_count .count') or item.select_one('.recomm')
+                if rec:
+                    r_text = rec.get_text().strip()
+                    if r_text.isdigit(): like = int(r_text)
+                    
+                comment = 0
+                com = item.select_one('.num_comment .num') or item.select_one('.num_comment')
+                if com:
+                    c_text = com.get_text().strip('[]() ')
+                    if c_text.isdigit(): comment = int(c_text)
+                    
+                cat_el = item.select_one('.category')
+                cat = self.normalize_category(cat_el.get_text()) if cat_el else "기타"
+                
+                if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "Ruliweb", "category": cat, "price": price, "comment_count": comment, "like_count": like}): count += 1
+                time.sleep(0.1)
             except Exception as e: logger.error(f"Ruliweb 에러: {e}")
         logger.info(f"=== [Ruliweb] 크롤링 완료 ({count}건) ===")
 
