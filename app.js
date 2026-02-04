@@ -125,7 +125,7 @@ function renderDeals(deals) {
             <div class="card-content">
                 <div class="card-header-row">
                     <div class="deal-source">
-                        <img src="assets/${deal.source === 'Ppomppu' ? 'ppomppu' : 'fmkorea'}_icon.png" alt="${deal.source}" class="source-icon">
+                        <img src="assets/${deal.source.toLowerCase()}_icon.png" alt="${deal.source}" class="source-icon">
                         ${deal.source}
                     </div>
                     <div class="deal-time">${getRelativeTime(deal.created_at)}</div>

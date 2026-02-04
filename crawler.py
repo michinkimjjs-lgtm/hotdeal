@@ -190,12 +190,14 @@ class RuliwebCrawler(BaseCrawler):
                 if link.startswith('/'): link = "https://bbs.ruliweb.com" + link
                 
                 img_url = ""
-                img_el = item.select_one('img.thumb')
+                img_el = item.select_one('.td_img img') or item.select_one('img')
                 if img_el:
                     img_url = img_el.get('src') or img_el.get('data-src') or ""
                 if img_url.startswith('//'): img_url = "https:" + img_url
                 
-                price = "가격미상"; p_m = re.search(r'([0-9,]+원)', title)
+                price = "가격미상"
+                # 가격 정보를 타이틀이나 전용 태그에서 추출 시도
+                p_m = re.search(r'([0-9,]+원)', title)
                 if p_m: price = p_m.group(1)
                 
                 like = 0
@@ -214,7 +216,7 @@ class RuliwebCrawler(BaseCrawler):
                 cat = self.normalize_category(cat_el.get_text()) if cat_el else "기타"
                 
                 if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "Ruliweb", "category": cat, "price": price, "comment_count": comment, "like_count": like}): count += 1
-                time.sleep(0.1)
+                time.sleep(0.05)
             except Exception as e: logger.error(f"Ruliweb 에러: {e}")
         logger.info(f"=== [Ruliweb] 크롤링 완료 ({count}건) ===")
 
