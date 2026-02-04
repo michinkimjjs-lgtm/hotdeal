@@ -136,7 +136,7 @@ h1 {
   color: #fff;
   font-weight: 700;
   letter-spacing: 0.05em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -144,6 +144,19 @@ h1 {
   padding: 0.35rem 0.6rem;
   border-radius: 99px;
   border: 1px solid var(--glass-border);
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.deal-time {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .deal-source:has(img[alt="Ppomppu"]) {
