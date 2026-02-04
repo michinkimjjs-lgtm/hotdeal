@@ -163,7 +163,29 @@ class PpomppuCrawler(BaseCrawler):
                     category = raw_cat.replace('[', '').replace(']', '').strip()
                 comment_el = item.select_one('.baseList-c')
                 comment_count = int(comment_el.get_text().strip()) if comment_el else 0
-                data = {"title": full_title, "url": link, "img_url": img_url, "source": "Ppomppu", "category": category, "price": price, "comment_count": comment_count}
+                
+                # 추천수 추출
+                like_count = 0
+                like_el = item.select_one('.baseList-rec')
+                if like_el:
+                    try:
+                        like_text = like_el.get_text().strip()
+                        if like_text:
+                            # "추천: X" 또는 숫자만 있는 경우 대응
+                            numbers = re.findall(r'\d+', like_text)
+                            if numbers: like_count = int(numbers[0])
+                    except: pass
+
+                data = {
+                    "title": full_title, 
+                    "url": link, 
+                    "img_url": img_url, 
+                    "source": "Ppomppu", 
+                    "category": category, 
+                    "price": price, 
+                    "comment_count": comment_count,
+                    "like_count": like_count
+                }
                 if self.save_deal(data): count += 1
                 time.sleep(0.05)
             except Exception as e: logger.error(f"Ppomppu 항목 에러: {e}")
@@ -213,7 +235,26 @@ class FMKoreaCrawler(BaseCrawler):
                 if comment_span:
                     c_text = comment_span.get_text().strip('[] ')
                     if c_text.isdigit(): comment_count = int(c_text)
-                data = {"title": title, "url": link, "img_url": img_url, "source": "FMKorea", "category": category, "price": price, "comment_count": comment_count}
+                
+                # 추천수 추출 (FMKorea는 info div에 '추천' 텍스트로 있을 확률 높음)
+                like_count = 0
+                if info_div:
+                    info_text = info_div.get_text()
+                    # "추천: 10" 형태 검색
+                    like_match = re.search(r'추천[:\s]*(\d+)', info_text)
+                    if like_match:
+                        like_count = int(like_match.group(1))
+                
+                data = {
+                    "title": title, 
+                    "url": link, 
+                    "img_url": img_url, 
+                    "source": "FMKorea", 
+                    "category": category, 
+                    "price": price, 
+                    "comment_count": comment_count,
+                    "like_count": like_count
+                }
                 if self.save_deal(data): count += 1
                 time.sleep(1.0) # FMKorea는 차단 방지를 위해 더 긴 딜레이 적용
             except Exception as e: logger.error(f"FMKorea 항목 에러: {e}")
