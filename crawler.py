@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from supabase import create_client, Client
 import time
+import random
 import re
 import sys
 import io
@@ -46,6 +47,7 @@ import random
 class BaseCrawler:
     def __init__(self, supabase_url, supabase_key):
         self.supabase: Client = create_client(supabase_url, supabase_key)
+        self.session = requests.Session()
         self.user_agents = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
@@ -58,16 +60,14 @@ class BaseCrawler:
             try:
                 headers = {
                     'User-Agent': random.choice(self.user_agents),
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
                     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
                     'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache'
+                    'Pragma': 'no-cache',
+                    'Referer': 'https://www.google.com/'
                 }
                 
-                if 'fmkorea' in url:
-                    headers.update({'Referer': 'https://www.google.com/'})
-
-                response = requests.get(url, headers=headers, timeout=12)
+                response = self.session.get(url, headers=headers, timeout=15)
                 
                 if response.status_code == 200:
                     try:
@@ -75,7 +75,7 @@ class BaseCrawler:
                     except LookupError:
                         return response.content.decode('utf-8', errors='replace')
                 elif response.status_code == 430:
-                    logger.error(f"⚠️ FMKorea 차단됨 (430). 사이트에서 로봇 접속을 제한하고 있습니다. 잠시(약 30분) 후 시도하세요.")
+                    logger.error(f"⚠️ FMKorea 차단됨 (430). 사이트에서 로봇 접속을 제한하고 있습니다. 잠시(약 30분) 후 시도하세요. ({url})")
                     return None
                         
                 logger.warning(f"[{i+1}/{retries}] 페이지 로딩 실패: {response.status_code} ({url})")
@@ -83,7 +83,7 @@ class BaseCrawler:
                 logger.error(f"[{i+1}/{retries}] 네트워크 에러: {e}")
             
             if i < retries - 1:
-                time.sleep((i + 1) * 3)
+                time.sleep((i + 1) * 3 + random.random() * 2)
         return None
     
     def normalize_category(self, raw_cat):
@@ -210,16 +210,35 @@ class FMKoreaCrawler(BaseCrawler):
                 href = title_el['href']
                 link = ("https://www.fmkorea.com" + href) if href.startswith('/') else href
                 
-                # 안정성을 위해 상세 페이지 방문은 제외 (430 에러 방지)
+                # 상세 페이지 방문하여 고화질 원본 이미지 추출
                 img_url = ""
-                thumb_el = item.select_one('img.thumb')
-                if thumb_el:
-                    img_url = thumb_el.get('data-original') or thumb_el.get('src') or ""
-                if img_url:
-                    if img_url.startswith('//'): 
-                        img_url = "https:" + img_url
-                    # 저해상도(70x50)를 고해상도(140x100)로 변경
-                    img_url = img_url.replace('70x50', '140x100')
+                # 이전에 차단된 적이 있다면 상세 페이지 방문 건너뜀 (속도 및 상호작용 안정성)
+                if not getattr(self, 'is_details_blocked', False):
+                    try:
+                        time.sleep(3.0 + random.random() * 2.0)
+                        detail_html = self.fetch_page(link)
+                        if detail_html:
+                            detail_soup = BeautifulSoup(detail_html, 'html.parser')
+                            article_img = detail_soup.select_one('article img')
+                            if article_img:
+                                img_url = article_img.get('src') or article_img.get('data-original') or ""
+                        else:
+                            # fetch_page가 None을 반환(430 등)하면 차단된 것으로 간주
+                            self.is_details_blocked = True
+                            logger.warning(f"FMKorea 상세 페이지 접근 차단됨. 이번 회차는 썸네일로 대체합니다.")
+                    except Exception as e:
+                        logger.warning(f"상세 페이지 이미지 추출 실패: {e}")
+
+                # 원본 이미지를 못 찾았거나 차단된 경우 썸네일 활용
+                if not img_url:
+                    thumb_el = item.select_one('img.thumb')
+                    if thumb_el:
+                        img_url = thumb_el.get('data-original') or thumb_el.get('src') or ""
+                        if img_url:
+                            img_url = img_url.replace('70x50', '140x100')
+
+                if img_url and img_url.startswith('//'): 
+                    img_url = "https:" + img_url
 
                 info_div = item.select_one('.hotdeal_info')
                 price = "가격미상"
