@@ -215,8 +215,11 @@ class FMKoreaCrawler(BaseCrawler):
                 thumb_el = item.select_one('img.thumb')
                 if thumb_el:
                     img_url = thumb_el.get('data-original') or thumb_el.get('src') or ""
-                if img_url and img_url.startswith('//'): 
-                    img_url = "https:" + img_url
+                if img_url:
+                    if img_url.startswith('//'): 
+                        img_url = "https:" + img_url
+                    # 저해상도(70x50)를 고해상도(140x100)로 변경
+                    img_url = img_url.replace('70x50', '140x100')
 
                 info_div = item.select_one('.hotdeal_info')
                 price = "가격미상"
