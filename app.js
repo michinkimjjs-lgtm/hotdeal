@@ -41,8 +41,9 @@ async function fetchDeals(page = 1) {
 
         // Apply Category Filter
         if (currentCategory === 'HOT') {
-            // 인기: 댓글 많은 순
-            query = query.order('comment_count', { ascending: false });
+            // 핫/인기: 최신순 (단, '전체'와 구분을 위해 댓글 3개 이상 필터링)
+            query = query.gte('comment_count', 3);
+            query = query.order('id', { ascending: false });
         } else {
             // 일반 카테고리 필터
             if (currentCategory !== 'ALL') {
