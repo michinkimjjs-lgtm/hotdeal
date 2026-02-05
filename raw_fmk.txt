@@ -1,0 +1,54 @@
+<li class="li li_best2_pop0 li_best2_hotdeal0 li_best2_politics0" style="">
+ <div class="li" style="padding-left:120px;position:relative;padding-bottom:3px;">
+  <a href="/9455980118">
+   <img alt="[네이버] 비타도스C 3000 비타민C 분말 가루 스틱 30포 ..." class="thumb" data-original="//image.fmkorea.com/filesn/cache/thumb/20260204/9455980118_70x50.crop.webp?c=20260204160105" height="50" onerror="this.style.display='none'" src="//image.fmkorea.com/classes/lazy/img/transparent.gif" width="70"/>
+  </a>
+  <h3 class="title" data-title-ellipsis="true">
+   <a class="hotdeal_var8" href="/9455980118">
+    <span class="ellipsis-target">
+     비타도스C 3000 비타민C 분말 가루 스틱 30포
+    </span>
+    <span class="comment_count">
+     [2]
+    </span>
+   </a>
+  </h3>
+  <div class="hotdeal_info">
+   <span>
+    쇼핑몰:
+    <a class="strong" href="/index.php?mid=hotdeal&amp;search_keyword=%EB%84%A4%EC%9D%B4%EB%B2%84&amp;search_target=title">
+     네이버
+    </a>
+   </span>
+   /
+   <span>
+    가격:
+    <a class="strong" href="/9455980118">
+     2,940원
+    </a>
+   </span>
+   /
+   <span>
+    배송:
+    <a class="strong" href="/9455980118">
+     네맴무료
+    </a>
+   </span>
+  </div>
+  <div>
+   <span class="category">
+    <a href="/index.php?mid=hotdeal&amp;category=1196844726">
+     먹거리
+    </a>
+    /
+   </span>
+   <span class="regdate">
+    16:01
+    <!--		16:01	-->
+   </span>
+   <span class="author">
+    / 굼바의모험
+   </span>
+  </div>
+ </div>
+</li>

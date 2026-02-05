@@ -24,6 +24,10 @@ def main():
             logging.info("크롤링 루프 시작")
             ppomppu.crawl()
             fmkorea.crawl()
+            # Ruliweb 추가
+            from crawler import RuliwebCrawler
+            ruliweb = RuliwebCrawler(URL, KEY) # Note: Creating instance here for safety if not initialized outside
+            ruliweb.crawl()
             
             # 다음 실행까지 대기
             logging.info(f"✅ 일시 완료. {INTERVAL_MINUTES}분 대기 중... ({time.strftime('%H:%M:%S')} 재개 예정)")

@@ -52,9 +52,11 @@ async function fetchDeals(page = 1) {
             query = query.order('id', { ascending: false });
         }
 
-        // Apply Popular Filter (10+ Likes)
+        // Apply Popular Filter
+        // General: 10+ Likes
+        // Ruliweb: 100+ Likes (due to generous like culture)
         if (filterPopular) {
-            query = query.gte('like_count', 10);
+            query = query.or('and(source.eq.Ruliweb,like_count.gte.100),and(source.neq.Ruliweb,like_count.gte.10)');
         }
 
         const { data, error, count } = await query.range(from, to);

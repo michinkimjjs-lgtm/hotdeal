@@ -93,9 +93,11 @@ class BaseCrawler:
 class PpomppuCrawler(BaseCrawler):
     def extract_price(self, title):
         try:
-            match = re.search(r'[\(\[]\s*([\d,]+(?:원|만원|원)?)\s*(?:/|\]|\))', title)
+            # (12,345 / 무료) or [12,345] patterns
+            match = re.search(r'[\[\(]\s*([\d,]+(?:원)?|무료)\s*(?:/|\]|\))', title)
             if match: return match.group(1).strip()
-            match_won = re.search(r'([\d,]+(?:원|만원))', title)
+            # 10,000원 pattern
+            match_won = re.search(r'([\d,]+원)', title)
             if match_won: return match_won.group(1).strip()
         except: pass
         return "가격미상"
@@ -175,54 +177,106 @@ class FMKoreaCrawler(BaseCrawler):
 class RuliwebCrawler(BaseCrawler):
     def crawl(self):
         logger.info("=== [Ruliweb] 크롤링 시작 ===")
-        url = "https://bbs.ruliweb.com/market/board/1020"
+        # 갤러리 뷰로 요청하여 썸네일 노출 유도
+        url = "https://bbs.ruliweb.com/market/board/1020?view=gallery"
         html = self.fetch_page(url)
         if not html: return
         soup = BeautifulSoup(html, 'html.parser')
-        items = soup.select('table.board_list_table tr.table_body:not(.notice)')
+
+        # 갤러리 뷰 아이템 선택자
+        items = soup.select('div.flex_item.article_wrapper')
+        if not items:
+            # Fallback to list view selector if gallery view fails
+            items = soup.select('table.board_list_table tr.table_body:not(.notice)')
+            
         count = 0
         for item in items:
             try:
-                t_el = item.select_one('a.subject_link')
-                if not t_el: continue
-                title = t_el.get_text().strip(); link = t_el.get('href', '')
+                # 갤러리 뷰 구조 파싱
+                if item.name == 'div':
+                    subject_div = item.select_one('.subject_wrapper')
+                    if not subject_div: continue
+                    t_el = subject_div.select_one('a.subject_link')
+                    link = t_el['href'] if t_el else ""
+                    title = t_el.get_text().strip() if t_el else ""
+                    
+                    # 썸네일 추출 (background-image 파싱)
+                    img_url = ""
+                    thumb_a = item.select_one('a.thumbnail')
+                    if thumb_a and thumb_a.has_attr('style'):
+                        style = thumb_a['style']
+                        # background-image: url(...), url(...) 
+                        # 보통 첫 번째 url이 썸네일 (AVIF 또는 WEBP)
+                        urls = re.findall(r'url\((.*?)\)', style)
+                        if urls:
+                            img_url = urls[0].strip("'\"")
+                    
+                    # 수치 정보
+                    like = 0
+                    rec_el = item.select_one('.recomd')
+                    if rec_el:
+                         # 텍스트 내에서 숫자만 추출
+                         txt = rec_el.get_text().strip()
+                         nums = re.findall(r'\d+', txt)
+                         if nums: like = int(nums[0])
+                    
+                    comment = 0
+                    com_el = subject_div.select_one('.num_reply .num') if subject_div else None
+                    if com_el:
+                         # (10) 형태
+                         c_txt = com_el.get_text().strip()
+                         nums = re.findall(r'\d+', c_txt)
+                         if nums: comment = int(nums[0])
+
+                    cat = "기타" # 갤러리 뷰에서는 카테고리가 명시적으로 안 보일 수 있음. 
+                               # 제목 앞 말머리가 있다면 그것을 사용.
+                    # Fallback category logic based on title keywords
+                    cat = self.normalize_category(title)
+
+                else:
+                    # 리스트 뷰 구조 파싱 (기존 로직 유지)
+                    t_el = item.select_one('a.subject_link')
+                    if not t_el: continue
+                    title = t_el.get_text().strip(); link = t_el.get('href', '')
+                    
+                    img_url = ""
+                    # 리스트 뷰에서는 썸네일 찾기 어려움
+                    
+                    cat_el = item.select_one('.category') or item.select_one('.divsn')
+                    cat = self.normalize_category(cat_el.get_text()) if cat_el else "기타"
+                    
+                    comment = 0
+                    c_el = item.select_one('.num_reply') or item.select_one('.num_comment')
+                    if c_el:
+                        nums = re.findall(r'\d+', c_el.get_text())
+                        if nums: comment = int(nums[0])
+                        
+                    like = 0
+                    l_el = item.select_one('.recomd')
+                    if l_el:
+                        nums = re.findall(r'\d+', l_el.get_text())
+                        if nums: like = int(nums[0])
+
                 if not link: continue
                 if link.startswith('/'): link = "https://bbs.ruliweb.com" + link
                 
-                img_url = ""
-                # 루리웹 최신 지연 로딩 및 썸네일 구조 대응
-                img_el = item.select_one('td.thumb img') or item.select_one('img.thumb') or item.select_one('.td_img img') or item.select_one('img')
-                if img_el:
-                    # Ruliweb uses data-src or data-original for lazy loading
-                    img_url = img_el.get('data-src') or img_el.get('data-original') or img_el.get('src') or ""
-                
-                # Absolute URL and Protocol Fix
+                # 프로토콜 보정
                 if img_url.startswith('//'): img_url = "https:" + img_url
                 if img_url and not img_url.startswith('http'): img_url = "https://bbs.ruliweb.com" + img_url
                 
+                # 가격 파싱 개선
                 price = "가격미상"
-                # Extract price from title (e.g., [12,345원], 12,345원, [무료])
-                p_match = re.search(r'([0-9,.]+원)', title)
-                if p_match: 
+                # 뽐뿌/루리웹 공통 정규식: (12,345원) (무료) (1,000 / 무료) 등
+                # 1. 괄호 안의 숫자+원 또는 무료 찾기
+                # 루리웹: [12,345원] 등
+                p_match = re.search(r'[\[\(]\s*([\d,]+(?:원)?|무료)\s*(?:/|\]|\))', title)
+                if p_match:
                     price = p_match.group(1)
-                elif '무료' in title:
-                    price = '무료'
-                
-                like = 0
-                rec = item.select_one('.recomd_count .count') or item.select_one('.recomm') or item.select_one('.recomd')
-                if rec:
-                    r_text = rec.get_text().strip()
-                    if r_text.isdigit(): like = int(r_text)
-                    
-                comment = 0
-                com = item.select_one('.num_comment .num') or item.select_one('.num_comment') or item.select_one('.num_reply')
-                if com:
-                    c_text = com.get_text().strip('[]() ')
-                    if c_text.isdigit(): comment = int(c_text)
-                    
-                cat_el = item.select_one('.category')
-                cat = self.normalize_category(cat_el.get_text()) if cat_el else "기타"
-                
+                else:
+                    # 그냥 숫자+원 패턴 찾기
+                    p_match2 = re.search(r'([\d,]+원)', title)
+                    if p_match2: price = p_match2.group(1)
+
                 if self.save_deal({"title": title, "url": link, "img_url": img_url, "source": "Ruliweb", "category": cat, "price": price, "comment_count": comment, "like_count": like}): count += 1
                 time.sleep(0.05)
             except Exception as e: logger.error(f"Ruliweb 에러: {e}")

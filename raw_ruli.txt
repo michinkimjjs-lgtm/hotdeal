@@ -1,0 +1,41 @@
+<tr class="table_body notice inside">
+ <td class="id">
+  101318
+ </td>
+ <td class="divsn">
+  <a href="https://bbs.ruliweb.com/market/board/1020?cate=31" tabindex="-1">
+   <strong>
+    상품권
+   </strong>
+  </a>
+ </td>
+ <td class="subject">
+  <a class="subject_link deco" href="https://bbs.ruliweb.com/market/board/1020/read/101318?" tabindex="-1">
+   <strong>
+    [알리익스프레스]2월 초이스데이 사랑가득 선물대전(2월1일(일)~2월7일...
+   </strong>
+   <i class="icon-picture">
+   </i>
+   <a class="num_reply" href="https://bbs.ruliweb.com/market/board/1020/read/101318?#cmt" target="_self">
+    (4)
+   </a>
+  </a>
+ </td>
+ <td class="writer text_over">
+  <a href="javascript:;" onclick="app.getMemberContextMenu(this, 'https://bbs.ruliweb.com/market/board/1020?search_type=member_srl&amp;search_key=5328521', '5328521', 'https://mypi.ruliweb.com/mypi.htm?nid=5328521')" tabindex="-1">
+   <i class="ir">
+    _
+   </i>
+   핫딜관리자
+  </a>
+ </td>
+ <td class="recomd">
+  13
+ </td>
+ <td class="hit">
+  27518
+ </td>
+ <td class="time">
+  2026.01.30
+ </td>
+</tr>

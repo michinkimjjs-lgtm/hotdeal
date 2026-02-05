@@ -1,0 +1,53 @@
+<tr align="center" class="baseList bbs_new1 hotpop_bg_color">
+ <td class="baseList-space baseList-numb" colspan="2">
+  681573
+ </td>
+ <td align="left" class="baseList-space title">
+  <a class="baseList-thumb" href="view.php?id=ppomppu&amp;page=1&amp;divpage=108&amp;&amp;no=681573" tooltip="P_img://cdn2.ppomppu.co.kr/zboard/data3/2026/0203/m_20260203195656_G16yTstQ5j.jpeg">
+   <img onerror="this.src='//static.ppomppu.co.kr/www/img/noimage/noimage_60x50.jpg'" onfocus="blur()" src="//cdn2.ppomppu.co.kr/zboard/data/_thumb/ppomppu/3/small_681573.jpg?t=20260204"/>
+  </a>
+  <div class="baseList-box">
+   <div class="baseList-cover">
+    <img class="icons_vertical" src="/images/menu/pop_icon2.jpg"/>
+    <a class="baseList-title" href="view.php?id=ppomppu&amp;page=1&amp;divpage=108&amp;no=681573">
+     <span>
+      <em class="baseList-head subject_preface">
+       [지마켓]
+      </em>
+      구운계란 대란 30구+30구 (15,230원/무배)
+     </span>
+    </a>
+    <span class="baseList-c" onclick='win_comment("?id=ppomppu&amp;page=1&amp;divpage=108&amp;no=681573");'>
+     4
+    </span>
+   </div>
+   <small class="baseList-small">
+    [식품/건강]
+   </small>
+  </div>
+ </td>
+ <td align="left" class="baseList-space" colspan="2">
+  <div class="list_name">
+   <nobr class="list_name">
+    <a class="baseList-name" href="#" onclick="return false">
+     <span class="baseList-name">
+      <i class="nlevel lv4">
+      </i>
+      하늘바라기@@
+     </span>
+    </a>
+   </nobr>
+  </div>
+ </td>
+ <td class="baseList-space" colspan="2" title="26.02.03 19:58:11">
+  <time class="baseList-time">
+   26/02/03
+  </time>
+ </td>
+ <td class="baseList-space baseList-rec" colspan="2">
+  1 - 0
+ </td>
+ <td class="baseList-space baseList-views" colspan="2">
+  20709
+ </td>
+</tr>
