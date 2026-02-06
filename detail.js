@@ -70,60 +70,88 @@ function renderDealInfo(deal) {
     document.title = `${deal.title} - 핫딜모음`;
 
     // Text Fields
-    document.getElementById('deal-title').textContent = deal.title;
-    document.getElementById('deal-price').textContent = deal.price || '가격미상';
-    document.getElementById('deal-category').textContent = deal.category || '기타';
+    // Layout: Header -> Meta -> Bar
 
-    // Date Format: YYYY. MM. DD.
+    // Header
+    const catEl = document.getElementById('deal-category');
+    if (catEl) catEl.textContent = deal.category || '기타';
+    document.getElementById('deal-title').textContent = deal.title;
+
+    // Meta
+    // Date Format: YYYY. MM. DD. hh:mm
     const d = new Date(deal.created_at);
-    // Month is 0-indexed
-    const dateStr = `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`;
+    const dateStr = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')} ${d.getHours()}:${d.getMinutes()}`;
     document.getElementById('deal-date').textContent = dateStr;
 
-    // Source Icon
+    document.getElementById('source-name-meta').textContent = deal.source;
+
+    // Source Icon & Bar Info
     const sourceIcon = document.getElementById('source-icon');
     const sMap = { 'ppomppu': 'ppomppu', 'fmkorea': 'fmkorea', 'ruliweb': 'ruliweb' };
     let sKey = deal.source.toLowerCase();
-
     if (sKey.includes('ppomppu')) sKey = 'ppomppu';
     else if (sKey.includes('fmkorea')) sKey = 'fmkorea';
     else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
 
     sourceIcon.src = `assets/${sKey}_icon.png`;
-    document.getElementById('source-name').textContent = deal.source;
+    document.getElementById('source-name-bar').textContent = deal.source;
+    document.getElementById('deal-price').textContent = deal.price || '가격 확인';
 
     // "Original Post" Button
     const origBtn = document.getElementById('original-link');
     if (origBtn) origBtn.href = deal.url;
 
-    // Image
-    const imgEl = document.getElementById('deal-image');
-    imgEl.src = deal.img_url || 'https://via.placeholder.com/400x400?text=No+Image';
-    imgEl.onerror = () => { imgEl.src = 'https://via.placeholder.com/400x400?text=No+Image'; };
-
-    // Stats
-    document.getElementById('stat-likes').textContent = deal.like_count || 0;
-    document.getElementById('stat-comments').textContent = deal.comment_count || 0;
+    // Affiliate Link Generation
+    const btn = document.getElementById('buy-link');
+    btn.href = generateAffiliateLink(deal.url, deal.source);
 
     // Content (Modified: Hide section if empty, Hide redundant main image if content exists)
     const contentEl = document.getElementById('deal-content-html');
     const contentSection = document.querySelector('.content-section');
-    const mainImageArea = document.querySelector('.product-image-area');
+    // Note: Main image is removed from layout in HTML, so no need to hide it via JS anymore.
 
     if (deal.content && deal.content.trim().length > 0) {
         contentEl.innerHTML = deal.content;
         contentSection.style.display = 'block';
-        // Hide main image to avoid duplication
-        if (mainImageArea) mainImageArea.style.display = 'none';
     } else {
-        // No content -> Hide content section, Show main image
         contentSection.style.display = 'none';
-        if (mainImageArea) mainImageArea.style.display = 'block';
     }
+}
 
-    // Button
-    const btn = document.getElementById('buy-link');
-    btn.href = deal.url;
+/**
+ * 수익화 링크 생성 함수
+ * 여기에 쿠팡 파트너스 아이디 등을 입력하면 적용됩니다.
+ */
+function generateAffiliateLink(url, source) {
+    let finalUrl = url;
+
+    // 1. Coupang Logic
+    // 만약 원본 링크가 쿠팡이라면? (실제로는 크롤링된 url이 쿠팡 링크가 아니라 게시글 링크임. 
+    // 게시글 본문 내의 링크를 파싱해야 하는데, 현재 DB엔 게시글 URL만 있음.
+    // '구매하기' 버튼은 일단 '게시글(원본)'으로 이동하게 되어있음 (핫딜모음 특성상).
+    // 만약 '쿠팡 바로가기'를 원한다면 본문 파싱 단계에서 '구매 링크'를 별도로 추출해서 DB에 저장했어야 함.)
+
+    // 현재 구조: 구매하기 -> 원본 게시글. 
+    // 유저의 요청: "구매하기 버튼을 누르면 해당 상품의 쇼핑몰로 바로 보냈으면 좋겠어"
+
+    // !!! 중요 !!! 
+    // 현재 우리 DB에는 '쇼핑몰 원본 상품 링크'가 따로 저장되어 있지 않습니다.
+    // deal.url은 '뽐뿌/펨코 게시글 URL'입니다.
+    // 따라서 지금은 '게시글'로 이동할 수밖에 없습니다. 
+    // 추후 크롤러 업그레이드가 필요합니다. (본문 내 링크 추출)
+
+    // 임시로 쿠팡 파트너스 예시 코드만 적어둡니다.
+    // 예를 들어, url이 쿠팡 단축 링크라면 태그를 붙일 수 있습니다.
+
+    /*
+    const MY_COUPANG_ID = 'AF1234567'; // 여기에 아이디 입력
+    if (finalUrl.includes('coupang.com')) {
+        if (finalUrl.includes('?')) finalUrl += `&tag=${MY_COUPANG_ID}`;
+        else finalUrl += `?tag=${MY_COUPANG_ID}`;
+    }
+    */
+
+    return finalUrl;
 }
 
 function renderComparison(deal) {

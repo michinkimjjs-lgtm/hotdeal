@@ -43,19 +43,20 @@
 
                 <!-- Product Header Section -->
                 <div class="product-header">
-                    <h1 id="deal-title" class="product-title">상품 제목 들어가는 곳</h1>
+                    <div class="header-top-row">
+                        <span id="deal-category" class="badge-blue">카테고리</span>
+                        <h1 id="deal-title" class="product-title">상품 제목 들어가는 곳</h1>
+                    </div>
 
                     <div class="product-meta-row">
-                        <span id="deal-category" class="badge-blue">카테고리</span>
                         <!-- Date -->
                         <div class="meta-item">
                             <span class="icon-calendar">📅</span>
                             <span id="deal-date" class="meta-text">2024. 01. 01.</span>
                         </div>
-                        <!-- Source -->
+                        <!-- Source Base -->
                         <div class="meta-item">
-                            <img id="source-icon" src="" alt="icon" class="source-favicon">
-                            <span id="source-name" class="meta-text">쇼핑몰</span>
+                            <span id="source-name-meta" class="meta-text">쇼핑몰</span>
                         </div>
                         <!-- Original Link Button -->
                         <a id="original-link" href="#" target="_blank" class="origin-btn">
@@ -64,39 +65,21 @@
                     </div>
                 </div>
 
-                <!-- Product Body (Image + Info) -->
-                <div class="product-body">
-                    <div class="product-image-area">
-                        <div class="image-wrapper">
-                            <img id="deal-image" src="" alt="Product Image">
-                        </div>
+                <!-- Price & Action Bar (New Layout) -->
+                <div class="price-action-bar">
+                    <div class="mall-info">
+                        <img id="source-icon" src="" alt="icon" class="source-favicon-large">
+                        <span id="source-name-bar" class="mall-name">쇼핑몰 이름</span>
                     </div>
 
-                    <div class="product-info-area">
-                        <div class="price-section">
-                            <span class="price-label">핫딜가</span>
-                            <span id="deal-price" class="price-value">0원</span>
-                        </div>
-
-                        <div class="purchase-section">
-                            <a id="buy-link" href="#" target="_blank" class="buy-button">
-                                구매하러 가기
-                            </a>
-                        </div>
-
-                        <div class="stats-row">
-                            <span>👍 추천 <b id="stat-likes">0</b></span>
-                            <span>💬 댓글 <b id="stat-comments">0</b></span>
-                        </div>
+                    <div class="price-display">
+                        <span id="deal-price" class="price-value-large">0원</span>
                     </div>
-                </div>
 
-                <!-- Deal Content (Parsed HTML) -->
-                <div class="content-section">
-                    <h3>상세 내용</h3>
-                    <div id="deal-content-html" class="content-html">
-                        <!-- Parsed content will be injected here -->
-                        <p style="color:#666;">본문 내용을 불러오는 중입니다...</p>
+                    <div class="action-area">
+                        <a id="buy-link" href="#" target="_blank" class="buy-button">
+                            구매하기
+                        </a>
                     </div>
                 </div>
 
@@ -138,12 +121,20 @@
                     </div>
                 </div>
 
+                <!-- Deal Content (Parsed HTML) -->
+                <div class="content-section">
+                    <!-- Removing H3 as per reference style, it flows naturally -->
+                    <div id="deal-content-html" class="content-html">
+                        <p style="color:#666;">본문 내용을 불러오는 중입니다...</p>
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
 
     <!-- Logic -->
-    <script src="detail.js?v=2.2"></script>
+    <script src="detail.js?v=2.3"></script>
 </body>
 
 </html>
