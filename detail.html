@@ -13,8 +13,8 @@
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="index.css"> <!-- Reuse base styles -->
-    <link rel="stylesheet" href="detail.css">
+    <link rel="stylesheet" href="index.css?v=2.0"> <!-- Reuse base styles -->
+    <link rel="stylesheet" href="detail.css?v=2.0">
 </head>
 
 <body>
@@ -91,6 +91,15 @@
                     </div>
                 </div>
 
+                <!-- Deal Content (Parsed HTML) -->
+                <div class="content-section">
+                    <h3>상세 내용</h3>
+                    <div id="deal-content-html" class="content-html">
+                        <!-- Parsed content will be injected here -->
+                        <p style="color:#666;">본문 내용을 불러오는 중입니다...</p>
+                    </div>
+                </div>
+
                 <!-- Analysis Tabs -->
                 <div class="analysis-section">
                     <div class="tabs">
@@ -134,7 +143,7 @@
     </div>
 
     <!-- Logic -->
-    <script src="detail.js"></script>
+    <script src="detail.js?v=2.0"></script>
 </body>
 
 </html>

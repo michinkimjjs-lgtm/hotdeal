@@ -105,6 +105,17 @@ function renderDealInfo(deal) {
     document.getElementById('stat-likes').textContent = deal.like_count || 0;
     document.getElementById('stat-comments').textContent = deal.comment_count || 0;
 
+    // Content (New)
+    const contentEl = document.getElementById('deal-content-html');
+    if (deal.content) {
+        contentEl.innerHTML = deal.content;
+    } else {
+        contentEl.innerHTML = `<p style="color:#888; text-align:center; padding:20px;">
+            본문 내용이 수집되지 않았습니다.<br>
+            <span style="font-size:0.9em">(크롤러가 다음 주기부터 수집을 시작합니다)</span>
+        </p>`;
+    }
+
     // Button
     const btn = document.getElementById('buy-link');
     btn.href = deal.url;

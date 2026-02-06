@@ -264,6 +264,42 @@
     font-weight: 500;
 }
 
+/* Content Section */
+.content-section {
+    background: #1e1e1e;
+    border-radius: 12px;
+    border: 1px solid #333;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.content-section h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.content-html {
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: auto;
+    /* Handle wide tables/images */
+}
+
+.content-html img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.content-html p {
+    margin-bottom: 15px;
+}
+
 /* Chart */
 .chart-container {
     position: relative;

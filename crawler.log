@@ -10692,3 +10692,691 @@
 2026-02-06 11:20:23,302 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101523?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
 2026-02-06 11:20:23,552 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101522?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
 2026-02-06 11:20:23,605 [INFO] === [Ruliweb] 크롤링 완료 (1건) ===
+2026-02-06 11:30:23,616 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 11:30:24,579 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682194) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:24,843 [INFO] [Ppomppu] 기타 | [지마켓]한돈 대패삼겹살 1.2kg  | 15,600원
+2026-02-06 11:30:25,099 [INFO] [Ppomppu] 식품/건강 | [G마켓]명엽채/오징어실채 볶음 60 | 9,600원
+2026-02-06 11:30:25,351 [INFO] [Ppomppu] 가전/가구 | [G마켓]LG 휘센 오브제컬렉션 뷰2 | 1,697,250원
+2026-02-06 11:30:25,615 [INFO] [Ppomppu] 컴퓨터 | [네이버]레이저블랙위도우v3 외 다수 | 가격미상
+2026-02-06 11:30:25,879 [INFO] [Ppomppu] 식품/건강 | [조이풀푸드]이가네 양념돼지 왕구이  | 20,300원
+2026-02-06 11:30:26,132 [INFO] [Ppomppu] 식품/건강 | [11번가]g7 퓨어블랙 커피 200 | 26,900원
+2026-02-06 11:30:26,371 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:26,619 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682338) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:26,859 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:27,127 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:27,397 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:27,646 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:27,885 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:28,177 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:28,429 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682331) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:28,680 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682330) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:28,961 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682329) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:29,199 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682328) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:29,429 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682327) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:29,663 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682326) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:29,902 [INFO] [Ppomppu] 기타 | 홍콩반점 2/10 짜장면 3,900원 | 3,900원
+2026-02-06 11:30:30,147 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:30,379 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:30,436 [INFO] === [Ppomppu] 크롤링 완료 (7건) ===
+2026-02-06 11:30:30,436 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 11:30:31,129 [INFO] [FMKorea] 식품/건강 | 가나 프리미엄 랑드샤 3종 6개 | 16,080원
+2026-02-06 11:30:31,382 [INFO] [FMKorea] 기타 | [쌤소나이트 레드] TOIIS C 캐 | 129,020원
+2026-02-06 11:30:31,629 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462565803) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:31,868 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545813) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:32,110 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462556352) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:32,353 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462555141) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:32,597 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462549899) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:32,857 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506266) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:33,096 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545373) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:33,333 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506509) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:33,574 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462539879) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:33,809 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462531627) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:34,074 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462485793) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:34,329 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462462840) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:34,569 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462414462) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:34,823 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462412994) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:35,067 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462402634) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:35,321 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462348978) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:35,566 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462371322) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:35,807 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462382534) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:35,866 [INFO] === [FMKorea] 크롤링 완료 (2건) ===
+2026-02-06 11:30:35,921 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 11:30:37,762 [INFO] [Ruliweb] 기타 | [롯데온] 쉬크 하이드로5 면도기 기 | 가격미상
+2026-02-06 11:30:38,253 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101551?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:38,489 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101549?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:38,712 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101548?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:38,949 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101547?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:39,199 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101545?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:39,429 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101544?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:39,660 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101543?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:39,881 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101542?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:40,119 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101541?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:40,359 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101540?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:40,593 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101539?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:40,822 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101538?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:41,065 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101537?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:41,307 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101536?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:41,539 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101535?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:41,773 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101534?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:42,015 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101533?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:42,303 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101532?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:42,547 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101531?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:42,793 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101530?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:43,035 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101529?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:43,270 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:43,511 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:43,743 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101526?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:43,969 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101525?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:44,213 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101524?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:44,458 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101523?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:30:44,518 [INFO] === [Ruliweb] 크롤링 완료 (1건) ===
+2026-02-06 11:40:44,532 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 11:40:45,454 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682262) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:45,708 [INFO] [Ppomppu] 식품/건강 | [롯데온]커클랜드 시그니춰 먹는샘물  | 6,530원
+2026-02-06 11:40:45,949 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:46,188 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:46,426 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:46,673 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:46,923 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:47,167 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:47,403 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:47,649 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682338) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:47,894 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:48,152 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:48,398 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:48,655 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:48,900 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:49,173 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:49,431 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682331) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:49,688 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682330) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:49,935 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682329) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:50,218 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682328) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:50,463 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682327) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:50,714 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:50,963 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:51,229 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:51,280 [INFO] === [Ppomppu] 크롤링 완료 (1건) ===
+2026-02-06 11:40:51,280 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 11:40:51,812 [INFO] [FMKorea] 기타 | 팸퍼스 엔젤브리즈 소프트팬티 8팩 총 | 117,699원
+2026-02-06 11:40:52,061 [INFO] [FMKorea] 기타 | 리스테린 그린티 마일드 750ml 4 | 15,155원
+2026-02-06 11:40:52,300 [INFO] [FMKorea] 의류/잡화 | 리복 클럽C 그라운드 UK 	[2] | 35,870원
+2026-02-06 11:40:52,547 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462654204) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:52,792 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462636336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:53,062 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462565803) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:53,305 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545813) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:53,582 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462556352) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:53,818 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462555141) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:54,049 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462549899) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:54,292 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506266) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:54,533 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545373) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:54,764 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506509) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:55,011 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462539879) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:55,252 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462531627) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:55,486 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462485793) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:55,755 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462462840) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:55,997 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462414462) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:56,229 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462412994) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:56,462 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462402634) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:56,524 [INFO] === [FMKorea] 크롤링 완료 (3건) ===
+2026-02-06 11:40:56,557 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 11:40:58,132 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101552?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:58,354 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101551?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:58,582 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101549?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:58,823 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101548?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:59,060 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101547?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:59,341 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101545?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:59,576 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101544?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:40:59,813 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101543?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:00,045 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101542?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:00,338 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101541?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:00,571 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101540?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:00,849 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101539?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:01,085 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101538?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:01,326 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101537?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:01,565 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101536?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:01,812 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101535?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:02,090 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101534?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:02,325 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101533?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:02,557 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101532?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:02,789 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101531?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:03,018 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101530?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:03,244 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101529?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:03,480 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:03,715 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:03,958 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101526?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:04,190 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101525?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:04,430 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101524?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:04,670 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101523?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:41:04,735 [INFO] === [Ruliweb] 크롤링 완료 (0건) ===
+2026-02-06 11:44:34,570 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 11:44:35,359 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682194) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:36,783 [INFO] [Ppomppu] 기타 | [토스]리르 글루타치온 14 앰플 5 | 11,900원
+2026-02-06 11:44:38,197 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:39,668 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:41,084 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:42,531 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:44,029 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:45,536 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:46,976 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:48,415 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:49,944 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682338) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:51,399 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:52,885 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:54,319 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:55,753 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:57,177 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:44:58,639 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:00,076 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682331) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:01,516 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682330) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:02,966 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682329) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:04,396 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682328) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:05,808 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:07,216 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:08,715 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:09,716 [INFO] === [Ppomppu] 크롤링 완료 (1건) ===
+2026-02-06 11:45:09,716 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 11:45:12,117 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462687937) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:13,880 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462669426) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:15,689 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462672365) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:18,046 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462654204) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:19,669 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462636336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:21,172 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462565803) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:23,538 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545813) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:24,548 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 11:45:25,094 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:25,583 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462556352) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:26,323 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:27,553 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:27,877 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462555141) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:28,823 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:30,097 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:30,122 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462549899) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:31,375 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:31,815 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506266) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:32,607 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:33,852 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:33,989 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545373) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:35,096 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:35,608 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506509) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:36,349 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:37,635 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:37,716 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462539879) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:38,880 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:39,300 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462531627) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:40,113 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:40,946 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462485793) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:41,362 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:42,615 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:43,139 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462462840) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:43,856 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:44,670 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462414462) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:45,123 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:46,215 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462412994) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:46,376 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:47,656 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:48,528 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462402634) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:48,593 [INFO] === [FMKorea] 크롤링 완료 (0건) ===
+2026-02-06 11:45:48,593 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 11:45:48,907 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:50,177 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:51,442 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:52,448 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101552?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:52,676 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:53,969 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:54,007 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101551?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:54,980 [INFO] === [Ppomppu] 크롤링 완료 (0건) ===
+2026-02-06 11:45:54,980 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 11:45:55,094 [ERROR] ⚠️ 차단됨 (430) (https://www.fmkorea.com/hotdeal)
+2026-02-06 11:45:55,094 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 11:45:55,541 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101549?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:55,662 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:56,899 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:57,151 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101548?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:58,156 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:45:58,600 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101547?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:45:59,505 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:00,073 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101545?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:00,755 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:01,508 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101544?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:02,047 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:03,196 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101543?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:03,291 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:04,643 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:04,735 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101542?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:05,922 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:06,369 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101541?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:07,267 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:07,888 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101540?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:08,632 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:09,487 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101539?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:10,069 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:10,939 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101538?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:11,466 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:12,387 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101537?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:12,757 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:13,988 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101536?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:14,195 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:15,470 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101535?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:15,487 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:16,826 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:17,465 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101534?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:18,074 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:18,973 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101533?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:19,424 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:20,551 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101532?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:20,750 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:22,074 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101531?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:22,162 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:23,578 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:23,707 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101530?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:24,886 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:25,254 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101529?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:26,192 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:26,778 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:27,568 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:28,235 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:28,894 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:29,755 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101526?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:30,124 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:31,325 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101525?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:31,446 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 11:46:32,461 [INFO] === [Ruliweb] 크롤링 완료 (0건) ===
+2026-02-06 11:46:32,805 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101524?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:34,374 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101523?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:46:35,382 [INFO] === [Ruliweb] 크롤링 완료 (0건) ===
+2026-02-06 11:51:04,745 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 11:51:05,378 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682282) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:05,625 [INFO] [Ppomppu] 가전/가구 | [하이마트몰]에코백스 X11 프로옴니 | 1,290,000원
+2026-02-06 11:51:05,864 [INFO] [Ppomppu] 식품/건강 | [GS샵]떡국떡 4kg (10,800 | 10,800원
+2026-02-06 11:51:06,105 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682347) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:06,347 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:06,592 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:06,833 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:07,063 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:07,303 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:07,535 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:07,766 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:08,006 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:08,262 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682338) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:08,501 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:08,731 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:08,982 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:09,223 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:09,459 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:09,695 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:09,939 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682331) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:10,176 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682330) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:10,440 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:10,707 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:10,958 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:11,024 [INFO] === [Ppomppu] 크롤링 완료 (2건) ===
+2026-02-06 11:51:11,024 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 11:51:11,547 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462687937) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:11,782 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462669426) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:12,027 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462672365) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:12,285 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462654204) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:12,515 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462636336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:12,740 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462565803) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:12,970 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545813) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:13,204 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462556352) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:13,454 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462555141) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:13,689 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462549899) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:13,918 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506266) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:14,154 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545373) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:14,396 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506509) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:14,633 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462539879) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:14,877 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462531627) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:15,127 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462485793) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:15,363 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462462840) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:15,604 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462414462) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:15,835 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462412994) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:16,080 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462402634) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:16,141 [INFO] === [FMKorea] 크롤링 완료 (0건) ===
+2026-02-06 11:51:16,176 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 11:51:16,829 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101552?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:17,067 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101551?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:17,304 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101549?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:17,550 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101548?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:17,793 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101547?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:18,020 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101545?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:18,269 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101544?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:18,499 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101543?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:18,735 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101542?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:18,970 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101541?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:19,196 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101540?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:19,457 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101539?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:19,684 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101538?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:19,920 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101537?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:20,147 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101536?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:20,398 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101535?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:20,629 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101534?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:20,861 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101533?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:21,084 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101532?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:21,327 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101531?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:21,566 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101530?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:21,807 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101529?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:22,040 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:22,270 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:22,498 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101526?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:22,741 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101525?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:22,971 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101524?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:23,199 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101523?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 11:51:23,255 [INFO] === [Ruliweb] 크롤링 완료 (0건) ===
+2026-02-06 12:01:23,263 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 12:01:23,865 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682222) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:24,110 [INFO] [Ppomppu] 기타 | [지마켓]순수 대나무 3겹 키친타월  | 7,600원
+2026-02-06 12:01:24,344 [INFO] [Ppomppu] 식품/건강 | [남도장터]활전복 1kg 5-7미 ( | 19,180원
+2026-02-06 12:01:24,573 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682349) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:24,816 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682348) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:25,052 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682347) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:25,298 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:25,546 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:25,788 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:26,028 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:26,260 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:26,499 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:26,730 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:26,956 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:27,203 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682338) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:27,441 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:27,684 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:27,918 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:28,148 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:28,381 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:28,614 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:28,851 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:29,089 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:29,333 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:29,385 [INFO] === [Ppomppu] 크롤링 완료 (2건) ===
+2026-02-06 12:01:29,385 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 12:01:29,988 [INFO] [FMKorea] 식품/건강 | G햇반 흑미밥 210g x12개+발아 | 32,290원
+2026-02-06 12:01:30,221 [INFO] [FMKorea] 식품/건강 | 토블론 스위스 삼각 초콜릿 100g  | 8,900원
+2026-02-06 12:01:30,450 [INFO] [FMKorea] 식품/건강 | 쿡솜씨 인기상품 밀키트 모음전 | 18,900원
+2026-02-06 12:01:30,685 [INFO] [FMKorea] 가전/가구 | 삼성 스마트모니터 M7 LS43FM7 | 467,040원
+2026-02-06 12:01:30,919 [INFO] [FMKorea] 디지털 | Fishx: 낚시 기록 앱 평생무료  | 0원
+2026-02-06 12:01:31,151 [INFO] [FMKorea] 컴퓨터 | Thinkpad E14 ILL G7  | 1,099,000원
+2026-02-06 12:01:31,391 [INFO] [FMKorea] 컴퓨터 | ATK U2 V2 mini Ultim | 61,020원
+2026-02-06 12:01:31,626 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462687937) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:31,868 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462669426) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:32,098 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462672365) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:32,345 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462654204) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:32,586 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462636336) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:32,840 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462565803) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:33,073 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545813) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:33,308 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462556352) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:33,556 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462555141) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:33,794 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462549899) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:34,022 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506266) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:34,259 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462545373) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:34,505 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://www.fmkorea.com/9462506509) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:34,560 [INFO] === [FMKorea] 크롤링 완료 (7건) ===
+2026-02-06 12:01:34,628 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 12:01:35,218 [INFO] [Ruliweb] 기타 | [반다이몰] 프반 일반 예판 | 가격미상
+2026-02-06 12:01:35,456 [INFO] [Ruliweb] 기타 | [겜우리] 햄스터와 태양의 마을 예판 | 가격미상
+2026-02-06 12:01:35,682 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101552?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:35,915 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101551?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:36,153 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101549?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:36,390 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101548?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:36,628 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101547?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:36,869 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101545?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:37,103 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101544?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:37,352 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101543?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:37,594 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101542?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:37,843 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101541?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:38,088 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101540?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:38,323 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101539?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:38,580 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101538?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:38,824 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101537?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:39,066 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101536?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:39,312 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101535?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:39,568 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101534?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:39,809 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101533?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:40,035 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101532?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:40,280 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101531?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:40,525 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101530?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:40,759 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101529?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:40,996 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:41,240 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:41,482 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101526?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:41,717 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101525?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
+2026-02-06 12:01:41,768 [INFO] === [Ruliweb] 크롤링 완료 (2건) ===
+2026-02-06 12:04:09,876 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 12:04:10,426 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682224 | Src: Ppomppu
+2026-02-06 12:04:10,430 [WARNING]   !! Saving deal with EMPTY/NULL content: [지마켓]휠라 레이유나이트 ...
+2026-02-06 12:04:10,430 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:11,674 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682352 | Src: Ppomppu
+2026-02-06 12:04:11,676 [WARNING]   !! Saving deal with EMPTY/NULL content: [오늘의집]원할머니 명품육개...
+2026-02-06 12:04:11,676 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:12,895 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682351 | Src: Ppomppu
+2026-02-06 12:04:12,898 [WARNING]   !! Saving deal with EMPTY/NULL content: [지마켓]순수 대나무 3겹 ...
+2026-02-06 12:04:12,898 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:14,133 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682350 | Src: Ppomppu
+2026-02-06 12:04:14,135 [WARNING]   !! Saving deal with EMPTY/NULL content: [남도장터]활전복 1kg 5...
+2026-02-06 12:04:14,136 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:15,428 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682349 | Src: Ppomppu
+2026-02-06 12:04:15,430 [WARNING]   !! Saving deal with EMPTY/NULL content: [하이마트몰]에코백스 X11...
+2026-02-06 12:04:15,430 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:16,678 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682348 | Src: Ppomppu
+2026-02-06 12:04:16,680 [WARNING]   !! Saving deal with EMPTY/NULL content: [GS샵]떡국떡 4kg (1...
+2026-02-06 12:04:16,680 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:17,913 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682347 | Src: Ppomppu
+2026-02-06 12:04:17,915 [WARNING]   !! Saving deal with EMPTY/NULL content: [토스]리르 글루타치온 14...
+2026-02-06 12:04:17,915 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:19,159 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346 | Src: Ppomppu
+2026-02-06 12:04:19,162 [WARNING]   !! Saving deal with EMPTY/NULL content: [롯데온]커클랜드 시그니춰 ...
+2026-02-06 12:04:19,162 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:20,443 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345 | Src: Ppomppu
+2026-02-06 12:04:20,445 [WARNING]   !! Saving deal with EMPTY/NULL content: [지마켓]한돈 대패삼겹살 1...
+2026-02-06 12:04:20,445 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:21,704 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344 | Src: Ppomppu
+2026-02-06 12:04:21,706 [WARNING]   !! Saving deal with EMPTY/NULL content: [G마켓]명엽채/오징어실채 ...
+2026-02-06 12:04:21,706 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:22,965 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343 | Src: Ppomppu
+2026-02-06 12:04:22,967 [WARNING]   !! Saving deal with EMPTY/NULL content: [G마켓]LG 휘센 오브제컬...
+2026-02-06 12:04:22,967 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:24,284 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342 | Src: Ppomppu
+2026-02-06 12:04:24,286 [WARNING]   !! Saving deal with EMPTY/NULL content: [네이버]레이저블랙위도우v3...
+2026-02-06 12:04:24,286 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:25,677 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341 | Src: Ppomppu
+2026-02-06 12:04:25,679 [WARNING]   !! Saving deal with EMPTY/NULL content: [조이풀푸드]이가네 양념돼지...
+2026-02-06 12:04:25,679 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:26,913 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340 | Src: Ppomppu
+2026-02-06 12:04:26,916 [WARNING]   !! Saving deal with EMPTY/NULL content: [11번가]g7 퓨어블랙 커...
+2026-02-06 12:04:26,916 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:28,158 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339 | Src: Ppomppu
+2026-02-06 12:04:28,161 [WARNING]   !! Saving deal with EMPTY/NULL content: [11번가]한라봉 4kg 실...
+2026-02-06 12:04:28,161 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:29,432 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337 | Src: Ppomppu
+2026-02-06 12:04:29,434 [WARNING]   !! Saving deal with EMPTY/NULL content: [공식몰]아모레 로맨틱 스페...
+2026-02-06 12:04:29,434 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:30,695 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336 | Src: Ppomppu
+2026-02-06 12:04:30,697 [WARNING]   !! Saving deal with EMPTY/NULL content: [롯데온]바이오가이아 아기 ...
+2026-02-06 12:04:30,697 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:31,945 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335 | Src: Ppomppu
+2026-02-06 12:04:31,947 [WARNING]   !! Saving deal with EMPTY/NULL content: [네이버]센토 프라임 고불소...
+2026-02-06 12:04:31,947 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:33,218 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334 | Src: Ppomppu
+2026-02-06 12:04:33,220 [WARNING]   !! Saving deal with EMPTY/NULL content: [네이버]피코크 직화구이 떡...
+2026-02-06 12:04:33,220 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:34,449 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333 | Src: Ppomppu
+2026-02-06 12:04:34,451 [WARNING]   !! Saving deal with EMPTY/NULL content: [H몰]아티키 천연꿀/메리비...
+2026-02-06 12:04:34,451 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:35,768 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332 | Src: Ppomppu
+2026-02-06 12:04:35,770 [WARNING]   !! Saving deal with EMPTY/NULL content: [무신사]가나디 별자리 맥세...
+2026-02-06 12:04:35,770 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:37,012 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963 | Src: Ppomppu
+2026-02-06 12:04:37,015 [WARNING]   !! Saving deal with EMPTY/NULL content: 홍콩반점 2/10 짜장면 3...
+2026-02-06 12:04:37,015 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:38,269 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961 | Src: Ppomppu
+2026-02-06 12:04:38,271 [WARNING]   !! Saving deal with EMPTY/NULL content: 한라봉 굿구리...
+2026-02-06 12:04:38,271 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:39,591 [WARNING]   -> Content Extraction Failed (Soup valid, selector failed). URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959 | Src: Ppomppu
+2026-02-06 12:04:39,593 [WARNING]   !! Saving deal with EMPTY/NULL content: 로청 추천좀 부탁드립니다...
+2026-02-06 12:04:39,593 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:40,601 [INFO] === [Ppomppu] 크롤링 완료 (0건) ===
+2026-02-06 12:04:40,601 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 12:04:42,774 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:44,840 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:46,338 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:47,801 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:49,544 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:50,853 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:53,043 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:54,895 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:56,839 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:58,406 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:04:59,944 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:00,253 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 12:05:00,832 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682231 | Src: Ppomppu
+2026-02-06 12:05:00,835 [WARNING]   !! Saving deal with EMPTY content: [G마켓]컬럼비아 남성 파이...
+2026-02-06 12:05:02,176 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:02,577 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682352 | Src: Ppomppu
+2026-02-06 12:05:02,579 [WARNING]   !! Saving deal with EMPTY content: [오늘의집]원할머니 명품육개...
+2026-02-06 12:05:02,949 [INFO]   [Insert] Ppomppu | [오늘의집]원할머니 명품육개장 600
+2026-02-06 12:05:03,776 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:04,215 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682351 | Src: Ppomppu
+2026-02-06 12:05:04,216 [WARNING]   !! Saving deal with EMPTY content: [지마켓]순수 대나무 3겹 ...
+2026-02-06 12:05:05,596 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:05,900 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682350 | Src: Ppomppu
+2026-02-06 12:05:05,902 [WARNING]   !! Saving deal with EMPTY content: [남도장터]활전복 1kg 5...
+2026-02-06 12:05:07,518 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682349 | Src: Ppomppu
+2026-02-06 12:05:07,519 [WARNING]   !! Saving deal with EMPTY content: [하이마트몰]에코백스 X11...
+2026-02-06 12:05:07,739 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:09,130 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682348 | Src: Ppomppu
+2026-02-06 12:05:09,131 [WARNING]   !! Saving deal with EMPTY content: [GS샵]떡국떡 4kg (1...
+2026-02-06 12:05:09,870 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:10,796 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682347 | Src: Ppomppu
+2026-02-06 12:05:10,797 [WARNING]   !! Saving deal with EMPTY content: [토스]리르 글루타치온 14...
+2026-02-06 12:05:11,496 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:12,437 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346 | Src: Ppomppu
+2026-02-06 12:05:12,439 [WARNING]   !! Saving deal with EMPTY content: [롯데온]커클랜드 시그니춰 ...
+2026-02-06 12:05:13,076 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:14,042 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345 | Src: Ppomppu
+2026-02-06 12:05:14,044 [WARNING]   !! Saving deal with EMPTY content: [지마켓]한돈 대패삼겹살 1...
+2026-02-06 12:05:14,924 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:15,647 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344 | Src: Ppomppu
+2026-02-06 12:05:15,649 [WARNING]   !! Saving deal with EMPTY content: [G마켓]명엽채/오징어실채 ...
+2026-02-06 12:05:17,185 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:17,236 [INFO] === [FMKorea] 크롤링 완료 (0건) ===
+2026-02-06 12:05:17,236 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 12:05:17,368 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343 | Src: Ppomppu
+2026-02-06 12:05:17,371 [WARNING]   !! Saving deal with EMPTY content: [G마켓]LG 휘센 오브제컬...
+2026-02-06 12:05:18,982 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342 | Src: Ppomppu
+2026-02-06 12:05:18,984 [WARNING]   !! Saving deal with EMPTY content: [네이버]레이저블랙위도우v3...
+2026-02-06 12:05:20,746 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341 | Src: Ppomppu
+2026-02-06 12:05:20,748 [WARNING]   !! Saving deal with EMPTY content: [조이풀푸드]이가네 양념돼지...
+2026-02-06 12:05:20,973 [INFO]   -> Content fetched. Len: 942
+2026-02-06 12:05:20,973 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:22,244 [INFO]   -> Content fetched. Len: 359
+2026-02-06 12:05:22,244 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:22,360 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340 | Src: Ppomppu
+2026-02-06 12:05:22,362 [WARNING]   !! Saving deal with EMPTY content: [11번가]g7 퓨어블랙 커...
+2026-02-06 12:05:23,556 [INFO]   -> Content fetched. Len: 20262
+2026-02-06 12:05:23,556 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:23,994 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339 | Src: Ppomppu
+2026-02-06 12:05:23,995 [WARNING]   !! Saving deal with EMPTY content: [11번가]한라봉 4kg 실...
+2026-02-06 12:05:24,829 [INFO]   -> Content fetched. Len: 580
+2026-02-06 12:05:24,830 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:25,624 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337 | Src: Ppomppu
+2026-02-06 12:05:25,626 [WARNING]   !! Saving deal with EMPTY content: [공식몰]아모레 로맨틱 스페...
+2026-02-06 12:05:26,198 [INFO]   -> Content fetched. Len: 697
+2026-02-06 12:05:26,198 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:27,208 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336 | Src: Ppomppu
+2026-02-06 12:05:27,209 [WARNING]   !! Saving deal with EMPTY content: [롯데온]바이오가이아 아기 ...
+2026-02-06 12:05:27,465 [INFO]   -> Content fetched. Len: 1086
+2026-02-06 12:05:27,465 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:28,800 [INFO]   -> Content fetched. Len: 639
+2026-02-06 12:05:28,800 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:28,809 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335 | Src: Ppomppu
+2026-02-06 12:05:28,810 [WARNING]   !! Saving deal with EMPTY content: [네이버]센토 프라임 고불소...
+2026-02-06 12:05:30,113 [INFO]   -> Content fetched. Len: 660
+2026-02-06 12:05:30,113 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:30,398 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334 | Src: Ppomppu
+2026-02-06 12:05:30,400 [WARNING]   !! Saving deal with EMPTY content: [네이버]피코크 직화구이 떡...
+2026-02-06 12:05:31,465 [INFO]   -> Content fetched. Len: 121
+2026-02-06 12:05:31,465 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:32,016 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682333 | Src: Ppomppu
+2026-02-06 12:05:32,018 [WARNING]   !! Saving deal with EMPTY content: [H몰]아티키 천연꿀/메리비...
+2026-02-06 12:05:32,771 [INFO]   -> Content fetched. Len: 873
+2026-02-06 12:05:32,771 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:33,627 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682332 | Src: Ppomppu
+2026-02-06 12:05:33,629 [WARNING]   !! Saving deal with EMPTY content: [무신사]가나디 별자리 맥세...
+2026-02-06 12:05:34,039 [INFO]   -> Content fetched. Len: 386
+2026-02-06 12:05:34,312 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:35,224 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963 | Src: Ppomppu
+2026-02-06 12:05:35,227 [WARNING]   !! Saving deal with EMPTY content: 홍콩반점 2/10 짜장면 3...
+2026-02-06 12:05:35,678 [INFO]   -> Content fetched. Len: 858
+2026-02-06 12:05:35,678 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:37,122 [INFO]   -> Content fetched. Len: 984
+2026-02-06 12:05:37,122 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:37,169 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961 | Src: Ppomppu
+2026-02-06 12:05:37,172 [WARNING]   !! Saving deal with EMPTY content: 한라봉 굿구리...
+2026-02-06 12:05:38,399 [INFO]   -> Content fetched. Len: 450
+2026-02-06 12:05:38,399 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:38,822 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959 | Src: Ppomppu
+2026-02-06 12:05:38,825 [WARNING]   !! Saving deal with EMPTY content: 로청 추천좀 부탁드립니다...
+2026-02-06 12:05:39,776 [INFO]   -> Content fetched. Len: 1702
+2026-02-06 12:05:39,776 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:40,194 [INFO] === [Ppomppu] 크롤링 완료 (24건) ===
+2026-02-06 12:05:40,194 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 12:05:40,285 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:05:41,087 [INFO]   -> Content fetched. Len: 1642
+2026-02-06 12:05:41,087 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:42,354 [INFO]   -> Content fetched. Len: 2399
+2026-02-06 12:05:42,354 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:43,675 [INFO]   -> Content fetched. Len: 1070
+2026-02-06 12:05:43,676 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:44,909 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:05:44,999 [INFO]   -> Content fetched. Len: 442
+2026-02-06 12:05:44,999 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:46,429 [INFO]   -> Content fetched. Len: 3460
+2026-02-06 12:05:46,430 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:47,691 [INFO]   -> Content fetched. Len: 2785
+2026-02-06 12:05:47,692 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:49,002 [INFO]   -> Content fetched. Len: 508
+2026-02-06 12:05:49,002 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:50,370 [INFO]   -> Content fetched. Len: 569
+2026-02-06 12:05:50,371 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:51,715 [INFO]   -> Content fetched. Len: 823
+2026-02-06 12:05:51,716 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:52,722 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:05:52,723 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 12:05:53,025 [INFO]   -> Content fetched. Len: 671
+2026-02-06 12:05:53,025 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:53,283 [INFO]   -> Content fetched. Len: 942
+2026-02-06 12:05:53,737 [INFO]   [Insert] Ruliweb | [G마켓] 플레이스테이션 5 PRO 
+2026-02-06 12:05:54,336 [INFO]   -> Content fetched. Len: 15983
+2026-02-06 12:05:54,336 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:54,991 [INFO]   -> Content fetched. Len: 359
+2026-02-06 12:05:55,704 [INFO]   -> Content fetched. Len: 5319
+2026-02-06 12:05:55,704 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:56,596 [INFO]   -> Content fetched. Len: 20262
+2026-02-06 12:05:57,019 [INFO]   -> Content fetched. Len: 1354
+2026-02-06 12:05:57,020 [ERROR] 저장 실패: upsert() got an unexpected keyword argument 'on_conflict'
+2026-02-06 12:05:58,030 [INFO] === [Ruliweb] 크롤링 완료 (0건) ===
+2026-02-06 12:05:58,353 [INFO]   -> Content fetched. Len: 580
+2026-02-06 12:06:00,054 [INFO]   -> Content fetched. Len: 697
+2026-02-06 12:06:01,672 [INFO]   -> Content fetched. Len: 1086
+2026-02-06 12:06:03,640 [INFO]   -> Content fetched. Len: 639
+2026-02-06 12:06:06,087 [INFO]   -> Content fetched. Len: 660
+2026-02-06 12:06:11,453 [INFO]   -> Content fetched. Len: 121
+2026-02-06 12:06:16,326 [INFO]   -> Content fetched. Len: 873
+2026-02-06 12:06:18,223 [INFO]   -> Content fetched. Len: 386
+2026-02-06 12:06:19,974 [INFO]   -> Content fetched. Len: 858
+2026-02-06 12:06:21,748 [INFO]   -> Content fetched. Len: 984
+2026-02-06 12:06:23,620 [INFO]   -> Content fetched. Len: 450
+2026-02-06 12:06:25,388 [INFO]   -> Content fetched. Len: 1702
+2026-02-06 12:06:27,033 [INFO]   -> Content fetched. Len: 1642
+2026-02-06 12:06:28,625 [INFO]   -> Content fetched. Len: 2399
+2026-02-06 12:06:30,267 [INFO]   -> Content fetched. Len: 1070
+2026-02-06 12:06:31,941 [INFO]   -> Content fetched. Len: 442
+2026-02-06 12:06:33,729 [INFO]   -> Content fetched. Len: 3460
+2026-02-06 12:06:35,416 [INFO]   -> Content fetched. Len: 2785
+2026-02-06 12:06:37,129 [INFO]   -> Content fetched. Len: 508
+2026-02-06 12:06:38,790 [INFO]   -> Content fetched. Len: 569
+2026-02-06 12:06:40,475 [INFO]   -> Content fetched. Len: 823
+2026-02-06 12:06:42,112 [INFO]   -> Content fetched. Len: 671
+2026-02-06 12:06:43,828 [INFO]   -> Content fetched. Len: 15983
+2026-02-06 12:06:45,491 [INFO]   -> Content fetched. Len: 5319
+2026-02-06 12:06:47,211 [INFO]   -> Content fetched. Len: 1354
+2026-02-06 12:06:48,549 [INFO] === [Ruliweb] 크롤링 완료 (28건) ===
