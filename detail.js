@@ -73,19 +73,28 @@ function renderDealInfo(deal) {
     document.getElementById('deal-title').textContent = deal.title;
     document.getElementById('deal-price').textContent = deal.price || '가격미상';
     document.getElementById('deal-category').textContent = deal.category || '기타';
-    document.getElementById('deal-date').textContent = new Date(deal.created_at).toLocaleDateString();
+
+    // Date Format: YYYY. MM. DD.
+    const d = new Date(deal.created_at);
+    // Month is 0-indexed
+    const dateStr = `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`;
+    document.getElementById('deal-date').textContent = dateStr;
 
     // Source Icon
     const sourceIcon = document.getElementById('source-icon');
     const sMap = { 'ppomppu': 'ppomppu', 'fmkorea': 'fmkorea', 'ruliweb': 'ruliweb' };
     let sKey = deal.source.toLowerCase();
-    // Simple fallback logic if exact match fails, though we normalized nicely
+
     if (sKey.includes('ppomppu')) sKey = 'ppomppu';
     else if (sKey.includes('fmkorea')) sKey = 'fmkorea';
     else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
 
     sourceIcon.src = `assets/${sKey}_icon.png`;
     document.getElementById('source-name').textContent = deal.source;
+
+    // "Original Post" Button
+    const origBtn = document.getElementById('original-link');
+    if (origBtn) origBtn.href = deal.url;
 
     // Image
     const imgEl = document.getElementById('deal-image');
