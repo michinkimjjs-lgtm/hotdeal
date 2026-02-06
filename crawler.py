@@ -201,6 +201,7 @@ class BaseCrawler:
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
+                if href.startswith('/'): continue # Ignore relative internal links
                 if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
                 if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href and 'shopping' not in href: continue
                 if href.endswith('.jpg') or href.endswith('.png'): continue

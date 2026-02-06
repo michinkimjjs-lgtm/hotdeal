@@ -100,7 +100,7 @@ function renderDealInfo(deal) {
     let displaySource = deal.source;
     if (deal.content) {
         const mallMatch = deal.content.match(/<!-- MALL_NAME: (.*?) -->/);
-        if (mallMatch && mallMatch[1]) {
+        if (mallMatch && mallMatch[1] && mallMatch[1] !== 'None') {
             displaySource = mallMatch[1];
         }
     }
