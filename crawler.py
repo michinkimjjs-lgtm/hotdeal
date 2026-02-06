@@ -133,12 +133,14 @@ class BaseCrawler:
             return "", None
 
     def extract_buy_link(self, soup, source, content_html):
-        """본문에서 쇼핑몰 링크 추출 (우선순위: Known Mall > External Link)"""
+        """본문에서 쇼핑몰 링크 추출 (강력한 도메인 매칭)"""
         try:
             KNOWN_MALLS = [
                 'coupang.com', 'coupang.net', 'gmarket.co.kr', 'auction.co.kr', '11st.co.kr', 
                 'wemakeprice.com', 'tmon.co.kr', 'ssg.com', 'lotteon.com', 'cjthemarket.com', 
-                'aliexpress.com', 'qoo10.com', 'amazon.com', 'smartstore.naver.com', 'brand.naver.com'
+                'aliexpress.com', 'qoo10.com', 'amazon.com', 'smartstore.naver.com', 'brand.naver.com',
+                'shopping.naver.com', 'e-himart.co.kr', 'gsshop.com', 'cjmall.com', 'interpark.com',
+                'lotimall.com', 'akmall.com', 'hyundaihmall.com', 'shinsegaemall.ssg.com', 'emart.ssg.com'
             ]
 
             # 1. Ruliweb: Has explicit .source_url
@@ -147,10 +149,19 @@ class BaseCrawler:
                 if src_el and src_el.has_attr('href'):
                     return src_el['href']
 
+            # 2. FMKorea: Specific .hotdeal_info check
+            if source == 'FMKorea':
+                info_div = soup.select_one('.hotdeal_info')
+                if info_div:
+                    link_a = info_div.select_one('a')
+                    if link_a and link_a.has_attr('href'):
+                        return link_a['href']
+                        
+            # 3. Aggressive Scan: Find ANY link matching Known Malls in content
             c_soup = BeautifulSoup(content_html, 'html.parser')
             links = c_soup.select('a')
             
-            # 2. Priority Scan: Known Malls
+            # Priority 1: Direct Mall Domains
             for a in links:
                 href = a.get('href', '')
                 if not href: continue
@@ -162,12 +173,12 @@ class BaseCrawler:
                     if mall in href:
                         return href
             
-            # 3. Fallback: First External Link (that is not excluded)
+            # Priority 2: Fallback to first external link if not excluded
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
                 if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
-                if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href: continue # Plain Naver excluded
+                if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href and 'shopping' not in href: continue
                 if href.endswith('.jpg') or href.endswith('.png'): continue
                 if 'adpost' in str(a.parent.get('class', [])): continue
                 
