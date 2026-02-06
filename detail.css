@@ -28,38 +28,71 @@
 
 .product-title {
     font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     line-height: 1.4;
     word-break: keep-all;
+    font-weight: 700;
 }
 
 .product-meta-row {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 15px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #aaa;
     margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
 }
 
-.badge {
-    background: #0ea5e9;
+.badge-blue {
+    background: #007bff;
+    /* Bright Blue */
     color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.meta-source {
+.meta-item {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
-.meta-source img {
+.meta-text {
+    color: #ccc;
+    font-weight: 500;
+}
+
+.source-favicon {
     width: 20px;
     height: 20px;
     border-radius: 4px;
+}
+
+.origin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f3f4f6;
+    /* Light gray */
+    color: #374151;
+    /* Dark text */
+    padding: 6px 12px;
+    border-radius: 20px;
+    /* Pill shape */
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.origin-btn:hover {
+    background: #e5e7eb;
+    color: #111;
 }
 
 /* Product Body layout */
