@@ -134,7 +134,7 @@ class BaseCrawler:
             logger.error(f"  -> Content Fetch Exception ({source}): {e}")
             return "", None
 
-    def get_mall_name(self, url):
+    def extract_mall_name_from_url(self, url):
         """URL에서 쇼핑몰 이름 (한글) 반환"""
         if not url: return None
         if 'coupang' in url: return '쿠팡'

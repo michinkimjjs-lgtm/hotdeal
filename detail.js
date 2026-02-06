@@ -87,13 +87,14 @@ function renderDealInfo(deal) {
 
     // Source Icon & Bar Info
     const sourceIcon = document.getElementById('source-icon');
-    const sMap = { 'ppomppu': 'ppomppu', 'fmkorea': 'fmkorea', 'ruliweb': 'ruliweb' };
-    let sKey = deal.source.toLowerCase();
-    if (sKey.includes('ppomppu')) sKey = 'ppomppu';
-    else if (sKey.includes('fmkorea')) sKey = 'fmkorea';
-    else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
+    if (sourceIcon) sourceIcon.style.display = 'none'; // Hide icon as requested
 
-    sourceIcon.src = `assets/${sKey}_icon.png`;
+    // const sMap = { 'ppomppu': 'ppomppu', 'fmkorea': 'fmkorea', 'ruliweb': 'ruliweb' };
+    // let sKey = deal.source.toLowerCase();
+    // if (sKey.includes('ppomppu')) sKey = 'ppomppu';
+    // else if (sKey.includes('fmkorea')) sKey = 'fmkorea';
+    // else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
+    // sourceIcon.src = `assets/${sKey}_icon.png`;
 
     // Mall Name Text (Priority: Hidden Content > Source)
     let displaySource = deal.source;
