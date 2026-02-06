@@ -141,7 +141,30 @@ class BaseCrawler:
                 if src_el and src_el.has_attr('href'):
                     return src_el['href']
             
-            # 2. General Heuristic: First External Link in Content
+            # 2. Ppomppu: Link is often in specific top areas or .wordfix
+            if source == 'Ppomppu':
+                # Priority 1: .wordfix anchor (common for links)
+                wordfix_a = soup.select_one('.wordfix a')
+                if wordfix_a and wordfix_a.has_attr('href') and 'ppomppu' not in wordfix_a['href']:
+                    return wordfix_a['href']
+                
+                # Priority 2: anchors in .han class that are not internal
+                han_links = soup.select('.han a')
+                for a in han_links:
+                    href = a.get('href', '')
+                    if href and 'http' in href and 'ppomppu' not in href:
+                        return href
+
+            # 3. FMKorea: Link is often in .hotdeal_info or specific table
+            if source == 'FMKorea':
+                # Priority 1: .hotdeal_info anchor
+                # Sometimes it's just text, sometimes an anchor.
+                # Let's check for links inside .hotdeal_info or adjacent
+                hotdeal_a = soup.select_one('.hotdeal_info a')
+                if hotdeal_a and hotdeal_a.has_attr('href'):
+                     return hotdeal_a['href']
+
+            # 4. Fallback: First External Link in Content
             c_soup = BeautifulSoup(content_html, 'html.parser')
             links = c_soup.select('a')
             
@@ -149,6 +172,7 @@ class BaseCrawler:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
                 if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
+                # Skip image links
                 if href.endswith('.jpg') or href.endswith('.png'): continue
                 return href
         except: pass
