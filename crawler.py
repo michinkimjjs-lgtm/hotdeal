@@ -133,47 +133,44 @@ class BaseCrawler:
             return "", None
 
     def extract_buy_link(self, soup, source, content_html):
-        """본문이나 메타데이터에서 실제 구매(쇼핑몰) 링크를 추출"""
+        """본문에서 쇼핑몰 링크 추출 (우선순위: Known Mall > External Link)"""
         try:
+            KNOWN_MALLS = [
+                'coupang.com', 'coupang.net', 'gmarket.co.kr', 'auction.co.kr', '11st.co.kr', 
+                'wemakeprice.com', 'tmon.co.kr', 'ssg.com', 'lotteon.com', 'cjthemarket.com', 
+                'aliexpress.com', 'qoo10.com', 'amazon.com', 'smartstore.naver.com', 'brand.naver.com'
+            ]
+
             # 1. Ruliweb: Has explicit .source_url
             if source == 'Ruliweb':
                 src_el = soup.select_one('.source_url a')
                 if src_el and src_el.has_attr('href'):
                     return src_el['href']
-            
-            # 2. Ppomppu: Link is often in specific top areas or .wordfix
-            if source == 'Ppomppu':
-                # Priority 1: .wordfix anchor (common for links)
-                wordfix_a = soup.select_one('.wordfix a')
-                if wordfix_a and wordfix_a.has_attr('href') and 'ppomppu' not in wordfix_a['href']:
-                    return wordfix_a['href']
-                
-                # Priority 2: anchors in .han class that are not internal
-                han_links = soup.select('.han a')
-                for a in han_links:
-                    href = a.get('href', '')
-                    if href and 'http' in href and 'ppomppu' not in href:
-                        return href
 
-            # 3. FMKorea: Link is often in .hotdeal_info or specific table
-            if source == 'FMKorea':
-                # Priority 1: .hotdeal_info anchor
-                # Sometimes it's just text, sometimes an anchor.
-                # Let's check for links inside .hotdeal_info or adjacent
-                hotdeal_a = soup.select_one('.hotdeal_info a')
-                if hotdeal_a and hotdeal_a.has_attr('href'):
-                     return hotdeal_a['href']
-
-            # 4. Fallback: First External Link in Content
             c_soup = BeautifulSoup(content_html, 'html.parser')
             links = c_soup.select('a')
             
+            # 2. Priority Scan: Known Malls
+            for a in links:
+                href = a.get('href', '')
+                if not href: continue
+                # Skip Ads (FMKorea adpost) or Naver Search Ad
+                if 'adpost' in str(a.parent.get('class', [])): continue
+                if 'adbiz' in href: continue
+
+                for mall in KNOWN_MALLS:
+                    if mall in href:
+                        return href
+            
+            # 3. Fallback: First External Link (that is not excluded)
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
                 if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
-                # Skip image links
+                if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href: continue # Plain Naver excluded
                 if href.endswith('.jpg') or href.endswith('.png'): continue
+                if 'adpost' in str(a.parent.get('class', [])): continue
+                
                 return href
         except: pass
         return None
