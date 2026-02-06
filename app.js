@@ -140,7 +140,7 @@ function renderDeals(deals) {
                         <span class="deal-comment">💬 ${deal.comment_count || 0}</span>
                     </div>
                     <div class="deal-price">${deal.price || '가격미상'}</div>
-                    <a href="${deal.url}" target="_blank" class="view-btn">보러가기</a>
+                    <a href="detail.html?id=${deal.id}" class="view-btn">상세보기</a>
                 </div>
             </div>
         </div>
