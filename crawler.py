@@ -123,15 +123,52 @@ class BaseCrawler:
             # Post-processing: Make images visible (lazyload handling)
             # Many sites use data-original. Replace src with data-original if present.
             if content_html:
-                # Simple string replacement for common lazy loads
                  content_html = content_html.replace('data-original=', 'src=')
+                 
+                 # --- NEW: Extract "Buy Link" (Affiliate Target) ---
+                 # Strategy: Find specific link field OR first external link in content
+                 buy_link = self.extract_buy_link(soup, source, content_html)
+                 if buy_link:
+                     # Inject hidden comment at the VERY START
+                     content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
+                     logger.info(f"  -> Extracted Buy Link: {buy_link}")
+                 
                  logger.info(f"  -> Content fetched. Len: {len(content_html)}")
             else:
                  logger.warning(f"  -> Content Extraction Failed. URL: {url} | Src: {source}")
-                 # Debug: print logic if needed, or save empty string to avoid NULL
                  content_html = "" # DB NULL 방지
 
             return content_html
+
+    def extract_buy_link(self, soup, source, content_html):
+        """본문이나 메타데이터에서 실제 구매(쇼핑몰) 링크를 추출"""
+        try:
+            link = ""
+            
+            # 1. Ruliweb: Has explicit .source_url
+            if source == 'Ruliweb':
+                src_el = soup.select_one('.source_url a')
+                if src_el and src_el.has_attr('href'):
+                    return src_el['href']
+            
+            # 2. General Heuristic: First External Link in Content
+            # Parse content_html again to find links inside the captured body
+            c_soup = BeautifulSoup(content_html, 'html.parser')
+            links = c_soup.select('a')
+            
+            for a in links:
+                href = a.get('href', '')
+                if not href or href.startswith('#') or href.startswith('javascript'): continue
+                if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
+                # Skip image links
+                if href.endswith('.jpg') or href.endswith('.png'): continue
+                
+                # Assume this is the buy link
+                return href
+                
+        except Exception as e:
+            pass
+        return None
             
         except Exception as e:
             logger.error(f"  -> Content Fetch Exception ({source}): {e}")
