@@ -154,88 +154,95 @@ class BaseCrawler:
         if 'gsshop' in url: return 'GS SHOP'
         return None
 
+    def _resolve_real_url(self, url):
+        """리다이렉트/단축 URL 등을 분석하여 진짜 목적지 반환"""
+        if not url: return None
+        
+        # 1. Reject Invalid / Internal Search Patterns
+        if url.startswith('/'): 
+            # Allow only if it looks like a redirect script
+            if not any(x in url for x in ['link.php', 'move.php', 'surl.php']):
+                return None
+        
+        if 'search_keyword=' in url or 'mid=hotdeal' in url:
+            return None # Skip internal search links
+
+        # 2. Redirect Resolution (link.php?url=...)
+        if 'link.php' in url or 'move.php' in url or 'surl.php' in url:
+            try:
+                from urllib.parse import urlparse, parse_qs, unquote
+                parsed = urlparse(url)
+                qs = parse_qs(parsed.query)
+                for key in ['url', 'ol', 'link', 'target']:
+                    if key in qs:
+                        return self._resolve_real_url(qs[key][0]) # Recursive check
+            except: pass
+            
+        return url
+
     def extract_buy_link(self, soup, source, content_html):
-        """본문에서 쇼핑몰 링크 추출 (강력한 도메인 매칭)"""
+        """본문에서 쇼핑몰 링크 추출 (통합 검증 로직 적용)"""
         try:
-        # ... (rest of extract_buy_link logic is same, but I need to make sure I don't delete it)
+            candidates = []
 
-            KNOWN_MALLS = [
-                'coupang.com', 'coupang.net', 'gmarket.co.kr', 'auction.co.kr', '11st.co.kr', 
-                'wemakeprice.com', 'tmon.co.kr', 'ssg.com', 'lotteon.com', 'cjthemarket.com', 
-                'aliexpress.com', 'qoo10.com', 'amazon.com', 'smartstore.naver.com', 'brand.naver.com',
-                'shopping.naver.com', 'e-himart.co.kr', 'gsshop.com', 'cjmall.com', 'interpark.com',
-                'lotimall.com', 'akmall.com', 'hyundaihmall.com', 'shinsegaemall.ssg.com', 'emart.ssg.com'
-            ]
-
-            # 1. Ruliweb: Has explicit .source_url
+            # 1. Source Specific Selectors (High Priority)
             if source == 'Ruliweb':
                 src_el = soup.select_one('.source_url a')
                 if src_el and src_el.has_attr('href'):
-                    return src_el['href']
+                    candidates.append(src_el['href'])
 
-            # 2. FMKorea: Specific .hotdeal_info check
             if source == 'FMKorea':
                 info_div = soup.select_one('.hotdeal_info')
                 if info_div:
                     link_a = info_div.select_one('a')
                     if link_a and link_a.has_attr('href'):
-                        return link_a['href']
+                        candidates.append(link_a['href'])
                         
-            # 3. Aggressive Scan: Find ANY link matching Known Malls in content
+            # 2. Content Scan (Medium Priority)
             c_soup = BeautifulSoup(content_html, 'html.parser')
             links = c_soup.select('a')
             
-            # Priority 1: Direct Mall Domains
-            for a in links:
-                href = a.get('href', '')
-                if not href: continue
-                # Skip Ads (FMKorea adpost) or Naver Search Ad
-                if 'adpost' in str(a.parent.get('class', [])): continue
-                if 'adbiz' in href: continue
-
-                for mall in KNOWN_MALLS:
-                    if mall in href:
-                        return href
-            
-            # Priority 2: Fallback to first external link if not excluded
+            # Gather all potential links
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
-                
-                # --- [NEW] Redirect Handling ---
-                # Check for link.php, move.php, surl.php etc.
-                if 'link.php' in href or 'move.php' in href or 'surl.php' in href:
-                    # Try to extract 'url' parameter
-                    try:
-                        from urllib.parse import urlparse, parse_qs
-                        parsed = urlparse(href)
-                        qs = parse_qs(parsed.query)
-                        # Common params: 'url', 'ol', 'link'
-                        real_url = None
-                        for key in ['url', 'ol', 'link']:
-                            if key in qs:
-                                real_url = qs[key][0]
-                                break
-                        
-                        if real_url:
-                            # Verify if real_url is a known mall
-                            for mall in KNOWN_MALLS:
-                                if mall in real_url:
-                                    return real_url
-                    except: pass
-
-                # Standard filtering
-                if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: 
-                    # If it's internal but NOT a redirect script we handled above, skip it.
-                    if not ('link.php' in href or 'move.php' in href or 'surl.php' in href):
-                        continue
-
-                if href.startswith('/'): continue 
-                if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href and 'shopping' not in href: continue
-                if href.endswith('.jpg') or href.endswith('.png'): continue
                 if 'adpost' in str(a.parent.get('class', [])): continue
+                if 'adbiz' in href: continue
+                # Skip known internal domains unless they are redirects
+                if any(x in href for x in ['ppomppu.co.kr', 'fmkorea.com', 'ruliweb.com', 'naver.com']):
+                    if not any(r in href for r in ['link.php', 'move.php', 'surl.php', 'smartstore', 'brand', 'shopping']):
+                        continue
+                candidates.append(href)
+
+            # 3. Process Candidates
+            KNOWN_MALLS = [
+                'coupang', 'gmarket', 'auction', '11st', 'wemakeprice', 'tmon', 'ssg', 'lotteon', 
+                'cjthemarket', 'aliexpress', 'qoo10', 'amazon', 'smartstore', 'brand.naver', 
+                'shopping.naver', 'e-himart', 'gsshop', 'cjmall', 'interpark', 'lotimall', 'akmall', 
+                'hyundaihmall', 'shinsegaemall', 'emart'
+            ]
+
+            # Pass 1: Look for KNOWN MALLS (Resolved)
+            for raw_url in candidates:
+                real_url = self._resolve_real_url(raw_url)
+                if not real_url: continue
                 
-                return href
+                # Check against known malls
+                for mall in KNOWN_MALLS:
+                    if mall in real_url:
+                        return real_url
+            
+            # Pass 2: Fallback to first valid external link (if no known mall found)
+            for raw_url in candidates:
+                real_url = self._resolve_real_url(raw_url)
+                if real_url and real_url.startswith('http'):
+                    # Double check it's not internal garbage
+                    if 'search_keyword' in real_url: continue
+                    return real_url
+
+        except Exception as e:
+            pass
+        return None
         except: pass
         return None
 
