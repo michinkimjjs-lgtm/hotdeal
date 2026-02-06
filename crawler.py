@@ -84,48 +84,38 @@ class BaseCrawler:
     def fetch_content_html(self, url, source):
         """본문 HTML을 가져오는 공통 메소드 - 소스별 로직 분기"""
         try:
-            # 뽐뿌는 euc-kr, 나머지는 utf-8일 가능성 높음. 
-            # fetch_page 내부가 알아서 디코딩하지만, 특정 태그 추출을 위해 soup 생성
             encoding = 'euc-kr' if source == 'Ppomppu' else 'utf-8'
             html = self.fetch_page(url, encoding=encoding)
-            if not html: return None
+            if not html: return None, None
             
             soup = BeautifulSoup(html, 'html.parser')
             content_html = ""
             
             if source == 'Ppomppu':
-                # Ppomppu Body: table.pic_bg table td.han (Most reliable based on debug)
                 target = soup.select_one('table.pic_bg table td.han')
-                
-                # Fallbacks
                 if not target:
                     target = soup.select_one('.board-contents') or soup.find('td', class_='board-contents')
-                    
                 if target:
-                    # Clean up
                     for tag in target(['script', 'style', 'iframe', 'object']): tag.decompose()
                     content_html = str(target)
                     
             elif source == 'FMKorea':
-                # FMKorea Body: .rd_body
                 target = soup.select_one('.rd_body') or soup.select_one('div.rd_body')
                 if target:
                      for tag in target(['script', 'style']): tag.decompose()
                      content_html = str(target)
                      
             elif source == 'Ruliweb':
-                # Ruliweb Body: .view_content
                 target = soup.select_one('.view_content') or soup.select_one('.board_main_view')
                 if target:
                      for tag in target(['script', 'style']): tag.decompose()
                      content_html = str(target)
 
-            # Post-processing: Make images visible (lazyload handling)
-            # Many sites use data-original. Replace src with data-original if present.
+            buy_link = None
             if content_html:
                  content_html = content_html.replace('data-original=', 'src=')
                  
-                 # --- NEW: Extract "Buy Link" (Affiliate Target) ---
+                 # --- Extract Buy Link ---
                  buy_link = self.extract_buy_link(soup, source, content_html)
                  if buy_link:
                      content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
@@ -134,9 +124,13 @@ class BaseCrawler:
                  logger.info(f"  -> Content fetched. Len: {len(content_html)}")
             else:
                  logger.warning(f"  -> Content Extraction Failed. URL: {url} | Src: {source}")
-                 content_html = "" # DB NULL 방지
+                 content_html = "" 
 
-            return content_html
+            return content_html, buy_link # Return both content and extracted link for mall name detection
+            
+        except Exception as e:
+            logger.error(f"  -> Content Fetch Exception ({source}): {e}")
+            return "", None
 
     def extract_buy_link(self, soup, source, content_html):
         """본문이나 메타데이터에서 실제 구매(쇼핑몰) 링크를 추출"""
@@ -160,52 +154,39 @@ class BaseCrawler:
         except: pass
         return None
 
-    def extract_mall_name(self, title):
-        """제목에서 쇼핑몰 이름 추출 [쇼핑몰] or (쇼핑몰) 패턴"""
-        try:
-            # [MallName] or (MallName) at start of title
-            match = re.search(r'^[\[\(](.+?)[\]\)]', title)
-            if match:
-                return match.group(1).strip()
-        except: pass
+    def extract_mall_name_from_url(self, url):
+        """URL 기반 쇼핑몰 이름 추출"""
+        if not url: return None
+        if 'coupang.com' in url or 'coupang.net' in url: return '쿠팡'
+        if 'gmarket.co.kr' in url: return 'G마켓'
+        if 'auction.co.kr' in url: return '옥션'
+        if '11st.co.kr' in url: return '11번가'
+        if 'wemakeprice.com' in url: return '위메프'
+        if 'tmon.co.kr' in url: return '티몬'
+        if 'ssg.com' in url: return 'SSG'
+        if 'lotteon.com' in url: return '롯데온'
+        if 'cjthemarket.com' in url: return 'CJ더마켓'
+        if 'ali' in url and ('express' in url or 'baba' in url): return '알리익스프레스'
+        if 'qoo10' in url: return '큐텐'
+        if 'amazon' in url: return '아마존'
+        if 'naver.com' in url: return '네이버쇼핑'
         return None
 
     def save_deal(self, data):
         try:
             data['category'] = self.normalize_category(data.get('category'))
             
-            # --- Mall Name Extraction ---
-            # If we extracted a mall name from title (e.g. [Coupang]), use it as 'source' for display?
-            # Or keep 'source' as origin (Ppomppu) and maybe append to title?
-            # User wants to see "Coupang" in the mall list. 
-            # Let's try to overwrite 'source' ONLY IF it's a known mall pattern, 
-            # BUT we need to keep track of where it came from?
-            # The current UI uses 'source' for the favicon and name. 
-            # If we change source to 'Coupang', we need a Coupang favicon.
-            # Let's just update the data['source'] variable passed to DB if found.
-            
-            mall_name = self.extract_mall_name(data['title'])
-            if mall_name:
-                # Optional: Map variations (Gmarket -> 지마켓 etc)
-                data['source'] = mall_name 
-
             # --- Content Check ---
             if not data.get('content'):
                 logger.warning(f"  !! Saving deal with EMPTY content: {data['title'][:15]}...")
             
-            # Use explicit Select -> Update/Insert to avoid upsert compatibility issues
             # Check if exists by URL
             existing = self.supabase.table("hotdeals").select("id").eq("url", data['url']).execute()
             
             if existing.data and len(existing.data) > 0:
-                # Update
                 deal_id = existing.data[0]['id']
-                # Only update necessary fields to minimize overhead? 
-                # For now, update all including content
                 self.supabase.table("hotdeals").update(data).eq("id", deal_id).execute()
-                # logger.info(f"  [Update] {data['title'][:20]}")
             else:
-                # Insert
                 self.supabase.table("hotdeals").insert(data).execute()
                 logger.info(f"  [Insert] {data['source']} | {data['title'][:20]}")
 
@@ -239,8 +220,7 @@ class PpomppuCrawler(BaseCrawler):
                 if not title_el: continue
                 link = ("https://www.ppomppu.co.kr" + href) if href.startswith('/') else ("https://www.ppomppu.co.kr/zboard/" + href)
                 
-                # Fetch Content
-                content_html = self.fetch_content_html(link, 'Ppomppu')
+                content_html, buy_link = self.fetch_content_html(link, 'Ppomppu')
                 
                 img_url = ""
                 thumb_link = item.select_one('.baseList-thumb')
@@ -256,18 +236,23 @@ class PpomppuCrawler(BaseCrawler):
                 comm_el = item.select_one('.baseList-c'); comment = int(comm_el.get_text().strip()) if comm_el else 0
                 like_el = item.select_one('.baseList-rec'); like = int(re.findall(r'\d+', like_el.get_text())[0]) if like_el and re.findall(r'\d+', like_el.get_text()) else 0
                 
+                source_name = "Ppomppu"
+                if buy_link:
+                    detected_mall = self.extract_mall_name_from_url(buy_link)
+                    if detected_mall: source_name = detected_mall
+
                 if self.save_deal({
                     "title": title_el.get_text().strip(), 
                     "url": link, 
                     "img_url": img_url, 
-                    "source": "Ppomppu", 
+                    "source": source_name, 
                     "category": category, 
                     "price": price, 
                     "comment_count": comment, 
                     "like_count": like,
-                    "content": content_html # 본문 추가
+                    "content": content_html
                 }): count += 1
-                time.sleep(1.0) # 뽐뿌는 요청 많으면 차단됨. 1초 대기
+                time.sleep(1.0)
             except Exception as e: logger.error(f"Ppomppu 에러: {e}")
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
@@ -288,21 +273,25 @@ class FMKoreaCrawler(BaseCrawler):
                 title = title_el.get_text().strip(); link = ("https://www.fmkorea.com" + title_el['href']) if title_el['href'].startswith('/') else title_el['href']
                 img_url = ""
                 content_html = None
+                buy_link = None
                 
-                # Fetch Detail Page for Image AND Content
                 try:
                     time.sleep(1.0 + random.random() * 1.0) 
                     d_html = self.fetch_page(link)
                     if d_html:
                         d_soup = BeautifulSoup(d_html, 'html.parser')
-                        # Image
                         img_el = d_soup.select_one('article img')
                         if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
-                        # Content
+                        
                         target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
                         if target:
                              for tag in target(['script', 'style']): tag.decompose()
                              content_html = str(target).replace('data-original=', 'src=')
+                             
+                             # Extract Buy Link
+                             buy_link = self.extract_buy_link(d_soup, 'FMKorea', content_html)
+                             if buy_link:
+                                 content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
                 except: pass
 
                 if not img_url:
@@ -318,11 +307,16 @@ class FMKoreaCrawler(BaseCrawler):
                 comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
                 v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
                 
+                source_name = "FMKorea"
+                if buy_link:
+                    detected_mall = self.extract_mall_name_from_url(buy_link)
+                    if detected_mall: source_name = detected_mall
+
                 if self.save_deal({
                     "title": title, 
                     "url": link, 
                     "img_url": img_url, 
-                    "source": "FMKorea", 
+                    "source": source_name, 
                     "category": category, 
                     "price": price, 
                     "comment_count": comment, 
@@ -346,22 +340,17 @@ class RuliwebCrawler(BaseCrawler):
         count = 0
         for item in items:
             try:
-                # ... (Parsing Logic same as before for list items) ...
-                # To simplify diff, I'll copy the list parsing part but add fetch_content
-                
-                if item.name == 'div': # Gallery View
+                if item.name == 'div': 
                     subject_div = item.select_one('.subject_wrapper')
                     if not subject_div: continue
                     t_el = subject_div.select_one('a.subject_link')
                     link = t_el['href'] if t_el else ""
                     title = t_el.get_text().strip() if t_el else ""
-                    # Thumb
                     img_url = ""
                     thumb_a = item.select_one('a.thumbnail')
                     if thumb_a and thumb_a.has_attr('style'):
                         urls = re.findall(r'url\((.*?)\)', thumb_a['style'])
                         if urls: img_url = urls[0].strip("'\"")
-                    # Stats
                     like = 0
                     rec_el = item.select_one('.recomd')
                     if rec_el: 
@@ -373,7 +362,7 @@ class RuliwebCrawler(BaseCrawler):
                          nums = re.findall(r'\d+', com_el.get_text())
                          if nums: comment = int(nums[0])
                     cat = self.normalize_category(title)
-                else: # List View
+                else: 
                     t_el = item.select_one('a.subject_link')
                     if not t_el: continue
                     title = t_el.get_text().strip(); link = t_el.get('href', '')
@@ -403,21 +392,25 @@ class RuliwebCrawler(BaseCrawler):
                     p_match2 = re.search(r'([\d,]+원)', title)
                     if p_match2: price = p_match2.group(1)
 
-                # Fetch Content
-                content_html = self.fetch_content_html(link, 'Ruliweb')
+                content_html, buy_link = self.fetch_content_html(link, 'Ruliweb')
+                
+                source_name = "Ruliweb"
+                if buy_link:
+                    detected_mall = self.extract_mall_name_from_url(buy_link)
+                    if detected_mall: source_name = detected_mall
 
                 if self.save_deal({
                     "title": title, 
                     "url": link, 
                     "img_url": img_url, 
-                    "source": "Ruliweb", 
+                    "source": source_name, 
                     "category": cat, 
                     "price": price, 
                     "comment_count": comment, 
                     "like_count": like,
                     "content": content_html
                 }): count += 1
-                time.sleep(1.0) # 루리웹 대기
+                time.sleep(1.0) 
             except Exception as e: logger.error(f"Ruliweb 에러: {e}")
         logger.info(f"=== [Ruliweb] 크롤링 완료 ({count}건) ===")
 
