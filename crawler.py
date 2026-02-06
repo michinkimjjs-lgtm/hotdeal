@@ -201,8 +201,36 @@ class BaseCrawler:
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
-                if href.startswith('/'): continue # Ignore relative internal links
-                if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
+                
+                # --- [NEW] Redirect Handling ---
+                # Check for link.php, move.php, surl.php etc.
+                if 'link.php' in href or 'move.php' in href or 'surl.php' in href:
+                    # Try to extract 'url' parameter
+                    try:
+                        from urllib.parse import urlparse, parse_qs
+                        parsed = urlparse(href)
+                        qs = parse_qs(parsed.query)
+                        # Common params: 'url', 'ol', 'link'
+                        real_url = None
+                        for key in ['url', 'ol', 'link']:
+                            if key in qs:
+                                real_url = qs[key][0]
+                                break
+                        
+                        if real_url:
+                            # Verify if real_url is a known mall
+                            for mall in KNOWN_MALLS:
+                                if mall in real_url:
+                                    return real_url
+                    except: pass
+
+                # Standard filtering
+                if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: 
+                    # If it's internal but NOT a redirect script we handled above, skip it.
+                    if not ('link.php' in href or 'move.php' in href or 'surl.php' in href):
+                        continue
+
+                if href.startswith('/'): continue 
                 if 'naver.com' in href and 'smartstore' not in href and 'brand' not in href and 'shopping' not in href: continue
                 if href.endswith('.jpg') or href.endswith('.png'): continue
                 if 'adpost' in str(a.parent.get('class', [])): continue
