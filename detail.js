@@ -94,7 +94,16 @@ function renderDealInfo(deal) {
     else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
 
     sourceIcon.src = `assets/${sKey}_icon.png`;
-    document.getElementById('source-name-bar').textContent = deal.source;
+
+    // Mall Name Text (Priority: Hidden Content > Source)
+    let displaySource = deal.source;
+    if (deal.content) {
+        const mallMatch = deal.content.match(/<!-- MALL_NAME: (.*?) -->/);
+        if (mallMatch && mallMatch[1]) {
+            displaySource = mallMatch[1];
+        }
+    }
+    document.getElementById('source-name-bar').textContent = displaySource;
     document.getElementById('deal-price').textContent = deal.price || '가격 확인';
 
     // "Original Post" Button

@@ -118,8 +118,10 @@ class BaseCrawler:
                  # --- Extract Buy Link ---
                  buy_link = self.extract_buy_link(soup, source, content_html)
                  if buy_link:
-                     content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
-                     logger.info(f"  -> Extracted Buy Link: {buy_link}")
+                     mall_name = self.get_mall_name(buy_link)
+                     mall_comment = f"<!-- MALL_NAME: {mall_name} -->" if mall_name else ""
+                     content_html = f"<!-- BUY_URL: {buy_link} -->{mall_comment}" + content_html
+                     logger.info(f"  -> Extracted Buy Link: {buy_link} ({mall_name})")
                  
                  logger.info(f"  -> Content fetched. Len: {len(content_html)}")
             else:
@@ -132,9 +134,31 @@ class BaseCrawler:
             logger.error(f"  -> Content Fetch Exception ({source}): {e}")
             return "", None
 
+    def get_mall_name(self, url):
+        """URL에서 쇼핑몰 이름 (한글) 반환"""
+        if not url: return None
+        if 'coupang' in url: return '쿠팡'
+        if 'gmarket' in url: return 'G마켓'
+        if 'auction' in url: return '옥션'
+        if '11st' in url: return '11번가'
+        if 'wemakeprice' in url: return '위메프'
+        if 'tmon' in url: return '티몬'
+        if 'ssg' in url: return 'SSG'
+        if 'lotteon' in url: return '롯데온'
+        if 'cj' in url and 'market' in url: return 'CJ더마켓'
+        if 'ali' in url: return '알리익스프레스'
+        if 'qoo10' in url: return '큐텐'
+        if 'amazon' in url: return '아마존'
+        if 'naver' in url: return '네이버쇼핑'
+        if 'himart' in url: return '하이마트'
+        if 'gsshop' in url: return 'GS SHOP'
+        return None
+
     def extract_buy_link(self, soup, source, content_html):
         """본문에서 쇼핑몰 링크 추출 (강력한 도메인 매칭)"""
         try:
+        # ... (rest of extract_buy_link logic is same, but I need to make sure I don't delete it)
+
             KNOWN_MALLS = [
                 'coupang.com', 'coupang.net', 'gmarket.co.kr', 'auction.co.kr', '11st.co.kr', 
                 'wemakeprice.com', 'tmon.co.kr', 'ssg.com', 'lotteon.com', 'cjthemarket.com', 
