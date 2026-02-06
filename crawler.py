@@ -126,10 +126,8 @@ class BaseCrawler:
                  content_html = content_html.replace('data-original=', 'src=')
                  
                  # --- NEW: Extract "Buy Link" (Affiliate Target) ---
-                 # Strategy: Find specific link field OR first external link in content
                  buy_link = self.extract_buy_link(soup, source, content_html)
                  if buy_link:
-                     # Inject hidden comment at the VERY START
                      content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
                      logger.info(f"  -> Extracted Buy Link: {buy_link}")
                  
@@ -143,8 +141,6 @@ class BaseCrawler:
     def extract_buy_link(self, soup, source, content_html):
         """본문이나 메타데이터에서 실제 구매(쇼핑몰) 링크를 추출"""
         try:
-            link = ""
-            
             # 1. Ruliweb: Has explicit .source_url
             if source == 'Ruliweb':
                 src_el = soup.select_one('.source_url a')
@@ -152,7 +148,6 @@ class BaseCrawler:
                     return src_el['href']
             
             # 2. General Heuristic: First External Link in Content
-            # Parse content_html again to find links inside the captured body
             c_soup = BeautifulSoup(content_html, 'html.parser')
             links = c_soup.select('a')
             
@@ -160,24 +155,40 @@ class BaseCrawler:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
                 if 'ppomppu.co.kr' in href or 'fmkorea.com' in href or 'ruliweb.com' in href: continue
-                # Skip image links
                 if href.endswith('.jpg') or href.endswith('.png'): continue
-                
-                # Assume this is the buy link
                 return href
-                
-        except Exception as e:
-            pass
+        except: pass
         return None
-            
-        except Exception as e:
-            logger.error(f"  -> Content Fetch Exception ({source}): {e}")
-            return ""
+
+    def extract_mall_name(self, title):
+        """제목에서 쇼핑몰 이름 추출 [쇼핑몰] or (쇼핑몰) 패턴"""
+        try:
+            # [MallName] or (MallName) at start of title
+            match = re.search(r'^[\[\(](.+?)[\]\)]', title)
+            if match:
+                return match.group(1).strip()
+        except: pass
+        return None
 
     def save_deal(self, data):
         try:
             data['category'] = self.normalize_category(data.get('category'))
             
+            # --- Mall Name Extraction ---
+            # If we extracted a mall name from title (e.g. [Coupang]), use it as 'source' for display?
+            # Or keep 'source' as origin (Ppomppu) and maybe append to title?
+            # User wants to see "Coupang" in the mall list. 
+            # Let's try to overwrite 'source' ONLY IF it's a known mall pattern, 
+            # BUT we need to keep track of where it came from?
+            # The current UI uses 'source' for the favicon and name. 
+            # If we change source to 'Coupang', we need a Coupang favicon.
+            # Let's just update the data['source'] variable passed to DB if found.
+            
+            mall_name = self.extract_mall_name(data['title'])
+            if mall_name:
+                # Optional: Map variations (Gmarket -> 지마켓 etc)
+                data['source'] = mall_name 
+
             # --- Content Check ---
             if not data.get('content'):
                 logger.warning(f"  !! Saving deal with EMPTY content: {data['title'][:15]}...")
