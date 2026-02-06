@@ -1,5 +1,10 @@
 // detail.js
 
+// Supabase Configuration (Copied from app.js)
+const SUPABASE_URL = 'https://zvlntvovzffizoruwxqx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_QQaxPklEyj2C7IVhtmspMg_AQmHkQKV';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 // 1. Check ID from URL
 const params = new URLSearchParams(window.location.search);
 const dealId = params.get('id');
