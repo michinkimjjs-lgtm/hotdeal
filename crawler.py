@@ -94,9 +94,13 @@ class BaseCrawler:
             content_html = ""
             
             if source == 'Ppomppu':
-                # Ppomppu Body: .board-contents or td.board-contents
-                # Remove scripts, styles
-                target = soup.select_one('.board-contents') or soup.find('td', class_='board-contents')
+                # Ppomppu Body: table.pic_bg table td.han (Most reliable based on debug)
+                target = soup.select_one('table.pic_bg table td.han')
+                
+                # Fallbacks
+                if not target:
+                    target = soup.select_one('.board-contents') or soup.find('td', class_='board-contents')
+                    
                 if target:
                     # Clean up
                     for tag in target(['script', 'style', 'iframe', 'object']): tag.decompose()

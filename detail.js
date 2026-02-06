@@ -105,16 +105,20 @@ function renderDealInfo(deal) {
     document.getElementById('stat-likes').textContent = deal.like_count || 0;
     document.getElementById('stat-comments').textContent = deal.comment_count || 0;
 
-    // Content (Modified: Hide section if empty)
+    // Content (Modified: Hide section if empty, Hide redundant main image if content exists)
     const contentEl = document.getElementById('deal-content-html');
     const contentSection = document.querySelector('.content-section');
+    const mainImageArea = document.querySelector('.product-image-area');
 
     if (deal.content && deal.content.trim().length > 0) {
         contentEl.innerHTML = deal.content;
         contentSection.style.display = 'block';
+        // Hide main image to avoid duplication
+        if (mainImageArea) mainImageArea.style.display = 'none';
     } else {
-        // User requested to remove the placeholder text
+        // No content -> Hide content section, Show main image
         contentSection.style.display = 'none';
+        if (mainImageArea) mainImageArea.style.display = 'block';
     }
 
     // Button

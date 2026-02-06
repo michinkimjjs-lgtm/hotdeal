@@ -11458,3 +11458,148 @@
 2026-02-06 12:12:00,352 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101528?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
 2026-02-06 12:12:00,613 [ERROR] 저장 실패: {'code': '23505', 'details': 'Key (url)=(https://bbs.ruliweb.com/market/board/1020/read/101527?view=gallery) already exists.', 'hint': None, 'message': 'duplicate key value violates unique constraint "hotdeals_url_key"'}
 2026-02-06 12:12:00,671 [INFO] === [Ruliweb] 크롤링 완료 (1건) ===
+2026-02-06 12:17:40,050 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 12:17:40,617 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682278 | Src: Ppomppu
+2026-02-06 12:17:40,620 [WARNING]   !! Saving deal with EMPTY content: [G마켓]화이트골드 커피믹스...
+2026-02-06 12:17:42,361 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682354 | Src: Ppomppu
+2026-02-06 12:17:42,362 [WARNING]   !! Saving deal with EMPTY content: [비욘드신세계]나이키 P-6...
+2026-02-06 12:17:42,745 [INFO]   [Insert] Ppomppu | [비욘드신세계]나이키 P-6000 스
+2026-02-06 12:17:44,035 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682353 | Src: Ppomppu
+2026-02-06 12:17:44,036 [WARNING]   !! Saving deal with EMPTY content: [네이버]올 스텐 수세미 칸...
+2026-02-06 12:17:45,637 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682352 | Src: Ppomppu
+2026-02-06 12:17:45,639 [WARNING]   !! Saving deal with EMPTY content: [오늘의집]원할머니 명품육개...
+2026-02-06 12:17:47,245 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682351 | Src: Ppomppu
+2026-02-06 12:17:47,247 [WARNING]   !! Saving deal with EMPTY content: [지마켓]순수 대나무 3겹 ...
+2026-02-06 12:17:48,870 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682350 | Src: Ppomppu
+2026-02-06 12:17:48,872 [WARNING]   !! Saving deal with EMPTY content: [남도장터]활전복 1kg 5...
+2026-02-06 12:17:50,475 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682349 | Src: Ppomppu
+2026-02-06 12:17:50,477 [WARNING]   !! Saving deal with EMPTY content: [하이마트몰]에코백스 X11...
+2026-02-06 12:17:52,077 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682348 | Src: Ppomppu
+2026-02-06 12:17:52,079 [WARNING]   !! Saving deal with EMPTY content: [GS샵]떡국떡 4kg (1...
+2026-02-06 12:17:53,700 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682347 | Src: Ppomppu
+2026-02-06 12:17:53,702 [WARNING]   !! Saving deal with EMPTY content: [토스]리르 글루타치온 14...
+2026-02-06 12:17:55,344 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682346 | Src: Ppomppu
+2026-02-06 12:17:55,345 [WARNING]   !! Saving deal with EMPTY content: [롯데온]커클랜드 시그니춰 ...
+2026-02-06 12:17:56,997 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682345 | Src: Ppomppu
+2026-02-06 12:17:56,999 [WARNING]   !! Saving deal with EMPTY content: [지마켓]한돈 대패삼겹살 1...
+2026-02-06 12:17:58,595 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682344 | Src: Ppomppu
+2026-02-06 12:17:58,596 [WARNING]   !! Saving deal with EMPTY content: [G마켓]명엽채/오징어실채 ...
+2026-02-06 12:18:00,242 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682343 | Src: Ppomppu
+2026-02-06 12:18:00,244 [WARNING]   !! Saving deal with EMPTY content: [G마켓]LG 휘센 오브제컬...
+2026-02-06 12:18:01,865 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682342 | Src: Ppomppu
+2026-02-06 12:18:01,867 [WARNING]   !! Saving deal with EMPTY content: [네이버]레이저블랙위도우v3...
+2026-02-06 12:18:03,588 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682341 | Src: Ppomppu
+2026-02-06 12:18:03,589 [WARNING]   !! Saving deal with EMPTY content: [조이풀푸드]이가네 양념돼지...
+2026-02-06 12:18:05,166 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682340 | Src: Ppomppu
+2026-02-06 12:18:05,167 [WARNING]   !! Saving deal with EMPTY content: [11번가]g7 퓨어블랙 커...
+2026-02-06 12:18:06,820 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682339 | Src: Ppomppu
+2026-02-06 12:18:06,822 [WARNING]   !! Saving deal with EMPTY content: [11번가]한라봉 4kg 실...
+2026-02-06 12:18:08,457 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682337 | Src: Ppomppu
+2026-02-06 12:18:08,459 [WARNING]   !! Saving deal with EMPTY content: [공식몰]아모레 로맨틱 스페...
+2026-02-06 12:18:10,086 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682336 | Src: Ppomppu
+2026-02-06 12:18:10,087 [WARNING]   !! Saving deal with EMPTY content: [롯데온]바이오가이아 아기 ...
+2026-02-06 12:18:11,701 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682335 | Src: Ppomppu
+2026-02-06 12:18:11,703 [WARNING]   !! Saving deal with EMPTY content: [네이버]센토 프라임 고불소...
+2026-02-06 12:18:13,292 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&page=1&divpage=108&no=682334 | Src: Ppomppu
+2026-02-06 12:18:13,294 [WARNING]   !! Saving deal with EMPTY content: [네이버]피코크 직화구이 떡...
+2026-02-06 12:18:14,970 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47963 | Src: Ppomppu
+2026-02-06 12:18:14,973 [WARNING]   !! Saving deal with EMPTY content: 홍콩반점 2/10 짜장면 3...
+2026-02-06 12:18:16,636 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47961 | Src: Ppomppu
+2026-02-06 12:18:16,638 [WARNING]   !! Saving deal with EMPTY content: 한라봉 굿구리...
+2026-02-06 12:18:18,251 [WARNING]   -> Content Extraction Failed. URL: https://www.ppomppu.co.kr/zboard/view.php?id=social&no=47959 | Src: Ppomppu
+2026-02-06 12:18:18,252 [WARNING]   !! Saving deal with EMPTY content: 로청 추천좀 부탁드립니다...
+2026-02-06 12:18:19,616 [INFO] === [Ppomppu] 크롤링 완료 (24건) ===
+2026-02-06 12:18:19,616 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 12:18:22,149 [INFO]   [Insert] FMKorea | 아이깨끗해 핸드워시 리필 1.8L+용
+2026-02-06 12:18:23,874 [INFO]   [Insert] FMKorea | 서린공식 ADATA DDR5-5600
+2026-02-06 12:18:28,047 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-06 12:18:28,945 [INFO]   -> Content fetched. Len: 213116
+2026-02-06 12:18:31,414 [INFO]   -> Content fetched. Len: 901
+2026-02-06 12:18:32,998 [INFO]   -> Content fetched. Len: 606
+2026-02-06 12:18:34,604 [INFO]   -> Content fetched. Len: 1015
+2026-02-06 12:18:36,215 [INFO]   -> Content fetched. Len: 344
+2026-02-06 12:18:37,784 [INFO]   -> Content fetched. Len: 351
+2026-02-06 12:18:39,390 [INFO]   -> Content fetched. Len: 537
+2026-02-06 12:18:41,021 [INFO]   -> Content fetched. Len: 1977
+2026-02-06 12:18:42,642 [INFO]   -> Content fetched. Len: 867
+2026-02-06 12:18:44,216 [INFO]   -> Content fetched. Len: 347
+2026-02-06 12:18:45,807 [INFO]   -> Content fetched. Len: 646
+2026-02-06 12:18:47,403 [INFO]   -> Content fetched. Len: 363
+2026-02-06 12:18:49,114 [INFO]   -> Content fetched. Len: 629
+2026-02-06 12:18:50,746 [INFO]   -> Content fetched. Len: 2205
+2026-02-06 12:18:52,404 [INFO]   -> Content fetched. Len: 822
+2026-02-06 12:18:53,987 [INFO]   -> Content fetched. Len: 379
+2026-02-06 12:18:55,581 [INFO]   -> Content fetched. Len: 383
+2026-02-06 12:18:57,186 [INFO]   -> Content fetched. Len: 981
+2026-02-06 12:18:58,756 [INFO]   -> Content fetched. Len: 366
+2026-02-06 12:19:00,407 [INFO]   -> Content fetched. Len: 602
+2026-02-06 12:19:02,030 [INFO]   -> Content fetched. Len: 381
+2026-02-06 12:19:03,603 [INFO] === [FMKorea] 크롤링 완료 (20건) ===
+2026-02-06 12:19:03,603 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 12:19:03,644 [INFO]   -> Content fetched. Len: 530
+2026-02-06 12:19:04,225 [INFO]   -> Content fetched. Len: 871
+2026-02-06 12:19:05,254 [INFO]   -> Content fetched. Len: 645
+2026-02-06 12:19:05,953 [INFO]   -> Content fetched. Len: 973
+2026-02-06 12:19:06,882 [INFO]   -> Content fetched. Len: 260
+2026-02-06 12:19:07,567 [INFO]   -> Content fetched. Len: 4127
+2026-02-06 12:19:08,228 [INFO] === [Ppomppu] 크롤링 완료 (24건) ===
+2026-02-06 12:19:08,228 [INFO] === [FMKorea] 크롤링 시작 ===
+2026-02-06 12:19:08,322 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:19:09,284 [INFO]   -> Content fetched. Len: 20861
+2026-02-06 12:19:10,935 [INFO]   -> Content fetched. Len: 580
+2026-02-06 12:19:12,135 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:19:12,581 [INFO]   -> Content fetched. Len: 697
+2026-02-06 12:19:14,191 [INFO]   -> Content fetched. Len: 1086
+2026-02-06 12:19:15,933 [INFO]   -> Content fetched. Len: 639
+2026-02-06 12:19:17,572 [INFO]   -> Content fetched. Len: 660
+2026-02-06 12:19:18,820 [WARNING] ⚠️ Fetch Failed: 430 (https://www.fmkorea.com/hotdeal)
+2026-02-06 12:19:18,820 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-06 12:19:19,236 [INFO]   -> Content fetched. Len: 121
+2026-02-06 12:19:19,437 [INFO]   -> Content fetched. Len: 973
+2026-02-06 12:19:20,846 [INFO]   -> Content fetched. Len: 873
+2026-02-06 12:19:21,149 [INFO]   -> Content fetched. Len: 4127
+2026-02-06 12:19:22,617 [INFO]   -> Content fetched. Len: 386
+2026-02-06 12:19:23,177 [INFO]   -> Content fetched. Len: 20861
+2026-02-06 12:19:24,349 [INFO]   -> Content fetched. Len: 858
+2026-02-06 12:19:24,831 [INFO]   -> Content fetched. Len: 580
+2026-02-06 12:19:26,039 [INFO]   -> Content fetched. Len: 984
+2026-02-06 12:19:26,729 [INFO]   -> Content fetched. Len: 697
+2026-02-06 12:19:27,685 [INFO]   -> Content fetched. Len: 450
+2026-02-06 12:19:28,321 [INFO]   -> Content fetched. Len: 1086
+2026-02-06 12:19:29,429 [INFO]   -> Content fetched. Len: 1702
+2026-02-06 12:19:30,197 [INFO]   -> Content fetched. Len: 639
+2026-02-06 12:19:31,104 [INFO]   -> Content fetched. Len: 1642
+2026-02-06 12:19:31,881 [INFO]   -> Content fetched. Len: 660
+2026-02-06 12:19:32,706 [INFO]   -> Content fetched. Len: 2399
+2026-02-06 12:19:33,565 [INFO]   -> Content fetched. Len: 121
+2026-02-06 12:19:34,345 [INFO]   -> Content fetched. Len: 1070
+2026-02-06 12:19:35,171 [INFO]   -> Content fetched. Len: 873
+2026-02-06 12:19:36,070 [INFO]   -> Content fetched. Len: 442
+2026-02-06 12:19:37,032 [INFO]   -> Content fetched. Len: 386
+2026-02-06 12:19:37,805 [INFO]   -> Content fetched. Len: 3460
+2026-02-06 12:19:38,737 [INFO]   -> Content fetched. Len: 858
+2026-02-06 12:19:39,414 [INFO]   -> Content fetched. Len: 2785
+2026-02-06 12:19:40,486 [INFO]   -> Content fetched. Len: 984
+2026-02-06 12:19:41,116 [INFO]   -> Content fetched. Len: 508
+2026-02-06 12:19:42,269 [INFO]   -> Content fetched. Len: 450
+2026-02-06 12:19:42,753 [INFO]   -> Content fetched. Len: 569
+2026-02-06 12:19:44,056 [INFO]   -> Content fetched. Len: 1702
+2026-02-06 12:19:44,528 [INFO]   -> Content fetched. Len: 823
+2026-02-06 12:19:45,775 [INFO]   -> Content fetched. Len: 1642
+2026-02-06 12:19:46,264 [INFO]   -> Content fetched. Len: 671
+2026-02-06 12:19:47,391 [INFO]   -> Content fetched. Len: 2399
+2026-02-06 12:19:47,937 [INFO]   -> Content fetched. Len: 15983
+2026-02-06 12:19:49,431 [INFO]   -> Content fetched. Len: 1070
+2026-02-06 12:19:49,551 [INFO]   -> Content fetched. Len: 5319
+2026-02-06 12:19:50,916 [INFO] === [Ruliweb] 크롤링 완료 (28건) ===
+2026-02-06 12:19:51,096 [INFO]   -> Content fetched. Len: 442
+2026-02-06 12:19:52,971 [INFO]   -> Content fetched. Len: 3460
+2026-02-06 12:19:54,804 [INFO]   -> Content fetched. Len: 2785
+2026-02-06 12:19:56,621 [INFO]   -> Content fetched. Len: 508
+2026-02-06 12:19:58,346 [INFO]   -> Content fetched. Len: 569
+2026-02-06 12:20:00,709 [INFO]   -> Content fetched. Len: 823
+2026-02-06 12:20:03,099 [INFO]   -> Content fetched. Len: 671
+2026-02-06 12:20:05,352 [INFO]   -> Content fetched. Len: 15983
+2026-02-06 12:20:07,102 [INFO]   -> Content fetched. Len: 5319
+2026-02-06 12:20:08,925 [INFO]   -> Content fetched. Len: 1354
+2026-02-06 12:20:10,274 [INFO] === [Ruliweb] 크롤링 완료 (28건) ===
