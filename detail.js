@@ -105,15 +105,16 @@ function renderDealInfo(deal) {
     document.getElementById('stat-likes').textContent = deal.like_count || 0;
     document.getElementById('stat-comments').textContent = deal.comment_count || 0;
 
-    // Content (New)
+    // Content (Modified: Hide section if empty)
     const contentEl = document.getElementById('deal-content-html');
-    if (deal.content) {
+    const contentSection = document.querySelector('.content-section');
+
+    if (deal.content && deal.content.trim().length > 0) {
         contentEl.innerHTML = deal.content;
+        contentSection.style.display = 'block';
     } else {
-        contentEl.innerHTML = `<p style="color:#888; text-align:center; padding:20px;">
-            본문 내용이 수집되지 않았습니다.<br>
-            <span style="font-size:0.9em">(크롤러가 다음 주기부터 수집을 시작합니다)</span>
-        </p>`;
+        // User requested to remove the placeholder text
+        contentSection.style.display = 'none';
     }
 
     // Button
