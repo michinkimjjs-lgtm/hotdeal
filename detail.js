@@ -103,14 +103,28 @@ function renderDealInfo(deal) {
 
     // Affiliate Link Generation
     const btn = document.getElementById('buy-link');
-    btn.href = generateAffiliateLink(deal.url, deal.source);
+
+    // 1. Try to find hidden BUY_URL in content (Injected by Crawler)
+    let targetUrl = deal.url; // Default: Post URL
+    if (deal.content) {
+        const match = deal.content.match(/<!-- BUY_URL: (.*?) -->/);
+        if (match && match[1]) {
+            targetUrl = match[1];
+        }
+    }
+
+    btn.href = generateAffiliateLink(targetUrl, deal.source);
+
+    // Open in new tab validation
+    btn.target = '_blank';
 
     // Content (Modified: Hide section if empty, Hide redundant main image if content exists)
     const contentEl = document.getElementById('deal-content-html');
     const contentSection = document.querySelector('.content-section');
-    // Note: Main image is removed from layout in HTML, so no need to hide it via JS anymore.
 
     if (deal.content && deal.content.trim().length > 0) {
+        // Remove the hidden comment for display check, but keep it in HTML if needed or remove it.
+        // Let's remove it from visual display to be clean, though browsers hide comments anyway.
         contentEl.innerHTML = deal.content;
         contentSection.style.display = 'block';
     } else {
@@ -120,36 +134,12 @@ function renderDealInfo(deal) {
 
 /**
  * 수익화 링크 생성 함수
- * 여기에 쿠팡 파트너스 아이디 등을 입력하면 적용됩니다.
  */
 function generateAffiliateLink(url, source) {
     let finalUrl = url;
 
-    // 1. Coupang Logic
-    // 만약 원본 링크가 쿠팡이라면? (실제로는 크롤링된 url이 쿠팡 링크가 아니라 게시글 링크임. 
-    // 게시글 본문 내의 링크를 파싱해야 하는데, 현재 DB엔 게시글 URL만 있음.
-    // '구매하기' 버튼은 일단 '게시글(원본)'으로 이동하게 되어있음 (핫딜모음 특성상).
-    // 만약 '쿠팡 바로가기'를 원한다면 본문 파싱 단계에서 '구매 링크'를 별도로 추출해서 DB에 저장했어야 함.)
-
-    // 현재 구조: 구매하기 -> 원본 게시글. 
-    // 유저의 요청: "구매하기 버튼을 누르면 해당 상품의 쇼핑몰로 바로 보냈으면 좋겠어"
-
-    // !!! 중요 !!! 
-    // 현재 우리 DB에는 '쇼핑몰 원본 상품 링크'가 따로 저장되어 있지 않습니다.
-    // deal.url은 '뽐뿌/펨코 게시글 URL'입니다.
-    // 따라서 지금은 '게시글'로 이동할 수밖에 없습니다. 
-    // 추후 크롤러 업그레이드가 필요합니다. (본문 내 링크 추출)
-
-    // 임시로 쿠팡 파트너스 예시 코드만 적어둡니다.
-    // 예를 들어, url이 쿠팡 단축 링크라면 태그를 붙일 수 있습니다.
-
-    /*
-    const MY_COUPANG_ID = 'AF1234567'; // 여기에 아이디 입력
-    if (finalUrl.includes('coupang.com')) {
-        if (finalUrl.includes('?')) finalUrl += `&tag=${MY_COUPANG_ID}`;
-        else finalUrl += `?tag=${MY_COUPANG_ID}`;
-    }
-    */
+    // Example: If it's a Coupang link, we could add tags here.
+    // if (finalUrl.includes('coupang.com')) { ... }
 
     return finalUrl;
 }
