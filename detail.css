@@ -29,9 +29,10 @@
 }
 
 .product-title {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    line-height: 1.4;
+    font-size: 1.25rem;
+    /* Reduced from 1.6rem */
+    margin-bottom: 10px;
+    line-height: 1.3;
     word-break: keep-all;
     font-weight: 700;
     color: #f8fafc;
@@ -121,8 +122,12 @@
 
 .price-info-group {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    /* Changed to row for inline layout */
+    align-items: center;
+    gap: 12px;
+    /* Space between mall and price */
+    flex-wrap: wrap;
 }
 
 .mall-info {
@@ -134,7 +139,8 @@
 .mall-name {
     color: #94a3b8;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    /* Slightly larger */
 }
 
 .price-display {
@@ -143,7 +149,8 @@
 }
 
 .price-value-large {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    /* Adjusted for inline balance */
     font-weight: 800;
     color: #ef4444;
     /* Keep Red for emphasis */
