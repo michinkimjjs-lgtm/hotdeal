@@ -5,7 +5,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const dealGrid = document.getElementById('deal-grid');
 const searchInput = document.getElementById('search-input');
-const categoryBtns = document.querySelectorAll('.cat-btn');
+const categoryBtns = document.querySelectorAll('.cat-link');
 
 let allDeals = [];
 let currentCategory = 'ALL';
