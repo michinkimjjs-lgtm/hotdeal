@@ -123,32 +123,19 @@ body {
   color: #fff;
 }
 
-/* Scrollable Category Nav */
-.category-nav-scroll {
+/* Text Category Nav (Multi-line, Static) */
+.category-nav-text {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 0 16px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  /* Firefox */
+  flex-wrap: wrap;
+  /* Allow wrapping */
+  justify-content: center;
+  /* Center align */
+  gap: 10px 20px;
+  /* Vertical / Horizontal gap */
+  padding: 15px 16px;
+  background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(15, 23, 42, 0.98);
-  position: sticky;
-  /* Stick below header? No, part of main flow but usually sticky in apps. */
-  /* Implementation detail: user wants it below header. If we want it sticky too: */
-  position: fixed;
-  top: 60px;
-  /* Below header height */
-  width: 100%;
-  z-index: 99;
-  height: 48px;
-}
-
-.category-nav-scroll::-webkit-scrollbar {
-  display: none;
+  margin-bottom: 10px;
 }
 
 .cat-link {
@@ -158,10 +145,12 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 12px 0;
+  padding: 5px 0;
+  /* Reduced padding */
   transition: color 0.2s;
   font-family: inherit;
   position: relative;
+  white-space: nowrap;
 }
 
 .cat-link:hover {
@@ -178,10 +167,10 @@ body {
   /* Red for Hot */
 }
 
-/* Main Content Padding for Fixed Header */
+/* Main Content Padding for Fixed Header Only */
 .main-content-padded {
-  padding-top: 110px;
-  /* Header (60) + Nav (48) + Gap */
+  padding-top: 70px;
+  /* Header (60) + Gap (10) */
 }
 
 /* Deal Grid */
