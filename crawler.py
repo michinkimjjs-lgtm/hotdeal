@@ -7,6 +7,7 @@ import re
 import sys
 import io
 import logging
+import urllib.parse
 
 # 터미널 출력 및 로깅 인코딩 강제 설정 (Windows mojibake 방지)
 if sys.stdout.encoding != 'utf-8':
@@ -47,11 +48,11 @@ class BaseCrawler:
         ]
         self.current_ua = random.choice(self.user_agents)
 
-    def fetch_page(self, url, encoding='utf-8', retries=3, referer=None):
+    def fetch_page(self, url, encoding='utf-8', retries=3, referer=None, custom_headers=None):
         for i in range(retries):
             try:
                 headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+                    'User-Agent': self.current_ua,
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
                     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
                     'Accept-Encoding': 'gzip, deflate',
@@ -62,6 +63,8 @@ class BaseCrawler:
                     'Sec-Ch-Ua-Mobile': '?0',
                     'Sec-Ch-Ua-Platform': '"Windows"'
                 }
+                if custom_headers:
+                    headers.update(custom_headers)
                 response = self.session.get(url, headers=headers, timeout=15)
                 if response.status_code == 200:
                     if encoding == 'auto':
@@ -430,10 +433,34 @@ class PpomppuCrawler(BaseCrawler):
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
 class FMKoreaCrawler(BaseCrawler):
+    def fetch_page(self, url, referer=None, custom_headers=None, encoding='utf-8'):
+        # FMKorea Specific Fetch with Minimal Headers and fresh session-like behavior
+        # Use known good UA
+        good_ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+        
+        for i in range(3):
+            try:
+                headers = {
+                    'User-Agent': good_ua,
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+                    'Referer': referer if referer else 'https://www.fmkorea.com/hotdeal'
+                }
+                # Use requests.get directly to avoid session pollution
+                response = requests.get(url, headers=headers, timeout=15)
+                if response.status_code == 200:
+                    return response.text
+                else:
+                    logger.warning(f"⚠️ Fetch Failed: {response.status_code} ({url})")
+            except Exception as e:
+                logger.error(f"FMKorea Fetch Error: {e}")
+            if i < 2:
+                time.sleep((i + 1) * 2 + random.random())
+        return None
+
     def crawl(self, limit=None):
         logger.info("=== [FMKorea] 크롤링 시작 ===")
         url = "https://www.fmkorea.com/hotdeal"
-        html = self.fetch_page(url)
+        html = self.fetch_page(url, referer="https://www.fmkorea.com/hotdeal")
         if not html: return
         soup = BeautifulSoup(html, 'html.parser')
         items = soup.select('.fm_best_widget._bd_pc li.li')
@@ -469,6 +496,23 @@ class FMKoreaCrawler(BaseCrawler):
                             # Link extraction from info_div removed (unreliable search links)
                             pass
 
+                        # Try to find the specific hotdeal URL (External Link)
+                        # <a class="hotdeal_url" href="https://link.fmkorea.org/link.php?url=...">
+                        link_el = d_soup.select_one('a.hotdeal_url')
+                        if link_el:
+                            href = link_el.get('href')
+                            if href:
+                                if 'link.fmkorea.org' in href and 'url=' in href:
+                                    try:
+                                        parsed = urllib.parse.urlparse(href)
+                                        qs = urllib.parse.parse_qs(parsed.query)
+                                        if 'url' in qs:
+                                            buy_link = qs['url'][0]
+                                    except:
+                                        buy_link = href
+                                else:
+                                    buy_link = href
+
                         # Image
                         img_el = d_soup.select_one('article img')
                         if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
@@ -484,13 +528,22 @@ class FMKoreaCrawler(BaseCrawler):
                                  
                              content_html = str(target).replace('data-original=', 'src=')
                              
-                             # If buy_link was not found in info_div, try base extractor
-                             if not buy_link:
-                                 buy_link = self.extract_buy_link(d_soup, 'FMKorea', content_html)
-                                 
+                             # If buy_link found, inject it
                              if buy_link:
                                  content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
-                except: pass
+                                 # Also inject MALL_NAME if possible? 
+                                 # FMKorea usually has mall name in hotdeal_info text "쇼핑몰: [Mall]"
+                                 # Let's extract it from info_div text
+                                 if info_div:
+                                      shop_match = re.search(r'쇼핑몰\s*:\s*(\S+)', info_div.get_text())
+                                      if shop_match:
+                                          mall_name = shop_match.group(1)
+                                          content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
+                             
+                             # Fallback extractor if still empty (maybe needed?)
+                             # if not buy_link: ...
+                except Exception as e:
+                     logger.error(f"FMKorea Detail Parse Error: {e}")
 
                 if not img_url:
                     t_el = item.select_one('img.thumb')
