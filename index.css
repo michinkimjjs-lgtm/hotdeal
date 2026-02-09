@@ -125,7 +125,7 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 20;
-  animation: bounce 2s infinite;
+  /* animation: bounce 2s infinite; Removed for performance */
   transform-origin: bottom center;
 }
 
@@ -196,6 +196,8 @@ h1 {
   /* Faster bounce */
   transform-origin: bottom center;
   border: 1px solid #fff;
+  will-change: transform;
+  /* Performance Optimization */
 }
 
 .deal-card.super-hot-deal:hover {
