@@ -127,15 +127,15 @@ body {
 .category-nav-text {
   display: flex;
   flex-wrap: wrap;
-  /* Allow wrapping */
-  justify-content: center;
-  /* Center align */
-  gap: 10px 20px;
-  /* Vertical / Horizontal gap */
-  padding: 15px 16px;
+  justify-content: flex-start;
+  /* Left align to match logo */
+  gap: 12px 18px;
+  /* Tweak gap */
+  padding: 10px 16px 15px 16px;
+  /* Reduce top padding, keep side padding */
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .cat-link {
@@ -145,12 +145,22 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 5px 0;
-  /* Reduced padding */
+  padding: 4px 0;
   transition: color 0.2s;
   font-family: inherit;
   position: relative;
   white-space: nowrap;
+  /* Remove flex-grow to avoid weird spacing */
+}
+
+/* Mobile Tweak for Nav Alignment */
+@media (max-width: 600px) {
+  .category-nav-text {
+    justify-content: space-between;
+    /* Spreads items to fill width on mobile */
+    gap: 10px;
+    /* Smaller gap for mobile to fit more */
+  }
 }
 
 .cat-link:hover {
@@ -169,8 +179,8 @@ body {
 
 /* Main Content Padding for Fixed Header Only */
 .main-content-padded {
-  padding-top: 70px;
-  /* Header (60) + Gap (10) */
+  padding-top: 60px;
+  /* Reduced gap - start right after header */
 }
 
 /* Deal Grid */
