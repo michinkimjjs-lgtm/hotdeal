@@ -116,8 +116,14 @@ function renderDeals(deals) {
         return;
     }
 
-    dealGrid.innerHTML = deals.map((deal, index) => `
-        <div class="deal-card" style="animation-delay: ${index * 0.05}s">
+    dealGrid.innerHTML = deals.map((deal, index) => {
+        // Hot Deal Logic (Robust Type Check)
+        const likes = parseInt(deal.like_count) || 0;
+        const isHot = (deal.source === 'Ruliweb' && likes >= 30) ||
+            (deal.source !== 'Ruliweb' && likes >= 10);
+
+        return `
+        <div class="deal-card ${isHot ? 'hot-deal' : ''}" style="animation-delay: ${index * 0.05}s">
             <div class="image-container">
                 <img src="${deal.img_url ? deal.img_url : 'https://via.placeholder.com/300x200?text=No+Image'}" 
                      alt="${deal.title}" 
@@ -144,7 +150,7 @@ function renderDeals(deals) {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 
     // Scroll to top of grid
     window.scrollTo({ top: 0, behavior: 'smooth' });

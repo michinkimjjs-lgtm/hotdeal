@@ -13,8 +13,8 @@
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="index.css?v=2.0"> <!-- Reuse base styles -->
-    <link rel="stylesheet" href="detail.css?v=3.0">
+    <link rel="stylesheet" href="index.css?v=2.1"> <!-- Reuse base styles -->
+    <link rel="stylesheet" href="detail.css?v=3.2">
 </head>
 
 <body>
@@ -133,8 +133,17 @@
         </main>
     </div>
 
+    <!-- Sticky Bottom Action Bar (Mobile Only) -->
+    <div id="sticky-action-bar" class="sticky-action-bar">
+        <div class="sticky-price-info">
+            <span class="sticky-label">최저가</span>
+            <span id="sticky-price" class="sticky-price-value">0원</span>
+        </div>
+        <a id="sticky-buy-btn" href="#" target="_blank" class="sticky-buy-btn">구매하기</a>
+    </div>
+
     <!-- Logic -->
-    <script src="detail_v3.js?v=3.2"></script>
+    <script src="detail_v3.js?v=3.3"></script>
 </body>
 
 </html>

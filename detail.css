@@ -167,6 +167,61 @@
     background: #0056b3;
 }
 
+.buy-button:hover {
+    background: #0056b3;
+}
+
+/* Sticky Action Bar (Mobile) */
+.sticky-action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    display: flex;
+    /* Flex but hidden via JS/Media Query initially if needed, but we use media query here */
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    /* Safe area for iPhone X+ */
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+.sticky-price-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sticky-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.sticky-price-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.sticky-buy-btn {
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 99px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transition: transform 0.2s;
+}
+
+.sticky-buy-btn:active {
+    transform: scale(0.95);
+}
+
 /* Mobile Responsive for Bar */
 @media (max-width: 600px) {
     .price-action-bar {
@@ -187,6 +242,17 @@
     .price-display {
         width: 100%;
         justify-content: space-between;
+    }
+
+    /* Add padding to body to prevent sticky bar overlap */
+    .detail-container {
+        padding-bottom: 90px;
+    }
+}
+
+@media (min-width: 601px) {
+    .sticky-action-bar {
+        display: none !important;
     }
 }
 

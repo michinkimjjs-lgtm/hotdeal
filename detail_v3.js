@@ -141,6 +141,20 @@ function renderDealInfo(deal) {
     // Open in new tab validation
     btn.target = '_blank';
 
+    // Sticky Bar Update (Mobile)
+    const stickyPrice = document.getElementById('sticky-price');
+    const stickyBtn = document.getElementById('sticky-buy-btn');
+
+    if (stickyPrice) stickyPrice.textContent = deal.price || '가격확인';
+    if (stickyBtn) {
+        stickyBtn.href = btn.href;
+        // Visual check: Valid URL?
+        if (!deal.url && !deal.content) {
+            stickyBtn.style.opacity = '0.5';
+            stickyBtn.textContent = '링크 없음';
+        }
+    }
+
     // Content (Modified: Hide section if empty, Hide redundant main image if content exists)
     const contentEl = document.getElementById('deal-content-html');
     const contentSection = document.querySelector('.content-section');
