@@ -119,8 +119,21 @@ function renderDeals(deals) {
     dealGrid.innerHTML = deals.map((deal, index) => {
         // Hot Deal Logic (Robust Type Check)
         const likes = parseInt(deal.like_count) || 0;
-        const isHot = (deal.source === 'Ruliweb' && likes >= 30) ||
-            (deal.source !== 'Ruliweb' && likes >= 10);
+
+        let hotTier = 0; // 0: Normal, 1: Hot, 2: Super Hot (God)
+
+        if (deal.source === 'Ruliweb') {
+            if (likes >= 100) hotTier = 2;
+            else if (likes >= 30) hotTier = 1;
+        } else {
+            if (likes >= 30) hotTier = 2;
+            else if (likes >= 10) hotTier = 1;
+        }
+
+        // Class and Badge Logic based on Tier
+        let cardClass = '';
+        if (hotTier === 2) cardClass = 'super-hot-deal';
+        else if (hotTier === 1) cardClass = 'hot-deal';
 
         // Merit Badge Logic
         let badgeHtml = '';
@@ -142,7 +155,7 @@ function renderDeals(deals) {
         }
 
         return `
-        <div class="deal-card ${isHot ? 'hot-deal' : ''}" style="animation-delay: ${index * 0.05}s">
+        <div class="deal-card ${cardClass}" style="animation-delay: ${index * 0.05}s">
             <div class="image-container">
                 <img src="${deal.img_url ? deal.img_url : 'https://via.placeholder.com/300x200?text=No+Image'}" 
                      alt="${deal.title}" 
