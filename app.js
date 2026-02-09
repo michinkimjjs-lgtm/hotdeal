@@ -122,6 +122,25 @@ function renderDeals(deals) {
         const isHot = (deal.source === 'Ruliweb' && likes >= 30) ||
             (deal.source !== 'Ruliweb' && likes >= 10);
 
+        // Merit Badge Logic
+        let badgeHtml = '';
+
+        // 1. Discount Pattern (e.g. 50%, 30프로)
+        const discountMatch = deal.title.match(/(\d+)(%|프로|퍼센트)/);
+        if (discountMatch) {
+            const discountRate = parseInt(discountMatch[1]);
+            if (discountRate >= 30) { // Only show significant discounts
+                badgeHtml = `<span class="merit-badge discount">${discountRate}%↓</span>`;
+            }
+        }
+
+        // 2. Keyword Pattern (If no discount badge yet)
+        if (!badgeHtml) {
+            if (deal.title.match(/역대|최저|대란|오류|끝판/)) {
+                badgeHtml = `<span class="merit-badge keyword">역대급</span>`;
+            }
+        }
+
         return `
         <div class="deal-card ${isHot ? 'hot-deal' : ''}" style="animation-delay: ${index * 0.05}s">
             <div class="image-container">
@@ -139,7 +158,9 @@ function renderDeals(deals) {
                     </div>
                     <div class="deal-time">${getRelativeTime(deal.created_at)}</div>
                 </div>
-                <div class="deal-title" title="${deal.title}">${deal.title}</div>
+                <div class="deal-title" title="${deal.title}">
+                    ${badgeHtml} ${deal.title}
+                </div>
                 <div class="deal-footer">
                     <div class="deal-info-stats">
                         <span class="deal-likes">👍 ${deal.like_count || 0}</span>
