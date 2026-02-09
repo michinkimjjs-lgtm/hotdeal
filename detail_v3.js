@@ -31,7 +31,7 @@ function switchTab(current) {
 
 
 async function loadDeal() {
-    console.log("🔥 Detail JS Version 3.1 (Renamed) Loaded");
+    console.log("🔥 Detail JS Version 3.2 (Mock Title Fix) Loaded");
     if (!dealId) {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error-message').textContent = '잘못된 접근입니다.';
@@ -199,11 +199,27 @@ function renderComparison(deal) {
     if (currentPrice > 0) {
         others.forEach(v => {
             let higherPrice = Math.floor(currentPrice * (1 + (Math.random() * 0.2) + 0.05)); // 5%~25% higher
-            // Format format: 12,345원
             let pStr = higherPrice.toLocaleString() + '원';
+
+            // Replace Mall Name in Title
+            let newTitle = deal.title;
+            const tagRegex = /^\s*[\[\(](.+?)[\]\)]/;
+            const match = newTitle.match(tagRegex);
+
+            if (match) {
+                // Replace existing tag (e.g. [Naver] -> [Coupang])
+                newTitle = newTitle.replace(match[0], `[${v}]`);
+            } else {
+                // Prepend if no tag exists
+                newTitle = `[${v}] ${newTitle}`;
+            }
+
+            // Truncate if too long
+            if (newTitle.length > 25) newTitle = newTitle.substring(0, 25) + '...';
+
             rows.push({
                 vendor: v,
-                name: deal.title.substring(0, 20) + '...',
+                name: newTitle,
                 price: pStr,
                 note: '일반 판매가',
                 highlight: false
