@@ -400,6 +400,39 @@
     border-bottom: none;
 }
 
+/* Mobile Table Optimization */
+@media (max-width: 600px) {
+
+    /* Hide Product Name Column (Redundant on mobile) */
+    .comparison-table th:nth-child(2),
+    .comparison-table td:nth-child(2) {
+        display: none;
+    }
+
+    /* Redistribute Widths (3 Columns) */
+    .comparison-table th:nth-child(1) {
+        width: 30%;
+    }
+
+    /* Seller */
+    .comparison-table th:nth-child(3) {
+        width: 35%;
+    }
+
+    /* Price */
+    .comparison-table th:nth-child(4) {
+        width: 35%;
+    }
+
+    /* Note */
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 10px 2px;
+        font-size: 0.8rem;
+    }
+}
+
 .comparison-table .row-highlight {
     background: rgba(37, 99, 235, 0.1);
 }
