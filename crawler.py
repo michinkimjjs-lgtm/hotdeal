@@ -45,24 +45,31 @@ class BaseCrawler:
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
             'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
         ]
+        self.current_ua = random.choice(self.user_agents)
 
-    def fetch_page(self, url, encoding='utf-8', retries=3):
+    def fetch_page(self, url, encoding='utf-8', retries=3, referer=None):
         for i in range(retries):
             try:
                 headers = {
-                    'User-Agent': random.choice(self.user_agents),
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
                     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-                    'Referer': 'https://www.google.com/'
+                    'Accept-Encoding': 'gzip, deflate',
+                    'Referer': referer if referer else 'https://www.google.com/',
+                    'Connection': 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1',
+                    'Sec-Ch-Ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+                    'Sec-Ch-Ua-Mobile': '?0',
+                    'Sec-Ch-Ua-Platform': '"Windows"'
                 }
                 response = self.session.get(url, headers=headers, timeout=15)
                 if response.status_code == 200:
+                    if encoding == 'auto':
+                        return response.text
                     try:
                         return response.content.decode(encoding, errors='replace')
                     except LookupError:
                         return response.content.decode('utf-8', errors='replace')
-                    logger.error(f"⚠️ 차단됨 (430) ({url})")
-                    return None
                 else:
                     logger.warning(f"⚠️ Fetch Failed: {response.status_code} ({url})")
             except Exception as e:
@@ -70,7 +77,6 @@ class BaseCrawler:
             if i < retries - 1:
                 time.sleep((i + 1) * 3 + random.random() * 2)
         return None
-    
     def normalize_category(self, raw_cat):
         if not raw_cat: return "기타"
         cat = raw_cat.strip()
@@ -97,6 +103,39 @@ class BaseCrawler:
                     target = soup.select_one('.board-contents') or soup.find('td', class_='board-contents')
                 if target:
                     for tag in target(['script', 'style', 'iframe', 'object']): tag.decompose()
+
+                    # Fix relative images
+                    for img in target.select('img'):
+                        src = img.get('src', '')
+                        if not src: continue
+                        
+                        if src.startswith('//'): 
+                            img['src'] = 'https:' + src
+                        elif src.startswith('/'): 
+                            img['src'] = 'https://www.ppomppu.co.kr' + src
+                        elif not src.startswith('http'):
+                            import re
+                            # Check if it looks like a timestamped filename (YYYYMMDD...)
+                            match = re.match(r'^(\d{4})(\d{2})\d{2}', src)
+                            if match:
+                                year = match.group(1)
+                                month_day = match.group(2) + src[6:8]
+                                img['src'] = f'https://cdn.ppomppu.co.kr/zboard/data3/{year}/{month_day}/{src}'
+                            else:
+                                # Default fallback to relative to board
+                                img['src'] = 'https://www.ppomppu.co.kr/zboard/' + src
+                            
+                            
+                        # Remove loading=lazy or other attributes that might block
+                        if img.has_attr('loading'): del img['loading']
+                        
+                        # Force cdn2 -> cdn (Byass hotlink block on cdn2)
+                        if img.has_attr('src') and 'cdn2.ppomppu.co.kr' in img['src']:
+                            img['src'] = img['src'].replace('cdn2.ppomppu.co.kr', 'cdn.ppomppu.co.kr')
+                            
+                        # Add no-referrer policy to bypass hotlink protection
+                        img['referrerpolicy'] = 'no-referrer'
+
                     content_html = str(target)
                     
             elif source == 'FMKorea':
@@ -118,7 +157,7 @@ class BaseCrawler:
                  # --- Extract Buy Link ---
                  buy_link = self.extract_buy_link(soup, source, content_html)
                  if buy_link:
-                     mall_name = self.get_mall_name(buy_link)
+                     mall_name = self.extract_mall_name_from_url(buy_link)
                      mall_comment = f"<!-- MALL_NAME: {mall_name} -->" if mall_name else ""
                      content_html = f"<!-- BUY_URL: {buy_link} -->{mall_comment}" + content_html
                      logger.info(f"  -> Extracted Buy Link: {buy_link} ({mall_name})")
@@ -177,6 +216,25 @@ class BaseCrawler:
                     if key in qs:
                         return self._resolve_real_url(qs[key][0]) # Recursive check
             except: pass
+
+        # 3. Ppomppu Custom Redirect Resolution (s.ppomppu.co.kr)
+        if 's.ppomppu.co.kr' in url:
+            try:
+                import base64
+                from urllib.parse import urlparse, parse_qs
+                parsed = urlparse(url)
+                qs = parse_qs(parsed.query)
+                if 'target' in qs:
+                    target_b64 = qs['target'][0]
+                    # Fix padding
+                    missing_padding = len(target_b64) % 4
+                    if missing_padding:
+                        target_b64 += '=' * (4 - missing_padding)
+                    try:
+                        decoded_url = base64.b64decode(target_b64).decode('utf-8')
+                        return self._resolve_real_url(decoded_url)
+                    except: pass
+            except: pass
             
         return url
 
@@ -191,12 +249,22 @@ class BaseCrawler:
                 if src_el and src_el.has_attr('href'):
                     candidates.append(src_el['href'])
 
+            if source == 'Ppomppu':
+                # 1. Try wordfix (legacy)
+                wordfix = soup.select_one('.wordfix')
+                if wordfix:
+                    for a in wordfix.select('a'):
+                        if a.has_attr('href'): candidates.append(a['href'])
+                
+                # 2. Try scrap_bx (new)
+                scrap_links = soup.select('a.scrap_bx_href')
+                for a in scrap_links:
+                    if a.has_attr('href'): candidates.append(a['href'])
+                        
             if source == 'FMKorea':
-                info_div = soup.select_one('.hotdeal_info')
-                if info_div:
-                    link_a = info_div.select_one('a')
-                    if link_a and link_a.has_attr('href'):
-                        candidates.append(link_a['href'])
+                # Removed hotdeal_info specific selector as it often contains internal search links (e.g. Mall Name -> Search)
+                # We will rely on Content Scan to find the real link.
+                pass
                         
             # 2. Content Scan (Medium Priority)
             c_soup = BeautifulSoup(content_html, 'html.parser')
@@ -206,6 +274,7 @@ class BaseCrawler:
             for a in links:
                 href = a.get('href', '')
                 if not href or href.startswith('#') or href.startswith('javascript'): continue
+                if 'search_keyword' in href or 'mid=hotdeal' in href: continue
                 if 'adpost' in str(a.parent.get('class', [])): continue
                 if 'adbiz' in href: continue
                 # Skip known internal domains unless they are redirects
@@ -219,7 +288,7 @@ class BaseCrawler:
                 'coupang', 'gmarket', 'auction', '11st', 'wemakeprice', 'tmon', 'ssg', 'lotteon', 
                 'cjthemarket', 'aliexpress', 'qoo10', 'amazon', 'smartstore', 'brand.naver', 
                 'shopping.naver', 'e-himart', 'gsshop', 'cjmall', 'interpark', 'lotimall', 'akmall', 
-                'hyundaihmall', 'shinsegaemall', 'emart'
+                'hyundaihmall', 'shinsegaemall', 'emart', 'musinsa', 'kream', 'bucketmarket'
             ]
 
             # Pass 1: Look for KNOWN MALLS (Resolved)
@@ -243,8 +312,7 @@ class BaseCrawler:
         except Exception as e:
             pass
         return None
-        except: pass
-        return None
+
 
     def extract_mall_name(self, title):
         """제목에서 쇼핑몰 이름 추출 [쇼핑몰] or (쇼핑몰) 패턴"""
@@ -306,7 +374,7 @@ class PpomppuCrawler(BaseCrawler):
         
         return price
 
-    def crawl(self):
+    def crawl(self, limit=None):
         logger.info("=== [Ppomppu] 크롤링 시작 ===")
         url = "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu"
         html = self.fetch_page(url, encoding='euc-kr')
@@ -315,6 +383,7 @@ class PpomppuCrawler(BaseCrawler):
         items = soup.select('tr.baseList')
         count = 0
         for item in items:
+            if limit and count >= limit: break
             try:
                 if 'baseNotice' in item.get('class', []): continue
                 title_el = item.select_one('.baseList-title'); href = title_el['href'] if title_el else ""
@@ -340,10 +409,10 @@ class PpomppuCrawler(BaseCrawler):
                 comm_el = item.select_one('.baseList-c'); comment = int(comm_el.get_text().strip()) if comm_el else 0
                 like_el = item.select_one('.baseList-rec'); like = int(re.findall(r'\d+', like_el.get_text())[0]) if like_el and re.findall(r'\d+', like_el.get_text()) else 0
                 
-                source_name = "Ppomppu" # Will be updated by title extraction in save_deal or buy_link
-                if buy_link:
-                    detected_mall = self.extract_mall_name_from_url(buy_link)
-                    if detected_mall: source_name = detected_mall
+                source_name = "Ppomppu" 
+                # if buy_link:
+                #     detected_mall = self.extract_mall_name_from_url(buy_link)
+                #     if detected_mall: source_name = detected_mall
 
                 if self.save_deal({
                     "title": full_title, 
@@ -361,7 +430,7 @@ class PpomppuCrawler(BaseCrawler):
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
 class FMKoreaCrawler(BaseCrawler):
-    def crawl(self):
+    def crawl(self, limit=None):
         logger.info("=== [FMKorea] 크롤링 시작 ===")
         url = "https://www.fmkorea.com/hotdeal"
         html = self.fetch_page(url)
@@ -371,6 +440,7 @@ class FMKoreaCrawler(BaseCrawler):
         if not items: items = soup.select('.bd_lst_wrp .bd_lst tr:not(.notice)')
         count = 0
         for item in items:
+            if limit and count >= limit: break
             try:
                 title_el = item.select_one('h3.title a.hotdeal_var8')
                 if not title_el: continue
@@ -383,7 +453,7 @@ class FMKoreaCrawler(BaseCrawler):
                 # Fetch Detail Page
                 try:
                     time.sleep(1.0 + random.random() * 1.0) 
-                    d_html = self.fetch_page(link)
+                    d_html = self.fetch_page(link, referer="https://www.fmkorea.com/hotdeal")
                     if d_html:
                         d_soup = BeautifulSoup(d_html, 'html.parser')
                         
@@ -393,22 +463,25 @@ class FMKoreaCrawler(BaseCrawler):
                         if info_div:
                             # Extract price
                             p_txt = info_div.get_text()
-                            p_match = re.search(r'가격\s*:\s*([0-9,]+원?)', p_txt)
+                            p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
                             if p_match: price = p_match.group(1)
                             
-                            # Extract Link from the info section
-                            link_a = info_div.select_one('a')
-                            if link_a and link_a.has_attr('href'):
-                                buy_link = link_a['href']
+                            # Link extraction from info_div removed (unreliable search links)
+                            pass
 
                         # Image
                         img_el = d_soup.select_one('article img')
                         if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
                         
-                        # Content
+                         # Content
                         target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
                         if target:
                              for tag in target(['script', 'style']): tag.decompose()
+                             
+                             # Add no-referrer to images
+                             for img in target.select('img'):
+                                 img['referrerpolicy'] = 'no-referrer'
+                                 
                              content_html = str(target).replace('data-original=', 'src=')
                              
                              # If buy_link was not found in info_div, try base extractor
@@ -436,9 +509,9 @@ class FMKoreaCrawler(BaseCrawler):
                 v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
                 
                 source_name = "FMKorea"
-                if buy_link:
-                    detected_mall = self.extract_mall_name_from_url(buy_link)
-                    if detected_mall: source_name = detected_mall
+                # if buy_link:
+                #     detected_mall = self.extract_mall_name_from_url(buy_link)
+                #     if detected_mall: source_name = detected_mall
 
                 if self.save_deal({
                     "title": title, 
@@ -456,10 +529,10 @@ class FMKoreaCrawler(BaseCrawler):
         logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
 
 class RuliwebCrawler(BaseCrawler):
-    def crawl(self):
+    def crawl(self, limit=None):
         logger.info("=== [Ruliweb] 크롤링 시작 ===")
         url = "https://bbs.ruliweb.com/market/board/1020?view=gallery"
-        html = self.fetch_page(url)
+        html = self.fetch_page(url, encoding='auto')
         if not html: return
         soup = BeautifulSoup(html, 'html.parser')
         items = soup.select('div.flex_item.article_wrapper')
@@ -467,6 +540,7 @@ class RuliwebCrawler(BaseCrawler):
             items = soup.select('table.board_list_table tr.table_body:not(.notice)')
         count = 0
         for item in items:
+            if limit and count >= limit: break
             try:
                 # Common variable initialization
                 link = ""; title = ""; img_url = ""; 
@@ -511,23 +585,100 @@ class RuliwebCrawler(BaseCrawler):
                 if img_url.startswith('//'): img_url = "https:" + img_url
                 if img_url and not img_url.startswith('http'): img_url = "https://bbs.ruliweb.com" + img_url
                 
+                # Price Extraction
                 price = "가격미상"
-                p_match = re.search(r'[\[\(]\s*([\d,]+(?:원)?|무료)\s*(?:/|\]|\))', title)
+                # Price Extraction
+                price = "가격미상"
+                # Matches (Price), (Price/Shipping), but tries to respect dates
+                # For now, simplistic match to ensure (69,800/2500) works
+                p_match = re.search(r'\(([\d,]+(?:원|W|w)?)\s*(?:/|\))', title)
+                if not p_match:
+                     p_match = re.search(r'\((무료)\s*(?:/|\))', title)
                 if p_match: price = p_match.group(1)
-                else:
-                    p_match2 = re.search(r'([\d,]+원)', title)
-                    if p_match2: price = p_match2.group(1)
-
-                content_html, buy_link = self.fetch_content_html(link, 'Ruliweb')
                 
+                # Fetch Detail for Content, Image, and Buy Link
+                content_html = ""
+                buy_link = None
+                
+                try:
+                    d_html = self.fetch_page(link, referer="https://bbs.ruliweb.com/market/board/1020")
+                    if d_html:
+                        d_soup = BeautifulSoup(d_html, 'html.parser')
+                        
+                        # 1. Content & Image
+                        target = d_soup.select_one('.view_content') or d_soup.select_one('.board_main_view')
+                        if target:
+                            # YouTube Thumbnail
+                            if not img_url or 'thumbnail_empty' in img_url:
+                                for iframe in target.select('iframe'):
+                                    src = iframe.get('src', '')
+                                    if 'youtube.com' in src or 'youtu.be' in src:
+                                        if 'embed/' in src:
+                                            vid_id = src.split('embed/')[-1].split('?')[0]
+                                            img_url = f"https://img.youtube.com/vi/{vid_id}/0.jpg"
+                                            break
+                            
+                            # Content Image Fallback
+                            if not img_url or 'thumbnail_empty' in img_url:
+                                for img in target.select('img'):
+                                    src = img.get('src', '')
+                                    if src and 'thumbnail_empty' not in src and 'smile' not in src:
+                                        if src.startswith('//'): src = "https:" + src
+                                        if src.startswith('http'):
+                                            img_url = src
+                                            break
+                                            
+                            # Clean Content
+                            for tag in target(['script', 'style', 'iframe', 'object']): tag.decompose()
+                            for ad in target.select('.ad_content'): ad.decompose()
+                            
+                            # Add no-referrer to images & Fix relative
+                            for img in target.select('img'):
+                                src = img.get('src', '')
+                                if src.startswith('//'): 
+                                    img['src'] = 'https:' + src
+                                img['referrerpolicy'] = 'no-referrer'
+                                
+                            content_html = str(target)
+                        
+                        # 2. Buy Link (Source URL)
+                        src_el = d_soup.select_one('.source_url a')
+                        if src_el and src_el.get('href'):
+                            potential_link = self._resolve_real_url(src_el.get('href'))
+                            if potential_link and 'ruliweb.com' not in potential_link:
+                                buy_link = potential_link
+                        
+                        # 3. Buy Link (Content Scan)
+                        if not buy_link and target:
+                            extracted = self.extract_buy_link(d_soup, 'Ruliweb', content_html)
+                            if extracted and 'ruliweb.com' not in extracted: 
+                                buy_link = extracted
+                            
+                except Exception as e:
+                    logger.error(f"Ruliweb detail fetch failed: {e}")
+
                 source_name = "Ruliweb"
-                if buy_link:
-                    detected_mall = self.extract_mall_name_from_url(buy_link)
-                    if detected_mall: source_name = detected_mall
+                # Keep source as Ruliweb for icon consistency.
+                # Mall name is already in the title (e.g. [Naver]...)
+                
+                # Check for empty buy_link
+                if not buy_link:
+                     buy_link = link # Fallback to post link if no external link found (but usually .source_url works)
+
+                # --- Inject Meta Tags for Detail Page (MALL_NAME, BUY_URL) ---
+                mall_name_for_meta = self.extract_mall_name_from_url(buy_link)
+                if not mall_name_for_meta:
+                    mall_name_for_meta = self.extract_mall_name(title) # Fallback to title [Mall]
+
+                mall_comment = f"<!-- MALL_NAME: {mall_name_for_meta} -->" if mall_name_for_meta else ""
+                buy_link_comment = f"<!-- BUY_URL: {buy_link} -->" if buy_link else ""
+                
+                if content_html:
+                    content_html = f"{buy_link_comment}{mall_comment}" + content_html
 
                 if self.save_deal({
                     "title": title, 
-                    "url": link, 
+                    "url": link, # Restored: URL field should be the Original Post URL
                     "img_url": img_url, 
                     "source": source_name, 
                     "category": cat, 
