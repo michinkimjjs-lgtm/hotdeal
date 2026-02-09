@@ -139,8 +139,11 @@
     /* Remove white box */
     padding: 20px 0;
     margin-bottom: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Slightly more visible separator */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 20px 0;
+    margin-top: 10px;
 }
 
 .price-info-group {
@@ -335,27 +338,62 @@
 
 /* Table */
 .comparison-table-wrapper {
-    overflow-x: auto;
+    overflow-x: visible;
+    /* Disable horizontal scroll */
+    width: 100%;
 }
 
 .comparison-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 15px;
-    min-width: 500px;
+    table-layout: fixed;
+    /* Fixed layout to manage column widths */
 }
 
 .comparison-table th {
     text-align: left;
-    padding: 12px;
+    padding: 10px 4px;
+    /* Reduced padding */
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     border-bottom: 1px solid #333;
+    white-space: nowrap;
+    /* Keep headers single line if possible */
 }
 
+.comparison-table th:nth-child(1) {
+    width: 15%;
+}
+
+/* Seller */
+.comparison-table th:nth-child(2) {
+    width: 35%;
+}
+
+/* Product */
+.comparison-table th:nth-child(3) {
+    width: 25%;
+}
+
+/* Price */
+.comparison-table th:nth-child(4) {
+    width: 25%;
+}
+
+/* Note */
+
 .comparison-table td {
-    padding: 15px 12px;
+    padding: 12px 4px;
     border-bottom: 1px solid #333;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    white-space: normal;
+    /* Allow wrapping */
+    word-break: keep-all;
+    /* Break words nicely for Korean */
+    vertical-align: top;
+    line-height: 1.4;
 }
 
 .comparison-table tr:last-child td {
