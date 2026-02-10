@@ -163,9 +163,15 @@ body {
     /* Vertical gap only */
     padding: 5px 0 10px 0;
     /* No side padding for full width */
+    /* No side padding for full width */
     justify-items: center;
     width: 100%;
     margin-bottom: 5px;
+  }
+
+  /* Reset Global Container Padding on Mobile to fix alignment */
+  .container {
+    padding: 0;
   }
 
   .cat-link {
@@ -191,10 +197,18 @@ body {
 }
 
 /* Main Content Padding for Fixed Header Only */
-/* Main Content Padding for Fixed Header Only */
 .main-content-padded {
-  padding-top: 60px;
-  /* Precision Header Height */
+  padding-top: 70px;
+  /* 60px Header + 10px Gap */
+}
+
+/* Restore side padding for content on mobile */
+@media (max-width: 600px) {
+
+  .deal-grid,
+  .filter-options {
+    padding: 0 16px;
+  }
 }
 
 /* Deal Grid */
