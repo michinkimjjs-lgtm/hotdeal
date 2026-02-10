@@ -2,7 +2,8 @@
 
 .detail-container {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 0 auto 20px auto;
+    /* Remove top margin */
     padding: 0 20px;
     color: #e0e0e0;
 }

@@ -14,122 +14,151 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Styles -->
     <link rel="stylesheet" href="index.css?v=3.2"> <!-- Reuse base styles -->
-    <link rel="stylesheet" href="detail.css?v=3.7">
+    <link rel="stylesheet" href="detail.css?v=4.0">
 </head>
 
 <body>
     <div class="app-container">
-        <!-- Header (Same as index) -->
-        <header>
-            <div class="header-content">
-                <a href="index.html" class="logo">🔥 핫딜모음</a>
+        <!-- Global App Header -->
+        <header class="app-header">
+            <div class="header-top">
+                <a href="index.html" class="logo-area" style="text-decoration:none;">
+                    <span class="logo-icon">🔥</span>
+                    <span class="logo-text">핫딜모음</span>
+                </a>
+                <div class="search-bar-compact">
+                    <form action="index.html" method="get" style="width:100%; display:flex;">
+                        <input type="text" name="search" id="search-input" placeholder="검색" autocomplete="off">
+                        <button type="submit" class="search-icon-btn">🔍</button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn-header">⚙️</button>
+                    <button class="icon-btn-header">☰</button>
+                </div>
             </div>
         </header>
 
-        <main class="detail-container">
-            <!-- Back Button -->
-            <div class="back-nav">
-                <a href="index.html" class="back-link">← 핫딜 목록으로 돌아가기</a>
-                <div class="action-icons">
-                    <button class="icon-btn" onclick="copyUrl()">🔗</button>
-                </div>
+        <main class="main-content-padded">
+            <!-- Global Category Nav -->
+            <div class="category-nav-text">
+                <a href="index.html?category=ALL" class="cat-link active">전체</a>
+                <a href="index.html?category=HOT" class="cat-link hot-link">인기</a>
+                <a href="index.html?category=식품/건강" class="cat-link">식품</a>
+                <a href="index.html?category=생활/주방" class="cat-link">생활용품</a>
+                <a href="index.html?category=가전/가구" class="cat-link">가전</a>
+                <a href="index.html?category=컴퓨터" class="cat-link">PC</a>
+                <a href="index.html?category=디지털" class="cat-link">디지털</a>
+                <a href="index.html?category=의류/잡화" class="cat-link">의류</a>
+                <a href="index.html?category=화장품" class="cat-link">화장품</a>
+                <a href="index.html?category=기타" class="cat-link">기타</a>
             </div>
 
-            <div id="loading" class="loading-spinner">불러오는 중...</div>
-            <div id="error-message" class="error-msg" style="display:none;"></div>
-
-            <!-- Main Content (Hidden until loaded) -->
-            <div id="deal-detail" class="deal-content" style="display:none;">
-
-                <!-- Product Header Section -->
-                <div class="product-header">
-                    <h1 id="deal-title" class="product-title">상품 제목 들어가는 곳</h1>
-
-                    <div class="product-meta-row">
-                        <!-- Category (Moved here) -->
-                        <span id="deal-category" class="badge-blue">카테고리</span>
-
-                        <!-- Date -->
-                        <div class="meta-item">
-                            <span class="icon-calendar">📅</span>
-                            <span id="deal-date" class="meta-text">2024. 01. 01.</span>
-                        </div>
-                        <!-- Source Base -->
-                        <div class="meta-item">
-                            <span id="source-name-meta" class="meta-text">쇼핑몰</span>
-                        </div>
-                        <!-- Original Link Button -->
-                        <a id="original-link" href="#" target="_blank" class="origin-btn">
-                            📄 원본글
-                        </a>
+            <div class="detail-container">
+                <!-- Back Button -->
+                <div class="back-nav">
+                    <a href="index.html" class="back-link">← 핫딜 목록으로 돌아가기</a>
+                    <div class="action-icons">
+                        <button class="icon-btn" onclick="copyUrl()">🔗</button>
                     </div>
                 </div>
 
-                <!-- Price & Action Bar (Clean Layout) -->
-                <div class="price-action-bar">
-                    <div class="price-info-group">
-                        <div class="mall-info">
-                            <span id="source-name-bar" class="mall-name">쇼핑몰 이름</span>
-                        </div>
-                        <div class="price-display">
-                            <span id="deal-price" class="price-value-large">0원</span>
-                        </div>
-                    </div>
+                <div id="loading" class="loading-spinner">불러오는 중...</div>
+                <div id="error-message" class="error-msg" style="display:none;"></div>
 
-                    <div class="action-area">
-                        <a id="buy-link" href="#" target="_blank" class="buy-button">
-                            구매하기
-                        </a>
-                    </div>
-                </div>
+                <!-- Main Content (Hidden until loaded) -->
+                <div id="deal-detail" class="deal-content" style="display:none;">
 
-                <!-- Analysis Tabs -->
-                <div class="analysis-section">
-                    <div class="tabs">
-                        <button class="tab-btn active" onclick="switchTab('comparison')">🏷️ 가격 비교</button>
-                        <button class="tab-btn" onclick="switchTab('history')">📈 가격 흐름</button>
-                    </div>
+                    <!-- Product Header Section -->
+                    <div class="product-header">
+                        <h1 id="deal-title" class="product-title">상품 제목 들어가는 곳</h1>
 
-                    <!-- Tab 1: Comparison -->
-                    <div id="tab-comparison" class="tab-content active">
-                        <div class="comparison-table-wrapper">
-                            <table class="comparison-table">
-                                <thead>
-                                    <tr>
-                                        <th>판매처</th>
-                                        <th>상품명</th>
-                                        <th>가격</th>
-                                        <th>비고</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="comparison-tbody">
-                                    <!-- JS will inject rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="lowest-price-alert">
-                            💡 <span id="lowest-price-text">분석 중...</span>
+                        <div class="product-meta-row">
+                            <!-- Category (Moved here) -->
+                            <span id="deal-category" class="badge-blue">카테고리</span>
+
+                            <!-- Date -->
+                            <div class="meta-item">
+                                <span class="icon-calendar">📅</span>
+                                <span id="deal-date" class="meta-text">2024. 01. 01.</span>
+                            </div>
+                            <!-- Source Base -->
+                            <div class="meta-item">
+                                <span id="source-name-meta" class="meta-text">쇼핑몰</span>
+                            </div>
+                            <!-- Original Link Button -->
+                            <a id="original-link" href="#" target="_blank" class="origin-btn">
+                                📄 원본글
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Tab 2: History -->
-                    <div id="tab-history" class="tab-content">
-                        <div class="chart-container">
-                            <canvas id="priceChart"></canvas>
+                    <!-- Price & Action Bar (Clean Layout) -->
+                    <div class="price-action-bar">
+                        <div class="price-info-group">
+                            <div class="mall-info">
+                                <span id="source-name-bar" class="mall-name">쇼핑몰 이름</span>
+                            </div>
+                            <div class="price-display">
+                                <span id="deal-price" class="price-value-large">0원</span>
+                            </div>
                         </div>
-                        <p class="chart-desc">* 최근 3개월 간의 가격 변동 추이입니다. (예시 데이터)</p>
-                    </div>
-                </div>
 
-                <!-- Deal Content (Parsed HTML) -->
-                <div class="content-section">
-                    <!-- Removing H3 as per reference style, it flows naturally -->
-                    <div id="deal-content-html" class="content-html">
-                        <p style="color:#666;">본문 내용을 불러오는 중입니다...</p>
+                        <div class="action-area">
+                            <a id="buy-link" href="#" target="_blank" class="buy-button">
+                                구매하기
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                    <!-- Analysis Tabs -->
+                    <div class="analysis-section">
+                        <div class="tabs">
+                            <button class="tab-btn active" onclick="switchTab('comparison')">🏷️ 가격 비교</button>
+                            <button class="tab-btn" onclick="switchTab('history')">📈 가격 흐름</button>
+                        </div>
+
+                        <!-- Tab 1: Comparison -->
+                        <div id="tab-comparison" class="tab-content active">
+                            <div class="comparison-table-wrapper">
+                                <table class="comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>판매처</th>
+                                            <th>상품명</th>
+                                            <th>가격</th>
+                                            <th>비고</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="comparison-tbody">
+                                        <!-- JS will inject rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="lowest-price-alert">
+                                💡 <span id="lowest-price-text">분석 중...</span>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: History -->
+                        <div id="tab-history" class="tab-content">
+                            <div class="chart-container">
+                                <canvas id="priceChart"></canvas>
+                            </div>
+                            <p class="chart-desc">* 최근 3개월 간의 가격 변동 추이입니다. (예시 데이터)</p>
+                        </div>
+                    </div>
+
+                    <!-- Deal Content (Parsed HTML) -->
+                    <div class="content-section">
+                        <!-- Removing H3 as per reference style, it flows naturally -->
+                        <div id="deal-content-html" class="content-html">
+                            <p style="color:#666;">본문 내용을 불러오는 중입니다...</p>
+                        </div>
+                    </div>
+
+                </div> <!-- End deal-detail -->
+            </div> <!-- End detail-container -->
         </main>
     </div>
 
