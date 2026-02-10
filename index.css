@@ -93,6 +93,8 @@ body {
   font-size: 1.1rem;
   color: var(--logo-color);
   white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .search-bar-compact {
