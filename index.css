@@ -123,19 +123,19 @@ body {
   color: #fff;
 }
 
-/* Text Category Nav (Multi-line, Static) */
+/* Text Category Nav (Grid Layout) */
 .category-nav-text {
   display: flex;
+  /* Flex for Desktop */
   flex-wrap: wrap;
-  justify-content: flex-start;
-  /* Left align to match logo */
-  gap: 12px 18px;
-  /* Tweak gap */
-  padding: 10px 16px 15px 16px;
-  /* Reduce top padding, keep side padding */
+  justify-content: center;
+  gap: 15px 30px;
+  padding: 10px 0 15px 0;
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .cat-link {
@@ -145,21 +145,34 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 4px 0;
+  padding: 5px 0;
   transition: color 0.2s;
   font-family: inherit;
   position: relative;
   white-space: nowrap;
-  /* Remove flex-grow to avoid weird spacing */
+  text-align: center;
 }
 
-/* Mobile Tweak for Nav Alignment */
+/* Mobile Tweak for Nav Alignment (5 Column Grid) */
 @media (max-width: 600px) {
   .category-nav-text {
-    justify-content: space-between;
-    /* Spreads items to fill width on mobile */
-    gap: 10px;
-    /* Smaller gap for mobile to fit more */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Force 5 cols */
+    gap: 8px 0;
+    /* Vertical gap only */
+    padding: 5px 10px 10px 10px;
+    /* Minimal padding */
+    justify-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .cat-link {
+    font-size: 0.85rem;
+    /* Clean resize */
+    width: 100%;
+    padding: 8px 0;
   }
 }
 
@@ -178,9 +191,10 @@ body {
 }
 
 /* Main Content Padding for Fixed Header Only */
+/* Main Content Padding for Fixed Header Only */
 .main-content-padded {
   padding-top: 60px;
-  /* Reduced gap - start right after header */
+  /* Precision Header Height */
 }
 
 /* Deal Grid */
