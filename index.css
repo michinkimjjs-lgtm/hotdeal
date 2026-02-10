@@ -161,8 +161,8 @@ body {
     /* Force 5 cols */
     gap: 8px 0;
     /* Vertical gap only */
-    padding: 5px 10px 10px 10px;
-    /* Minimal padding */
+    padding: 5px 0 10px 0;
+    /* No side padding for full width */
     justify-items: center;
     width: 100%;
     margin-bottom: 5px;
