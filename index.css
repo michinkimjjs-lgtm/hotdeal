@@ -243,6 +243,8 @@ body {
   .deal-grid,
   .filter-options {
     padding: 0 16px;
+    margin-top: 10px;
+    /* Compact on mobile */
   }
 }
 
@@ -599,6 +601,8 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  margin-top: 40px;
+  /* Increased top margin for PC */
 }
 
 .filter-btn {
