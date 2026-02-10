@@ -2,8 +2,9 @@
 
 .detail-container {
     max-width: 900px;
-    margin: 0 auto 20px auto;
-    /* Remove top margin */
+    margin: 30px auto 20px auto;
+    /* Added top margin */
+    /* Remove top margin - Reverted */
     padding: 0 20px;
     color: var(--text-primary);
 }
