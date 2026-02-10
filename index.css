@@ -1,12 +1,43 @@
 :root {
+  /* Default Dark Theme */
   --bg-color: #0f172a;
   --card-bg: rgba(30, 41, 59, 0.7);
+  --header-bg: rgba(15, 23, 42, 0.95);
+  --input-bg: #1e293b;
+  --input-border: #334155;
+
   --accent-color: #38bdf8;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
+  --logo-color: #f8fafc;
+
   --price-color: #fbbf24;
   --glass-border: rgba(255, 255, 255, 0.1);
+  --icon-hover-bg: #334155;
+
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  /* Light Theme */
+  --bg-color: #f8fafc;
+  /* Light Gray/White */
+  --card-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --input-bg: #f1f5f9;
+  --input-border: #cbd5e1;
+
+  --accent-color: #0284c7;
+  /* Darker Blue */
+  --text-primary: #1e293b;
+  /* Dark Slate */
+  --text-secondary: #64748b;
+  --logo-color: #1e293b;
+
+  --price-color: #d97706;
+  /* Darker Amber */
+  --glass-border: #e2e8f0;
+  --icon-hover-bg: #e2e8f0;
 }
 
 * {
@@ -36,11 +67,11 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.95);
+  background: var(--header-bg);
   backdrop-filter: blur(12px);
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .header-top {
@@ -60,7 +91,7 @@ body {
   gap: 6px;
   font-weight: 800;
   font-size: 1.1rem;
-  color: #f8fafc;
+  color: var(--logo-color);
   white-space: nowrap;
 }
 
@@ -73,10 +104,10 @@ body {
 #search-input {
   width: 100%;
   padding: 8px 36px 8px 16px;
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.9rem;
   outline: none;
   transition: all 0.2s;
@@ -84,7 +115,8 @@ body {
 
 #search-input:focus {
   border-color: var(--accent-color);
-  background: #0f172a;
+  background: var(--bg-color);
+  /* Slightly different focused bg? or just bg-color */
 }
 
 .search-icon-btn {
@@ -94,7 +126,7 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #94a3b8;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.9rem;
 }
@@ -105,9 +137,9 @@ body {
 }
 
 .icon-btn-header {
-  background: #1e293b;
+  background: var(--input-bg);
   border: none;
-  color: #94a3b8;
+  color: var(--text-secondary);
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -120,8 +152,8 @@ body {
 }
 
 .icon-btn-header:hover {
-  background: #334155;
-  color: #fff;
+  background: var(--icon-hover-bg);
+  color: var(--text-primary);
 }
 
 /* Text Category Nav (Grid Layout) */
@@ -133,7 +165,7 @@ body {
   gap: 15px 30px;
   padding: 10px 0 15px 0;
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--glass-border);
   margin-bottom: 0;
   max-width: 800px;
   margin: 0 auto;
@@ -142,7 +174,7 @@ body {
 .cat-link {
   background: none;
   border: none;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -184,11 +216,11 @@ body {
 }
 
 .cat-link:hover {
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 .cat-link.active {
-  color: #38bdf8;
+  color: var(--accent-color);
   font-weight: 700;
 }
 
