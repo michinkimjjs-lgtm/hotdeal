@@ -601,8 +601,8 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
-  margin-top: 40px;
-  /* Increased top margin for PC */
+  margin-top: 25px;
+  /* Adjusted top margin for PC */
 }
 
 .filter-btn {
