@@ -13,7 +13,7 @@
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="index.css?v=3.7"> <!-- Reuse base styles -->
+    <link rel="stylesheet" href="index.css?v=3.8"> <!-- Reuse base styles -->
     <link rel="stylesheet" href="detail.css?v=4.1">
     <script src="theme.js?v=1.0"></script>
     <script>
@@ -64,10 +64,18 @@
 
             <div class="detail-container">
                 <!-- Back Button -->
+                <!-- Back & Actions Nav -->
                 <div class="back-nav">
-                    <a href="index.html" class="back-link">← 핫딜 목록으로 돌아가기</a>
-                    <div class="action-icons">
-                        <button class="icon-btn" onclick="copyUrl()">🔗</button>
+                    <a href="index.html" class="back-link">
+                        <span class="icon-arrow">←</span> 핫딜 목록으로 돌아가기
+                    </a>
+                    <div class="action-buttons">
+                        <button class="icon-btn-action" aria-label="북마크">
+                            <span class="icon">📑</span>
+                        </button>
+                        <button class="icon-btn-action" onclick="copyCurrentUrl()" aria-label="링크 복사">
+                            <span class="icon">🔗</span>
+                        </button>
                     </div>
                 </div>
 

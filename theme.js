@@ -23,3 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Copy URL Function
+function copyCurrentUrl() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        alert('링크가 복사되었습니다!');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
