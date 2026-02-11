@@ -163,7 +163,7 @@ class BaseCrawler:
                  if buy_link:
                      mall_name = self.extract_mall_name_from_url(buy_link)
                      mall_comment = f"<!-- MALL_NAME: {mall_name} -->" if mall_name else ""
-                     content_html = f"<!-- BUY_URL: {buy_link} -->{mall_comment}" + content_html
+                     content_html = f"{mall_comment}<!-- BUY_URL: {buy_link} -->" + content_html
                      logger.info(f"  -> Extracted Buy Link: {buy_link} ({mall_name})")
                  
                  logger.info(f"  -> Content fetched. Len: {len(content_html)}")
@@ -519,8 +519,15 @@ class FMKoreaCrawler(BaseCrawler):
                     img_url = ""
                     content_html = None
                     buy_link = None
-                    price = "가격미상"
                     
+                    # 1. Extract Price from List Page (More reliable, avoids redirection issues)
+                    price = "가격미상"
+                    list_info_div = item.select_one('.hotdeal_info')
+                    if list_info_div:
+                        p_txt = list_info_div.get_text()
+                        p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
+                        if p_match: price = p_match.group(1)
+
                     # Fetch Detail Page with Playwright
                     try:
                         time.sleep(1.0) # Gentle delay
@@ -531,7 +538,7 @@ class FMKoreaCrawler(BaseCrawler):
                             
                             # FMKorea Specific Information Section
                             info_div = d_soup.select_one('.hotdeal_info')
-                            if info_div:
+                            if info_div and price == "가격미상": # Only if list extraction failed
                                 # Extract price
                                 p_txt = info_div.get_text()
                                 p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
@@ -574,7 +581,6 @@ class FMKoreaCrawler(BaseCrawler):
                                  # If buy_link found, inject it
                                  mall_name = None
                                  if buy_link:
-                                     content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
                                      mall_name = self.extract_mall_name_from_url(buy_link)
                                  
                                  if not mall_name and info_div:
@@ -582,8 +588,14 @@ class FMKoreaCrawler(BaseCrawler):
                                       if shop_match:
                                           mall_name = shop_match.group(1)
                                  
+                                 # Construct Meta Tags (Order: MALL_NAME then BUY_URL)
+                                 meta_tags = ""
                                  if mall_name:
-                                     content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
+                                     meta_tags += f"<!-- MALL_NAME: {mall_name} -->"
+                                 if buy_link:
+                                     meta_tags += f"<!-- BUY_URL: {buy_link} -->"
+                                     
+                                 content_html = meta_tags + content_html
                                  
                     except Exception as e:
                          logger.error(f"FMKorea Detail Parse Error: {e}")
@@ -625,111 +637,12 @@ class FMKoreaCrawler(BaseCrawler):
         
         finally:
             self.stop_browser()
-                        
-                        # FMKorea Specific Information Section
-                        info_div = d_soup.select_one('.hotdeal_info')
-                        if info_div:
-                            # Extract price
-                            p_txt = info_div.get_text()
-                            p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
-                            if p_match: price = p_match.group(1)
-                            
-                            # Link extraction from info_div removed (unreliable search links)
-                            pass
 
-                        # Try to find the specific hotdeal URL (External Link)
-                        # <a class="hotdeal_url" href="https://link.fmkorea.org/link.php?url=...">
-                        link_el = d_soup.select_one('a.hotdeal_url')
-                        if link_el:
-                            href = link_el.get('href')
-                            if href:
-                                if 'link.fmkorea.org' in href and 'url=' in href:
-                                    try:
-                                        parsed = urllib.parse.urlparse(href)
-                                        qs = urllib.parse.parse_qs(parsed.query)
-                                        if 'url' in qs:
-                                            buy_link = qs['url'][0]
-                                    except:
-                                        buy_link = href
-                                else:
-                                    buy_link = href
 
-                        # Image
-                        img_el = d_soup.select_one('article img')
-                        if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
-                        
-                         # Content
-                        target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
-                        if target:
-                             for tag in target(['script', 'style']): tag.decompose()
-                             
-                             # Remove link/copy bar
-                             addr_div = target.select_one('.document_address')
-                             if addr_div: addr_div.decompose()
-                             
-                             # Add no-referrer to images
-                             for img in target.select('img'):
-                                 img['referrerpolicy'] = 'no-referrer'
-                                 
-                             content_html = str(target).replace('data-original=', 'src=')
-                             
-                             # If buy_link found, inject it
-                             # If buy_link found, inject it
-                             mall_name = None
-                             if buy_link:
-                                 content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
-                                 # 1. Try to detect mall from URL first (Most accurate)
-                                 mall_name = self.extract_mall_name_from_url(buy_link)
-                             
-                             # 2. If not detected from URL, try text fallback
-                             if not mall_name and info_div:
-                                  shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', info_div.get_text())
-                                  if shop_match:
-                                      mall_name = shop_match.group(1)
-                             
-                             if mall_name:
-                                 content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
-                             
-                             # Fallback extractor if still empty (maybe needed?)
-                             # if not buy_link: ...
-                except Exception as e:
-                     logger.error(f"FMKorea Detail Parse Error: {e}")
 
-                if not img_url:
-                    t_el = item.select_one('img.thumb')
-                    if t_el: img_url = (t_el.get('data-original') or t_el.get('src') or "").replace('70x50', '140x100')
-                if img_url.startswith('//'): img_url = "https:" + img_url
-                
-                # List view fallback price
-                if price == "가격미상":
-                     info_div = item.select_one('.hotdeal_info')
-                     if info_div:
-                        p_m = re.search(r'가격:\s*([0-9,]+원)', info_div.get_text())
-                        if p_m: price = p_m.group(1)
 
-                cat_el = item.select_one('.category a'); category = cat_el.get_text().strip() if cat_el else "기타"
-                comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
-                v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
-                
-                source_name = "FMKorea"
-                # if buy_link:
-                #     detected_mall = self.extract_mall_name_from_url(buy_link)
-                #     if detected_mall: source_name = detected_mall
 
-                if self.save_deal({
-                    "title": title, 
-                    "url": link, 
-                    "img_url": img_url, 
-                    "source": source_name, 
-                    "category": category, 
-                    "price": price, 
-                    "comment_count": comment, 
-                    "like_count": like,
-                    "content": content_html
-                }): count += 1
-                time.sleep(0.05)
-            except Exception as e: logger.error(f"FMKorea 에러: {e}")
-        logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
+
 
 class RuliwebCrawler(BaseCrawler):
     def crawl(self, limit=None):
@@ -877,7 +790,7 @@ class RuliwebCrawler(BaseCrawler):
                 buy_link_comment = f"<!-- BUY_URL: {buy_link} -->" if buy_link else ""
                 
                 if content_html:
-                    content_html = f"{buy_link_comment}{mall_comment}" + content_html
+                    content_html = f"{mall_comment}{buy_link_comment}" + content_html
 
                 if self.save_deal({
                     "title": title, 
