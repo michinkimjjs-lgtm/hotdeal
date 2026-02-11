@@ -204,6 +204,8 @@ class BaseCrawler:
         if '29cm' in url: return '29CM'
         if 'todayhouse' in url or 'ohou' in url: return '오늘의집'
         if 'idus' in url: return '아이디어스'
+        if 'homeplus' in url: return '홈플러스'
+        if 'sooplive' in url or 'afreecatv' in url: return '숲토어'
         return None
 
     def _resolve_real_url(self, url):
