@@ -180,6 +180,7 @@ class BaseCrawler:
     def extract_mall_name_from_url(self, url):
         """URL에서 쇼핑몰 이름 (한글) 반환"""
         if not url: return None
+        if 'lfmall' in url: return 'LF몰'
         if 'coupang' in url: return '쿠팡'
         if 'gmarket' in url: return 'G마켓'
         if 'auction' in url: return '옥션'
