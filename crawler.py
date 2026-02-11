@@ -8,6 +8,7 @@ import sys
 import io
 import logging
 import urllib.parse
+import tls_client
 
 # 터미널 출력 및 로깅 인코딩 강제 설정 (Windows mojibake 방지)
 if sys.stdout.encoding != 'utf-8':
@@ -58,14 +59,13 @@ class BaseCrawler:
                     'Accept-Encoding': 'gzip, deflate',
                     'Referer': referer if referer else 'https://www.google.com/',
                     'Connection': 'keep-alive',
-                    'Upgrade-Insecure-Requests': '1',
-                    'Sec-Ch-Ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
-                    'Sec-Ch-Ua-Mobile': '?0',
-                    'Sec-Ch-Ua-Platform': '"Windows"'
                 }
+                
                 if custom_headers:
                     headers.update(custom_headers)
+                
                 response = self.session.get(url, headers=headers, timeout=15)
+                
                 if response.status_code == 200:
                     if encoding == 'auto':
                         return response.text
@@ -76,9 +76,10 @@ class BaseCrawler:
                 else:
                     logger.warning(f"⚠️ Fetch Failed: {response.status_code} ({url})")
             except Exception as e:
-                logger.error(f"에러: {e}")
+                logger.error(f"Error fetching {url}: {e}")
+                time.sleep(2)
             if i < retries - 1:
-                time.sleep((i + 1) * 3 + random.random() * 2)
+                time.sleep((i + 1) * 2 + random.random())
         return None
     def normalize_category(self, raw_cat):
         if not raw_cat: return "기타"
@@ -194,6 +195,15 @@ class BaseCrawler:
         if 'naver' in url: return '네이버쇼핑'
         if 'himart' in url: return '하이마트'
         if 'gsshop' in url: return 'GS SHOP'
+        if 'musinsa' in url: return '무신사'
+        if 'oliveyoung' in url: return '올리브영'
+        if 'compuzone' in url: return '컴퓨존'
+        if 'coolenjoy' in url: return '쿨엔조이'
+        if 'quasarzone' in url: return '퀘이사존'
+        if 'catchop' in url: return '캐치패션'
+        if '29cm' in url: return '29CM'
+        if 'todayhouse' in url or 'ohou' in url: return '오늘의집'
+        if 'idus' in url: return '아이디어스'
         return None
 
     def _resolve_real_url(self, url):
@@ -433,59 +443,190 @@ class PpomppuCrawler(BaseCrawler):
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
 class FMKoreaCrawler(BaseCrawler):
-    def fetch_page(self, url, referer=None, custom_headers=None, encoding='utf-8'):
-        # FMKorea Specific Fetch with Minimal Headers and fresh session-like behavior
-        # Use known good UA
-        good_ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
-        
-        for i in range(3):
-            try:
-                headers = {
-                    'User-Agent': good_ua,
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-                    'Referer': referer if referer else 'https://www.fmkorea.com/hotdeal'
-                }
-                # Use requests.get directly to avoid session pollution
-                response = requests.get(url, headers=headers, timeout=15)
-                if response.status_code == 200:
-                    return response.text
-                else:
-                    logger.warning(f"⚠️ Fetch Failed: {response.status_code} ({url})")
-            except Exception as e:
-                logger.error(f"FMKorea Fetch Error: {e}")
-            if i < 2:
-                time.sleep((i + 1) * 2 + random.random())
-        return None
+    def __init__(self, supabase_url, supabase_key):
+        super().__init__(supabase_url, supabase_key)
+        self.browser = None
+        self.context = None
+        self.playwright = None
+
+    def start_browser(self):
+        """Start Playwright Browser (Once per session)"""
+        from playwright.sync_api import sync_playwright
+        try:
+            self.playwright = sync_playwright().start()
+            self.browser = self.playwright.chromium.launch(headless=True)
+            self.context = self.browser.new_context(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+                viewport={"width": 1920, "height": 1080},
+                extra_http_headers={"Referer": "https://www.fmkorea.com/hotdeal"}
+            )
+            logger.info("  [FMKorea] Browser Started.")
+        except Exception as e:
+            logger.error(f"  [FMKorea] Browser Start Failed: {e}")
+
+    def stop_browser(self):
+        """Stop Playwright Browser"""
+        if self.context: self.context.close()
+        if self.browser: self.browser.close()
+        if self.playwright: self.playwright.stop()
+        logger.info("  [FMKorea] Browser Stopped.")
+
+    def fetch_page_with_playwright(self, url, referer=None):
+        if not self.context:
+            self.start_browser()
+            
+        try:
+            page = self.context.new_page()
+            # Update referer if needed for specific page?
+            # actually context header is fixed, but simple navigation should work. 
+            # If critical, we can set header on page request, but usually global referer is fine or we can use set_extra_http_headers slightly risky on running context.
+            # Simpler: Just go.
+            
+            page.goto(url, timeout=30000, wait_until="domcontentloaded")
+            time.sleep(1.0) # Basic wait
+            content = page.content()
+            page.close()
+            return content
+        except Exception as e:
+            logger.error(f"Playwright Fetch Error: {e}")
+            return None
 
     def crawl(self, limit=None):
-        logger.info("=== [FMKorea] 크롤링 시작 ===")
-        url = "https://www.fmkorea.com/hotdeal"
-        html = self.fetch_page(url, referer="https://www.fmkorea.com/hotdeal")
-        if not html: return
-        soup = BeautifulSoup(html, 'html.parser')
-        items = soup.select('.fm_best_widget._bd_pc li.li')
-        if not items: items = soup.select('.bd_lst_wrp .bd_lst tr:not(.notice)')
-        count = 0
-        for item in items:
-            if limit and count >= limit: break
-            try:
-                title_el = item.select_one('h3.title a.hotdeal_var8')
-                if not title_el: continue
-                title = title_el.get_text().strip(); link = ("https://www.fmkorea.com" + title_el['href']) if title_el['href'].startswith('/') else title_el['href']
-                img_url = ""
-                content_html = None
-                buy_link = None
-                price = "가격미상"
-                
-                # Fetch Detail Page
+        logger.info("=== [FMKorea] 크롤링 시작 (Playwright) ===")
+        
+        self.start_browser()
+        try:
+            url = "https://www.fmkorea.com/hotdeal"
+            
+            # Use Playwright for list page
+            html = self.fetch_page_with_playwright(url)
+            
+            if not html: return
+            soup = BeautifulSoup(html, 'html.parser')
+            items = soup.select('.fm_best_widget._bd_pc li.li')
+            if not items: items = soup.select('.bd_lst_wrp .bd_lst tr:not(.notice)')
+            count = 0
+            for item in items:
+                if limit and count >= limit: break
                 try:
-                    time.sleep(1.0 + random.random() * 1.0) 
-                    d_html = self.fetch_page(link, referer="https://www.fmkorea.com/hotdeal")
-                    if d_html:
-                        d_soup = BeautifulSoup(d_html, 'html.parser')
+                    title_el = item.select_one('h3.title a.hotdeal_var8')
+                    if not title_el: continue
+                    link_suffix = title_el['href']
+                    
+                    link = ("https://www.fmkorea.com" + link_suffix) if link_suffix.startswith('/') else link_suffix
+                    title = title_el.get_text().strip()
+                    
+                    img_url = ""
+                    content_html = None
+                    buy_link = None
+                    price = "가격미상"
+                    
+                    # Fetch Detail Page with Playwright
+                    try:
+                        time.sleep(1.0) # Gentle delay
+                        d_html = self.fetch_page_with_playwright(link)
+                        
+                        if d_html:
+                            d_soup = BeautifulSoup(d_html, 'html.parser')
+                            
+                            # FMKorea Specific Information Section
+                            info_div = d_soup.select_one('.hotdeal_info')
+                            if info_div:
+                                # Extract price
+                                p_txt = info_div.get_text()
+                                p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
+                                if p_match: price = p_match.group(1)
+                            
+                            # Try to find the specific hotdeal URL (External Link)
+                            link_el = d_soup.select_one('a.hotdeal_url')
+                            if link_el:
+                                href = link_el.get('href')
+                                if href:
+                                    if 'link.fmkorea.org' in href and 'url=' in href:
+                                        try:
+                                            parsed = urllib.parse.urlparse(href)
+                                            qs = urllib.parse.parse_qs(parsed.query)
+                                            if 'url' in qs:
+                                                buy_link = qs['url'][0]
+                                        except:
+                                            buy_link = href
+                                    else:
+                                        buy_link = href
+
+                            # Image
+                            img_el = d_soup.select_one('article img')
+                            if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
+                            
+                             # Content
+                            target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
+                            if target:
+                                 for tag in target(['script', 'style']): tag.decompose()
+                                 
+                                 # Remove link/copy bar
+                                 addr_div = target.select_one('.document_address')
+                                 if addr_div: addr_div.decompose()
+                                 
+                                 for img in target.select('img'):
+                                     img['referrerpolicy'] = 'no-referrer'
+                                     
+                                 content_html = str(target).replace('data-original=', 'src=')
+                                 
+                                 # If buy_link found, inject it
+                                 mall_name = None
+                                 if buy_link:
+                                     content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
+                                     mall_name = self.extract_mall_name_from_url(buy_link)
+                                 
+                                 if not mall_name and info_div:
+                                      shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', info_div.get_text())
+                                      if shop_match:
+                                          mall_name = shop_match.group(1)
+                                 
+                                 if mall_name:
+                                     content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
+                                 
+                    except Exception as e:
+                         logger.error(f"FMKorea Detail Parse Error: {e}")
+
+                    if not img_url:
+                        t_el = item.select_one('img.thumb')
+                        if t_el: img_url = (t_el.get('data-original') or t_el.get('src') or "").replace('70x50', '140x100')
+                    if img_url.startswith('//'): img_url = "https:" + img_url
+                    
+                    # List view fallback price
+                    if price == "가격미상":
+                         info_div = item.select_one('.hotdeal_info')
+                         if info_div:
+                            p_m = re.search(r'가격:\s*([0-9,]+원)', info_div.get_text())
+                            if p_m: price = p_m.group(1)
+
+                    cat_el = item.select_one('.category a'); category = cat_el.get_text().strip() if cat_el else "기타"
+                    comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
+                    v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
+                    
+                    source_name = "FMKorea"
+
+                    if self.save_deal({
+                        "title": title, 
+                        "url": link, 
+                        "img_url": img_url, 
+                        "source": source_name, 
+                        "category": category, 
+                        "price": price, 
+                        "comment_count": comment, 
+                        "like_count": like,
+                        "content": content_html
+                    }): count += 1
+                    
+                except Exception as e:
+                    logger.error(f"FMKorea Detail Fetch Error: {e}")
+            
+            logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
+        
+        finally:
+            self.stop_browser()
                         
                         # FMKorea Specific Information Section
-                        # Usually in a div with class 'hotdeal_info' or similar table structure
                         info_div = d_soup.select_one('.hotdeal_info')
                         if info_div:
                             # Extract price
@@ -522,6 +663,10 @@ class FMKoreaCrawler(BaseCrawler):
                         if target:
                              for tag in target(['script', 'style']): tag.decompose()
                              
+                             # Remove link/copy bar
+                             addr_div = target.select_one('.document_address')
+                             if addr_div: addr_div.decompose()
+                             
                              # Add no-referrer to images
                              for img in target.select('img'):
                                  img['referrerpolicy'] = 'no-referrer'
@@ -529,16 +674,21 @@ class FMKoreaCrawler(BaseCrawler):
                              content_html = str(target).replace('data-original=', 'src=')
                              
                              # If buy_link found, inject it
+                             # If buy_link found, inject it
+                             mall_name = None
                              if buy_link:
                                  content_html = f"<!-- BUY_URL: {buy_link} -->" + content_html
-                                 # Also inject MALL_NAME if possible? 
-                                 # FMKorea usually has mall name in hotdeal_info text "쇼핑몰: [Mall]"
-                                 # Let's extract it from info_div text
-                                 if info_div:
-                                      shop_match = re.search(r'쇼핑몰\s*:\s*(\S+)', info_div.get_text())
-                                      if shop_match:
-                                          mall_name = shop_match.group(1)
-                                          content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
+                                 # 1. Try to detect mall from URL first (Most accurate)
+                                 mall_name = self.extract_mall_name_from_url(buy_link)
+                             
+                             # 2. If not detected from URL, try text fallback
+                             if not mall_name and info_div:
+                                  shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', info_div.get_text())
+                                  if shop_match:
+                                      mall_name = shop_match.group(1)
+                             
+                             if mall_name:
+                                 content_html = f"<!-- MALL_NAME: {mall_name} -->" + content_html
                              
                              # Fallback extractor if still empty (maybe needed?)
                              # if not buy_link: ...
