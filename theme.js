@@ -22,6 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
             updateThemeIcon(newTheme);
         });
     }
+
+    // Dropdown Menu Logic
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    if (menuToggleBtn && dropdownMenu) {
+        menuToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent closing immediately
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownMenu.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    }
 });
 
 // Copy URL Function

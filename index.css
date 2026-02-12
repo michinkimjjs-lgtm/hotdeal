@@ -158,6 +158,69 @@ body {
   color: var(--text-primary);
 }
 
+/* Dropdown Menu */
+.menu-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  display: none;
+  /* Hidden by default */
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  animation: fadeInMenu 0.2s ease-out;
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: var(--icon-hover-bg);
+  color: var(--accent-color);
+}
+
+.menu-icon {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+}
+
+@keyframes fadeInMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Text Category Nav (Grid Layout) */
 .category-nav-text {
   display: flex;
