@@ -132,13 +132,21 @@ function renderDealInfo(deal) {
     if (bookmarkBtn) {
         const updateBookmarkUI = () => {
             const isBookmarked = BookmarkManager.has(deal.id);
+            const svgPath = bookmarkBtn.querySelector('path');
+
             if (isBookmarked) {
-                bookmarkBtn.innerHTML = `<span class="icon">📑</span>`;
-                bookmarkBtn.style.color = '#38bdf8'; // Filled color (Blue)
+                if (svgPath) {
+                    svgPath.setAttribute('fill', '#38bdf8');
+                    svgPath.setAttribute('stroke', '#38bdf8');
+                }
+                bookmarkBtn.style.color = '#38bdf8';
                 bookmarkBtn.style.background = 'rgba(56, 189, 248, 0.1)';
             } else {
-                bookmarkBtn.innerHTML = `<span class="icon">📑</span>`;
-                bookmarkBtn.style.color = ''; // Reset
+                if (svgPath) {
+                    svgPath.setAttribute('fill', 'none');
+                    svgPath.setAttribute('stroke', 'currentColor');
+                }
+                bookmarkBtn.style.color = '';
                 bookmarkBtn.style.background = '';
             }
         };
