@@ -127,6 +127,39 @@ function renderDealInfo(deal) {
     // Affiliate Link Generation
     const btn = document.getElementById('buy-link');
 
+    // Bookmark Logic
+    const bookmarkBtn = document.getElementById('bookmark-btn');
+    if (bookmarkBtn) {
+        const updateBookmarkUI = () => {
+            const isBookmarked = BookmarkManager.has(deal.id);
+            if (isBookmarked) {
+                bookmarkBtn.innerHTML = `<span class="icon">📑</span>`;
+                bookmarkBtn.style.color = '#38bdf8'; // Filled color (Blue)
+                bookmarkBtn.style.background = 'rgba(56, 189, 248, 0.1)';
+            } else {
+                bookmarkBtn.innerHTML = `<span class="icon">📑</span>`;
+                bookmarkBtn.style.color = ''; // Reset
+                bookmarkBtn.style.background = '';
+            }
+        };
+
+        // Init
+        updateBookmarkUI();
+
+        // Click Listener
+        bookmarkBtn.onclick = () => {
+            const isAdded = BookmarkManager.toggle(deal);
+            updateBookmarkUI();
+
+            // Simple Feedback
+            // const msg = isAdded ? '북마크에 저장되었습니다.' : '북마크가 해제되었습니다.';
+            // alert(msg); // Alert is too intrusive, maybe just UI change is enough
+
+            // Alternative: Toast (If simple toast exists or just rely on visual change)
+            // Visual change (color) is usually enough for bookmarks.
+        };
+    }
+
     // 1. Try to find hidden BUY_URL in content (Injected by Crawler)
     let targetUrl = deal.url; // Default: Post URL
     if (deal.content) {

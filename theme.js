@@ -42,6 +42,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Bookmark Manager
+const BookmarkManager = {
+    KEY: 'hotdeal_bookmarks',
+
+    get() {
+        try {
+            const data = localStorage.getItem(this.KEY);
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            console.error('Bookmark load error:', e);
+            return [];
+        }
+    },
+
+    save(bookmarks) {
+        localStorage.setItem(this.KEY, JSON.stringify(bookmarks));
+        // Dispatch event for real-time UI updates
+        window.dispatchEvent(new CustomEvent('bookmarkUpdated'));
+    },
+
+    add(deal) {
+        const bookmarks = this.get();
+        if (bookmarks.some(b => b.id === deal.id)) return; // Already exists
+
+        // Minimal data to save storage
+        const newBookmark = {
+            id: deal.id,
+            title: deal.title,
+            price: deal.price,
+            source: deal.source || deal.displaySource, // Use displaySource if available
+            img_url: deal.img_url,
+            url: deal.url,
+            category: deal.category,
+            created_at: new Date().toISOString(), // Use current time as added time? Or keep original?
+            // Let's keep original created_at for "Latest" sort if we want, or add 'saved_at'.
+            // The reference sorts by "Latest", which usually implies "Recently Added".
+            saved_at: new Date().toISOString()
+        };
+
+        // Add to beginning
+        bookmarks.unshift(newBookmark);
+        this.save(bookmarks);
+        return true;
+    },
+
+    remove(id) {
+        let bookmarks = this.get();
+        const initialLen = bookmarks.length;
+        bookmarks = bookmarks.filter(b => b.id != id); // Loose equality for string/number safety
+
+        if (bookmarks.length !== initialLen) {
+            this.save(bookmarks);
+            return true;
+        }
+        return false;
+    },
+
+    toggle(deal) {
+        if (this.has(deal.id)) {
+            this.remove(deal.id);
+            return false; // Removed
+        } else {
+            this.add(deal);
+            return true; // Added
+        }
+    },
+
+    has(id) {
+        const bookmarks = this.get();
+        return bookmarks.some(b => b.id == id);
+    },
+
+    clear() {
+        localStorage.removeItem(this.KEY);
+        window.dispatchEvent(new CustomEvent('bookmarkUpdated'));
+    }
+};
+
 // Copy URL Function
 function copyCurrentUrl() {
     const url = window.location.href;
