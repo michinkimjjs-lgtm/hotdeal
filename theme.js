@@ -120,6 +120,8 @@ const BookmarkManager = {
     }
 };
 
+window.BookmarkManager = BookmarkManager;
+
 // Copy URL Function
 function copyCurrentUrl() {
     const url = window.location.href;
