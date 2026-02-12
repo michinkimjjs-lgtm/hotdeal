@@ -43,8 +43,8 @@ def create_og_image(emoji_img):
         font_medium = ImageFont.load_default()
 
     # Text
-    title = "핫딜모음"
-    subtitle = "hotdeal.zip"
+    title = "핫딜모아"
+    subtitle = "hotdealmoa.co.kr"
     
     # Measure text
     try:
