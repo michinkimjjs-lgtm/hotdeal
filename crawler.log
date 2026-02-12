@@ -23616,3 +23616,63 @@
 2026-02-12 14:46:53,701 [INFO]   [Insert] Ruliweb | [스팀] 아스트리브라: 리비전 (18
 2026-02-12 14:47:41,810 [INFO] === [Ruliweb] 크롤링 완료 (28건) ===
 2026-02-12 14:47:41,811 [INFO] ✅ 루프 완료. 10분 대기 중... (14:57:41 재개 예정)
+2026-02-12 14:57:41,815 [INFO] ==== 크롤링 루프 시작 ====
+2026-02-12 14:57:41,816 [INFO] === [Ppomppu] 크롤링 시작 ===
+2026-02-12 14:57:42,451 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=4157147382 (G마켓)
+2026-02-12 14:57:42,452 [INFO]   -> Content fetched. Len: 482
+2026-02-12 14:57:44,281 [INFO]   -> Extracted Buy Link: https://www.tripstore.kr/promotion/250304_travel_festival (None)
+2026-02-12 14:57:44,282 [INFO]   -> Content fetched. Len: 1026
+2026-02-12 14:57:45,913 [INFO]   -> Extracted Buy Link: https://oy.run/oLxCjx0St264vl (None)
+2026-02-12 14:57:45,914 [INFO]   -> Content fetched. Len: 524
+2026-02-12 14:57:47,569 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=2993174612 (G마켓)
+2026-02-12 14:57:47,571 [INFO]   -> Content fetched. Len: 771
+2026-02-12 14:57:49,317 [INFO]   -> Extracted Buy Link: https://smartstore.naver.com/oneline20/products/6025817349 (네이버쇼핑)
+2026-02-12 14:57:49,319 [INFO]   -> Content fetched. Len: 527
+2026-02-12 14:57:50,950 [INFO]   -> Extracted Buy Link: https://www.11st.co.kr/products/8186544535 (11번가)
+2026-02-12 14:57:50,952 [INFO]   -> Content fetched. Len: 713
+2026-02-12 14:57:52,619 [INFO]   -> Extracted Buy Link: https://www.11st.co.kr/products/pa/8621435969 (11번가)
+2026-02-12 14:57:52,621 [INFO]   -> Content fetched. Len: 791
+2026-02-12 14:57:54,234 [INFO]   -> Extracted Buy Link: https://itempage3.auction.co.kr/DetailView.aspx?ItemNo=C604787279 (옥션)
+2026-02-12 14:57:54,236 [INFO]   -> Content fetched. Len: 482
+2026-02-12 14:57:55,872 [INFO]   -> Extracted Buy Link: https://brand.naver.com/projectm/shoppingstory/detail?id=5002501887 (네이버쇼핑)
+2026-02-12 14:57:55,873 [INFO]   -> Content fetched. Len: 792
+2026-02-12 14:57:57,520 [INFO]   -> Extracted Buy Link: https://smartstore.naver.com/ovacokorea/products/2372643883 (네이버쇼핑)
+2026-02-12 14:57:57,521 [INFO]   -> Content fetched. Len: 535
+2026-02-12 14:57:59,139 [INFO]   -> Extracted Buy Link: https://m.gmarket.co.kr/vi/product/4204775517 (G마켓)
+2026-02-12 14:57:59,140 [INFO]   -> Content fetched. Len: 739
+2026-02-12 14:58:00,754 [INFO]   -> Extracted Buy Link: https://brand.naver.com/bbsusan/products/300868056 (네이버쇼핑)
+2026-02-12 14:58:00,755 [INFO]   -> Content fetched. Len: 1567
+2026-02-12 14:58:02,369 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=3458184046 (G마켓)
+2026-02-12 14:58:02,370 [INFO]   -> Content fetched. Len: 571
+2026-02-12 14:58:04,064 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=4501274435 (G마켓)
+2026-02-12 14:58:04,065 [INFO]   -> Content fetched. Len: 747
+2026-02-12 14:58:05,666 [INFO]   -> Extracted Buy Link: https://mlive.cjonstyle.com/m/preview/22201 (None)
+2026-02-12 14:58:05,667 [INFO]   -> Content fetched. Len: 1042
+2026-02-12 14:58:07,443 [INFO]   -> Content fetched. Len: 448
+2026-02-12 14:58:09,070 [INFO]   -> Extracted Buy Link: https://link.gmarket.co.kr/SDAzuDNQu (G마켓)
+2026-02-12 14:58:09,071 [INFO]   -> Content fetched. Len: 437
+2026-02-12 14:58:10,706 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=4596140387 (G마켓)
+2026-02-12 14:58:10,707 [INFO]   -> Content fetched. Len: 459
+2026-02-12 14:58:12,318 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=2427600440 (G마켓)
+2026-02-12 14:58:12,319 [INFO]   -> Content fetched. Len: 972
+2026-02-12 14:58:13,955 [INFO]   -> Extracted Buy Link: https://store.kakao.com/sktea/products/678229008 (None)
+2026-02-12 14:58:13,956 [INFO]   -> Content fetched. Len: 756
+2026-02-12 14:58:15,640 [INFO]   -> Extracted Buy Link: https://www.11st.co.kr/products/pa/5681313421 (11번가)
+2026-02-12 14:58:15,641 [INFO]   -> Content fetched. Len: 469
+2026-02-12 14:58:17,457 [INFO]   -> Extracted Buy Link: https://item.gmarket.co.kr/Item?goodscode=4457924735 (G마켓)
+2026-02-12 14:58:17,458 [INFO]   -> Content fetched. Len: 22034
+2026-02-12 14:58:19,301 [INFO]   -> Content fetched. Len: 39559
+2026-02-12 14:58:21,275 [INFO]   -> Content fetched. Len: 70426
+2026-02-12 14:58:23,055 [INFO]   -> Content fetched. Len: 1149
+2026-02-12 14:58:24,686 [INFO]   -> Content fetched. Len: 610
+2026-02-12 14:58:26,299 [INFO]   -> Content fetched. Len: 436
+2026-02-12 14:58:27,645 [INFO] === [Ppomppu] 크롤링 완료 (27건) ===
+2026-02-12 14:58:27,646 [INFO] === [FMKorea] 크롤링 시작 (Playwright) ===
+2026-02-12 14:58:30,902 [INFO]   [FMKorea] Browser Started.
+2026-02-12 14:58:36,152 [INFO]   [Insert] FMKorea | 인 넥스트 라이프
+2026-02-12 14:58:39,534 [INFO]   [Insert] FMKorea | 신라면5봉+안성탕면5봉+너구리5봉+짜
+2026-02-12 14:59:39,864 [INFO] === [FMKorea] 크롤링 완료 (19건) ===
+2026-02-12 14:59:40,139 [INFO]   [FMKorea] Browser Stopped.
+2026-02-12 14:59:40,139 [INFO] === [Ruliweb] 크롤링 시작 ===
+2026-02-12 15:00:29,983 [INFO] === [Ruliweb] 크롤링 완료 (28건) ===
+2026-02-12 15:00:29,984 [INFO] ✅ 루프 완료. 10분 대기 중... (15:10:29 재개 예정)

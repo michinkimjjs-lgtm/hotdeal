@@ -155,46 +155,97 @@ function renderDealInfo(deal) {
         };
     }
 
-    // 1. Try to find hidden BUY_URL in content (Injected by Crawler)
-    let targetUrl = deal.url; // Default: Post URL
-    if (deal.content) {
-        const match = deal.content.match(/<!-- BUY_URL: (.*?) -->/);
-        if (match && match[1]) {
-            targetUrl = match[1];
+    // --- SEO Meta Tags Injection ---
+    // Update Meta Description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = `${deal.mall_name} | ${deal.title} - ${deal.price}원`;
+
+    // Update Open Graph Tags helper
+    const setMetaTag = (property, content) => {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('property', property);
+            document.head.appendChild(tag);
         }
-    }
+        tag.setAttribute('content', content);
+    };
 
-    btn.href = generateAffiliateLink(targetUrl, deal.source);
+    setMetaTag('og:title', deal.title);
+    setMetaTag('og:description', `${deal.price} | ${deal.mall_name}`);
+    if (deal.image_url) setMetaTag('og:image', deal.image_url);
+    setMetaTag('og:url', window.location.href);
 
-    // Open in new tab validation
-    btn.target = '_blank';
+    // Inject JSON-LD (Structured Data for Product)
+    const existingSchema = document.querySelector('script[type="application/ld+json"]');
+    if (existingSchema) existingSchema.remove();
 
-    // Sticky Bar Update (Mobile)
-    const stickyPrice = document.getElementById('sticky-price');
-    const stickyBtn = document.getElementById('sticky-buy-btn');
-
-    if (stickyPrice) stickyPrice.textContent = deal.price || '가격확인';
-    if (stickyBtn) {
-        stickyBtn.href = btn.href;
-        // Visual check: Valid URL?
-        if (!deal.url && !deal.content) {
-            stickyBtn.style.opacity = '0.5';
-            stickyBtn.textContent = '링크 없음';
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    const priceValue = deal.price ? deal.price.replace(/[^0-9]/g, '') : "0";
+    schemaScript.text = JSON.stringify({
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": deal.title,
+        "image": deal.image_url ? [deal.image_url] : [],
+        "description": `${deal.mall_name} 핫딜 상품입니다.`,
+        "offers": {
+            "@type": "Offer",
+            "priceCurrency": "KRW",
+            "price": priceValue || "0",
+            "availability": "https://schema.org/InStock",
+            "url": deal.buy_url || deal.link
         }
-    }
+    });
+    document.head.appendChild(schemaScript);
+    // --------------------------------
+}
 
-    // Content (Modified: Hide section if empty, Hide redundant main image if content exists)
-    const contentEl = document.getElementById('deal-content-html');
-    const contentSection = document.querySelector('.content-section');
-
-    if (deal.content && deal.content.trim().length > 0) {
-        // Remove the hidden comment for display check, but keep it in HTML if needed or remove it.
-        // Let's remove it from visual display to be clean, though browsers hide comments anyway.
-        contentEl.innerHTML = deal.content;
-        contentSection.style.display = 'block';
-    } else {
-        contentSection.style.display = 'none';
+// 1. Try to find hidden BUY_URL in content (Injected by Crawler)
+let targetUrl = deal.url; // Default: Post URL
+if (deal.content) {
+    const match = deal.content.match(/<!-- BUY_URL: (.*?) -->/);
+    if (match && match[1]) {
+        targetUrl = match[1];
     }
+}
+
+btn.href = generateAffiliateLink(targetUrl, deal.source);
+
+// Open in new tab validation
+btn.target = '_blank';
+
+// Sticky Bar Update (Mobile)
+const stickyPrice = document.getElementById('sticky-price');
+const stickyBtn = document.getElementById('sticky-buy-btn');
+
+if (stickyPrice) stickyPrice.textContent = deal.price || '가격확인';
+if (stickyBtn) {
+    stickyBtn.href = btn.href;
+    // Visual check: Valid URL?
+    if (!deal.url && !deal.content) {
+        stickyBtn.style.opacity = '0.5';
+        stickyBtn.textContent = '링크 없음';
+    }
+}
+
+// Content (Modified: Hide section if empty, Hide redundant main image if content exists)
+const contentEl = document.getElementById('deal-content-html');
+const contentSection = document.querySelector('.content-section');
+
+if (deal.content && deal.content.trim().length > 0) {
+    // Remove the hidden comment for display check, but keep it in HTML if needed or remove it.
+    // Let's remove it from visual display to be clean, though browsers hide comments anyway.
+    contentEl.innerHTML = deal.content;
+    contentSection.style.display = 'block';
+} else {
+    contentSection.style.display = 'none';
+}
 }
 
 /**

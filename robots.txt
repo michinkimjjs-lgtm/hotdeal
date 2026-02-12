@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hotdealmoa.co.kr/sitemap.xml
