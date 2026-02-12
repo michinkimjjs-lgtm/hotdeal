@@ -31,7 +31,7 @@ function switchTab(current) {
 
 
 async function loadDeal() {
-    console.log("🔥 Detail JS Version 3.2 (Mock Title Fix) Loaded");
+    console.log("🔥 Detail JS Version 3.5 (Bookmark Fix) Loaded");
     if (!dealId) {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error-message').textContent = '잘못된 접근입니다.';
@@ -109,13 +109,6 @@ function renderDealInfo(deal) {
     const sourceIcon = document.getElementById('source-icon');
     if (sourceIcon) sourceIcon.style.display = 'none'; // Hide icon as requested
 
-    // const sMap = { 'ppomppu': 'ppomppu', 'fmkorea': 'fmkorea', 'ruliweb': 'ruliweb' };
-    // let sKey = deal.source.toLowerCase();
-    // if (sKey.includes('ppomppu')) sKey = 'ppomppu';
-    // else if (sKey.includes('fmkorea')) sKey = 'fmkorea';
-    // else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
-    // sourceIcon.src = `assets/${sKey}_icon.png`;
-
     // Mall Name Text (Use pre-calculated displaySource)
     document.getElementById('source-name-bar').textContent = deal.displaySource;
     document.getElementById('deal-price').textContent = deal.price || '가격 확인';
@@ -155,16 +148,10 @@ function renderDealInfo(deal) {
         updateBookmarkUI();
 
         // Click Listener
-        bookmarkBtn.onclick = () => {
+        bookmarkBtn.onclick = (e) => {
+            if (e) e.preventDefault();
             const isAdded = BookmarkManager.toggle(deal);
             updateBookmarkUI();
-
-            // Simple Feedback
-            // const msg = isAdded ? '북마크에 저장되었습니다.' : '북마크가 해제되었습니다.';
-            // alert(msg); // Alert is too intrusive, maybe just UI change is enough
-
-            // Alternative: Toast (If simple toast exists or just rely on visual change)
-            // Visual change (color) is usually enough for bookmarks.
         };
     }
 

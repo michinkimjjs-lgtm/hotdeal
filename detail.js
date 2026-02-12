@@ -31,6 +31,7 @@ function switchTab(current) {
 
 
 async function loadDeal() {
+    console.log("🔥 Detail JS Version 3.0 Loaded");
     if (!dealId) {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error-message').textContent = '잘못된 접근입니다.';
@@ -48,6 +49,25 @@ async function loadDeal() {
 
         if (error) throw error;
         if (!deal) throw new Error('Deal not found');
+
+        // Calculate Display Source (Mall Name)
+        deal.displaySource = deal.source;
+
+        // 1. Try hidden content meta
+        if (deal.content) {
+            const mallMatch = deal.content.match(/<!-- MALL_NAME: (.*?) -->/);
+            if (mallMatch && mallMatch[1] && mallMatch[1] !== 'None') {
+                deal.displaySource = mallMatch[1];
+            }
+        }
+
+        // 2. If still default source, try to extract from title
+        if (deal.displaySource === deal.source) {
+            const titleMatch = deal.title.match(/^\s*[\[\(](.+?)[\]\)]/);
+            if (titleMatch && titleMatch[1]) {
+                deal.displaySource = titleMatch[1];
+            }
+        }
 
         // Render Data
         renderDealInfo(deal);
@@ -96,15 +116,8 @@ function renderDealInfo(deal) {
     // else if (sKey.includes('ruliweb')) sKey = 'ruliweb';
     // sourceIcon.src = `assets/${sKey}_icon.png`;
 
-    // Mall Name Text (Priority: Hidden Content > Source)
-    let displaySource = deal.source;
-    if (deal.content) {
-        const mallMatch = deal.content.match(/<!-- MALL_NAME: (.*?) -->/);
-        if (mallMatch && mallMatch[1] && mallMatch[1] !== 'None') {
-            displaySource = mallMatch[1];
-        }
-    }
-    document.getElementById('source-name-bar').textContent = displaySource;
+    // Mall Name Text (Use pre-calculated displaySource)
+    document.getElementById('source-name-bar').textContent = deal.displaySource;
     document.getElementById('deal-price').textContent = deal.price || '가격 확인';
 
     // "Original Post" Button
@@ -169,13 +182,13 @@ function renderComparison(deal) {
     // Creating dummy competitors
     const vendors = ['쿠팡', '네이버쇼핑', '11번가', 'G마켓'];
     // Shuffle vendors
-    const others = vendors.filter(v => !deal.source.includes(v)).slice(0, 3);
+    const others = vendors.filter(v => !deal.displaySource.includes(v)).slice(0, 3);
 
     let rows = [];
 
     // 1. Current Deal (Best)
     rows.push({
-        vendor: deal.source,
+        vendor: deal.displaySource,
         name: deal.title,
         price: deal.price,
         note: '🔥 핫딜모음에서 제공한 가격 (최저가)',
@@ -214,7 +227,7 @@ function renderComparison(deal) {
 
     // Render Alert
     document.getElementById('lowest-price-text').textContent =
-        `${deal.source} 가격(${deal.price})이 다른 쇼핑몰 대비 가장 저렴합니다! 강력 추천합니다.`;
+        `${deal.displaySource} 가격(${deal.price})이 다른 쇼핑몰 대비 가장 저렴합니다! 강력 추천합니다.`;
 }
 
 function renderChart(deal) {

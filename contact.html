@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 - 핫딜모아</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="index.css?v=3.9">
+    <script src="theme.js?v=1.3"></script>
+    <script>
+        // Init Theme
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="header-top">
+                <a href="index.html" class="logo-area" style="text-decoration:none;">
+                    <span class="logo-icon">🔥</span>
+                    <span class="logo-text">핫딜모아</span>
+                </a>
+                <div class="search-bar-compact">
+                    <form action="index.html" method="get" style="width:100%; display:flex;">
+                        <input type="text" name="search" id="search-input" placeholder="검색" autocomplete="off">
+                        <button type="submit" class="search-icon-btn">🔍</button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="icon-btn-header" aria-label="테마 변경">🌙</button>
+                    <div class="menu-container">
+                        <button id="menu-toggle" class="icon-btn-header" aria-label="메뉴">☰</button>
+                        <div id="dropdown-menu" class="dropdown-menu">
+                            <a href="bookmarks.html" class="menu-item">
+                                <span class="menu-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                </span> 북마크
+                            </a>
+                            <a href="#" class="menu-item" onclick="alert('알림 기능은 준비 중입니다!')">
+                                <span class="menu-icon">🔔</span> 핫딜알림
+                            </a>
+                            <a href="contact.html" class="menu-item">
+                                <span class="menu-icon">📧</span> 문의하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content-padded">
+            <!-- Contact Header -->
+            <div class="bookmark-page-header">
+                <div class="bookmark-title">
+                    <span>📧</span> 문의하기
+                </div>
+                <div class="bookmark-subtitle">
+                    사이트 이용 관련 문의나 제안을 보내주세요.
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-container">
+                <form action="https://formspree.io/f/soulsoftteam@gmail.com" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="email">이메일 주소</label>
+                        <input type="email" id="email" name="email" required placeholder="답변 받을 이메일을 입력해주세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">제목</label>
+                        <input type="text" id="subject" name="subject" required placeholder="문의 제목을 입력해주세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">내용</label>
+                        <textarea id="message" name="message" rows="6" required
+                            placeholder="문의하실 내용을 입력해주세요"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">보내기</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
