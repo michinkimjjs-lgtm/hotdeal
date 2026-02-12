@@ -72,7 +72,7 @@
 
             <!-- Contact Form -->
             <div class="contact-container">
-                <form action="https://formspree.io/soulsoftteam@gmail.com" method="POST" class="contact-form">
+                <form id="contact-form" class="contact-form">
                     <div class="form-group">
                         <label for="email">이메일 주소</label>
                         <input type="email" id="email" name="email" required placeholder="답변 받을 이메일을 입력해주세요">
@@ -89,10 +89,32 @@
                             placeholder="문의하실 내용을 입력해주세요"></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn">보내기</button>
+                    <button type="submit" class="submit-btn" id="submit-btn">보내기</button>
                 </form>
             </div>
         </main>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Construct Mailto Link
+            const recipient = 'soulsoftteam@gmail.com';
+            const mailSubject = `[핫딜모아 문의] ${subject}`;
+            const mailBody = `보내는 분: ${email}\n\n문의 내용:\n${message}`;
+
+            const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+            // Open Mail Client
+            window.location.href = mailtoLink;
+        });
+    </script>
+    </main>
     </div>
 </body>
 
