@@ -150,8 +150,18 @@ function renderDealInfo(deal) {
         // Click Listener
         bookmarkBtn.onclick = (e) => {
             if (e) e.preventDefault();
-            const isAdded = BookmarkManager.toggle(deal);
+            const isAdded = BookmarkManager.toggle(deal); // Returns true if added, false if removed (Requires update in theme.js if toggle doesn't return value yet, but checking code it does)
+
+            // Re-check logic: BookmarkManager.toggle actually relies on 'has' check inside, 
+            // verifying implementation in theme.js: toggle(deal) { if(has) remove; return false; else add; return true; } -> CORRECT.
+
             updateBookmarkUI();
+
+            if (isAdded) {
+                showToast("북마크에 저장되었습니다 ✅");
+            } else {
+                showToast("북마크가 해제되었습니다 🗑️");
+            }
         };
     }
 

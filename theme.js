@@ -131,3 +131,32 @@ function copyCurrentUrl() {
         console.error('Failed to copy: ', err);
     });
 }
+
+// Global Toast Notification
+window.showToast = function (message) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.innerHTML = `<span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    // Animation: Enter
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    // Remove after delay
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.addEventListener('transitionend', () => {
+            toast.remove();
+        });
+    }, 2500); // 2.5 seconds
+};
