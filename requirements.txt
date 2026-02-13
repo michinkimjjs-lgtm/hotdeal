@@ -3,3 +3,5 @@ beautifulsoup4
 supabase
 pydantic
 postgrest
+tls_client
+playwright
