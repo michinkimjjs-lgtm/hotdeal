@@ -2,7 +2,7 @@ name: HotDeal Crawler
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # 20분마다 실행 (GitHub Actions 최소 간격 고려)
+    - cron: '*/10 * * * *' # 10분마다 실행
   workflow_dispatch: # 수동 실행 버튼
 
 jobs:
