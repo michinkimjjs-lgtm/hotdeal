@@ -19,12 +19,17 @@ def main():
     SUPABASE_URL = os.environ.get("SUPABASE_URL")
     SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
+    if not SUPABASE_URL:
+        logger.error("❌ [오류] SUPABASE_URL이 없습니다. Settings > Secrets에 등록되었는지 확인해주세요.")
+    if not SUPABASE_KEY:
+        logger.error("❌ [오류] SUPABASE_KEY가 없습니다. Settings > Secrets에 등록되었는지 확인해주세요.")
+    
     if not SUPABASE_URL or not SUPABASE_KEY:
-        logger.error("❌ Supabase 환경 변수가 설정되지 않았습니다. (GitHub Secrets 확인 필요)")
         sys.exit(1)
 
     try:
         # Initialize Crawlers
+        logger.info("🛠️ 크롤러 초기화 중...")
         ppomppu = PpomppuCrawler(SUPABASE_URL, SUPABASE_KEY)
         fmkorea = FMKoreaCrawler(SUPABASE_URL, SUPABASE_KEY)
         ruliweb = RuliwebCrawler(SUPABASE_URL, SUPABASE_KEY)
