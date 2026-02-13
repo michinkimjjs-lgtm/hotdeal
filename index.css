@@ -1018,6 +1018,13 @@ body {
   }
 }
 
+.footer-disclosure {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
 /* Toast Notification */
 #toast-container {
   position: fixed;
