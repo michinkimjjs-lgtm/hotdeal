@@ -8,7 +8,9 @@ import sys
 import io
 import logging
 import urllib.parse
-import tls_client
+import logging
+import urllib.parse
+from curl_cffi import requests as cffi_requests
 
 # 터미널 출력 및 로깅 인코딩 강제 설정 (Windows mojibake 방지)
 if sys.stdout.encoding != 'utf-8':
@@ -43,23 +45,13 @@ class BaseCrawler:
         self.supabase: Client = create_client(supabase_url, supabase_key)
     def __init__(self, supabase_url, supabase_key):
         self.supabase: Client = create_client(supabase_url, supabase_key)
-        # Use tls_client for better evasion
-        self.session = tls_client.Session(
-            client_identifier="chrome_120",
-            random_tls_extension_order=True
-        )
-        self.user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        ]
-        self.current_ua = random.choice(self.user_agents)
-
+        # Use curl_cffi for better impersonation and encoding handling
+        self.session = cffi_requests.Session(impersonate="chrome120")
+        
     def fetch_page(self, url, encoding='utf-8', retries=3, referer=None, custom_headers=None):
         for i in range(retries):
             try:
                 headers = {
-                    'User-Agent': self.current_ua,
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
                     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
                     'Referer': referer if referer else 'https://www.google.com/',
@@ -68,8 +60,8 @@ class BaseCrawler:
                 if custom_headers:
                     headers.update(custom_headers)
                 
-                # tls_client uses 'headers' and 'timeout_seconds' logic is internal but get accepts timeout
-                response = self.session.get(url, headers=headers, timeout_seconds=15)
+                # curl_cffi handles encoding better, usually returns bytes in .content
+                response = self.session.get(url, headers=headers, timeout=15)
                 
                 if response.status_code == 200:
                     if encoding == 'auto':
@@ -450,76 +442,14 @@ class PpomppuCrawler(BaseCrawler):
             except Exception as e: logger.error(f"Ppomppu 에러: {e}")
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
-class FMKoreaCrawler(BaseCrawler):
-    def __init__(self, supabase_url, supabase_key):
-        super().__init__(supabase_url, supabase_key)
-        self.browser = None
-        self.context = None
-        self.playwright = None
-
-    def start_browser(self):
-        """Start Playwright Browser (Once per session)"""
-        from playwright.sync_api import sync_playwright
-        try:
-            self.playwright = sync_playwright().start()
-            self.browser = self.playwright.chromium.launch(headless=True)
-            self.context = self.browser.new_context(
-                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-                viewport={"width": 1920, "height": 1080},
-                extra_http_headers={"Referer": "https://www.fmkorea.com/hotdeal"}
-            )
-            logger.info("  [FMKorea] Browser Started.")
-        except Exception as e:
-            logger.error(f"  [FMKorea] Browser Start Failed: {e}")
-
-    def stop_browser(self):
-        """Stop Playwright Browser"""
-        try:
-            if self.context: self.context.close()
-        except: pass
-        
-        try:
-            if self.browser: self.browser.close()
-        except: pass
-        
-        try:
-            if self.playwright: self.playwright.stop()
-        except: pass
-        
-        self.context = None
-        self.browser = None
-        self.playwright = None
-        logger.info("  [FMKorea] Browser Stopped.")
-
-    def fetch_page_with_playwright(self, url, referer=None):
-        if not self.context:
-            self.start_browser()
-            
-        try:
-            page = self.context.new_page()
-            # Update referer if needed for specific page?
-            # actually context header is fixed, but simple navigation should work. 
-            # If critical, we can set header on page request, but usually global referer is fine or we can use set_extra_http_headers slightly risky on running context.
-            # Simpler: Just go.
-            
-            page.goto(url, timeout=30000, wait_until="domcontentloaded")
-            time.sleep(1.0) # Basic wait
-            content = page.content()
-            page.close()
-            return content
-        except Exception as e:
-            logger.error(f"Playwright Fetch Error: {e}")
-            return None
-
     def crawl(self, limit=None):
-        logger.info("=== [FMKorea] 크롤링 시작 (Playwright) ===")
+        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi) ===")
         
-        self.start_browser()
         try:
             url = "https://www.fmkorea.com/hotdeal"
             
-            # Use Playwright for list page
-            html = self.fetch_page_with_playwright(url)
+            # Use curl_cffi for list page
+            html = self.fetch_page(url)
             
             if not html: return
             soup = BeautifulSoup(html, 'html.parser')
@@ -540,7 +470,7 @@ class FMKoreaCrawler(BaseCrawler):
                     content_html = None
                     buy_link = None
                     
-                    # 1. Extract Price from List Page (More reliable, avoids redirection issues)
+                    # 1. Extract Price from List Page
                     price = "가격미상"
                     list_info_div = item.select_one('.hotdeal_info')
                     if list_info_div:
@@ -548,18 +478,20 @@ class FMKoreaCrawler(BaseCrawler):
                         p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
                         if p_match: price = p_match.group(1)
 
-                    # Fetch Detail Page with Playwright
+                    # Fetch Detail Page with curl_cffi
                     try:
                         time.sleep(1.0) # Gentle delay
-                        d_html = self.fetch_page_with_playwright(link)
+                        d_html, _ = self.fetch_content_html(link, 'FMKorea') # Re-use common method (modified for FMKorea logic inside?)
+                        # Actually fetch_content_html is good but we need custom parsing for logic below
+                        # Let's just fetch manually to keep logic
+                        d_html = self.fetch_page(link)
                         
                         if d_html:
                             d_soup = BeautifulSoup(d_html, 'html.parser')
                             
                             # FMKorea Specific Information Section
                             info_div = d_soup.select_one('.hotdeal_info')
-                            if info_div and price == "가격미상": # Only if list extraction failed
-                                # Extract price
+                            if info_div and price == "가격미상": 
                                 p_txt = info_div.get_text()
                                 p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
                                 if p_match: price = p_match.group(1)
@@ -656,7 +588,7 @@ class FMKoreaCrawler(BaseCrawler):
             logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
         
         finally:
-            self.stop_browser()
+            pass
 
 
 

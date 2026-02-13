@@ -49,13 +49,6 @@ def main():
     except Exception as e:
         logger.error(f"❌ 크롤링 중 치명적인 오류 발생: {e}", exc_info=True)
         sys.exit(1)
-    finally:
-        # Playwright Cleanup (Ignore errors if already closed)
-        try:
-            if 'fmkorea' in locals():
-                fmkorea.stop_browser()
-        except:
-            pass
 
 if __name__ == "__main__":
     main()

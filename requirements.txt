@@ -3,5 +3,5 @@ beautifulsoup4
 supabase
 pydantic
 postgrest
-tls-client
+curl_cffi
 playwright
