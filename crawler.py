@@ -442,6 +442,7 @@ class PpomppuCrawler(BaseCrawler):
             except Exception as e: logger.error(f"Ppomppu 에러: {e}")
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
+class FMKoreaCrawler(BaseCrawler):
     def crawl(self, limit=None):
         logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi) ===")
         
