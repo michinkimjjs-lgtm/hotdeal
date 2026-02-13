@@ -41,11 +41,17 @@ if not logger.handlers:
 class BaseCrawler:
     def __init__(self, supabase_url, supabase_key):
         self.supabase: Client = create_client(supabase_url, supabase_key)
-        self.session = requests.Session()
+    def __init__(self, supabase_url, supabase_key):
+        self.supabase: Client = create_client(supabase_url, supabase_key)
+        # Use tls_client for better evasion
+        self.session = tls_client.Session(
+            client_identifier="chrome_120",
+            random_tls_extension_order=True
+        )
         self.user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         ]
         self.current_ua = random.choice(self.user_agents)
 
@@ -56,15 +62,14 @@ class BaseCrawler:
                     'User-Agent': self.current_ua,
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
                     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-                    'Accept-Encoding': 'gzip, deflate',
                     'Referer': referer if referer else 'https://www.google.com/',
-                    'Connection': 'keep-alive',
                 }
                 
                 if custom_headers:
                     headers.update(custom_headers)
                 
-                response = self.session.get(url, headers=headers, timeout=15)
+                # tls_client uses 'headers' and 'timeout_seconds' logic is internal but get accepts timeout
+                response = self.session.get(url, headers=headers, timeout_seconds=15)
                 
                 if response.status_code == 200:
                     if encoding == 'auto':
