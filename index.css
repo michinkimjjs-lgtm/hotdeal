@@ -1071,3 +1071,21 @@ body {
     bottom: 40px;
   }
 }
+
+/* Detail Content Responsive Fix */
+.content-html {
+  overflow-wrap: break-word;
+  /* Prevent long words from breaking layout */
+}
+
+.content-html img,
+.content-html video,
+.content-html iframe {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 1rem auto;
+  /* Center with spacing */
+  border-radius: 8px;
+  /* Slight radius for better look */
+}
