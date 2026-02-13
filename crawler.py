@@ -469,9 +469,21 @@ class FMKoreaCrawler(BaseCrawler):
 
     def stop_browser(self):
         """Stop Playwright Browser"""
-        if self.context: self.context.close()
-        if self.browser: self.browser.close()
-        if self.playwright: self.playwright.stop()
+        try:
+            if self.context: self.context.close()
+        except: pass
+        
+        try:
+            if self.browser: self.browser.close()
+        except: pass
+        
+        try:
+            if self.playwright: self.playwright.stop()
+        except: pass
+        
+        self.context = None
+        self.browser = None
+        self.playwright = None
         logger.info("  [FMKorea] Browser Stopped.")
 
     def fetch_page_with_playwright(self, url, referer=None):
