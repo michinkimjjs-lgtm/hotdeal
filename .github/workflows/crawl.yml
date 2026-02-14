@@ -7,7 +7,7 @@ on:
 
 jobs:
   crawl:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     # 시간대 설정 (KST)
     env:
@@ -16,11 +16,6 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-
-    - name: Install Google Chrome & xvfb
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable xvfb
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -38,4 +33,4 @@ jobs:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: |
-        xvfb-run --auto-servernum python run_once.py
+        python run_once.py
