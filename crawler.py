@@ -387,8 +387,31 @@ class PpomppuCrawler(BaseCrawler):
         
         return price
 
+    # Override fetch_page to use standard requests for Ppomppu (Fix Encoding Issue)
+    def fetch_page(self, url, encoding='euc-kr', retries=3, referer=None, custom_headers=None):
+        import requests as std_requests
+        for i in range(retries):
+            try:
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+                    'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                    'Referer': referer if referer else 'https://www.google.com/',
+                }
+                if custom_headers: headers.update(custom_headers)
+                
+                response = std_requests.get(url, headers=headers, timeout=15)
+                if response.status_code == 200:
+                    return response.content.decode(encoding, errors='replace')
+                else:
+                    logger.warning(f"⚠️ Ppomppu Fetch Failed: {response.status_code}")
+            except Exception as e:
+                logger.error(f"Ppomppu Fetch Error: {e}")
+                time.sleep(1)
+        return None
+
     def crawl(self, limit=None):
-        logger.info("=== [Ppomppu] 크롤링 시작 ===")
+        logger.info("=== [Ppomppu] 크롤링 시작 (requests) ===")
         url = "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu"
         html = self.fetch_page(url, encoding='euc-kr')
         if not html: return
@@ -403,6 +426,8 @@ class PpomppuCrawler(BaseCrawler):
                 if not title_el: continue
                 link = ("https://www.ppomppu.co.kr" + href) if href.startswith('/') else ("https://www.ppomppu.co.kr/zboard/" + href)
                 
+                # Fetch Logic inside loop also needs to call self.fetch_page (which we overrode)
+                # But fetch_content_html calls self.fetch_page, so it will use the override! Good.
                 content_html, buy_link = self.fetch_content_html(link, 'Ppomppu')
                 
                 img_url = ""
@@ -423,9 +448,6 @@ class PpomppuCrawler(BaseCrawler):
                 like_el = item.select_one('.baseList-rec'); like = int(re.findall(r'\d+', like_el.get_text())[0]) if like_el and re.findall(r'\d+', like_el.get_text()) else 0
                 
                 source_name = "Ppomppu" 
-                # if buy_link:
-                #     detected_mall = self.extract_mall_name_from_url(buy_link)
-                #     if detected_mall: source_name = detected_mall
 
                 if self.save_deal({
                     "title": full_title, 
@@ -443,8 +465,13 @@ class PpomppuCrawler(BaseCrawler):
         logger.info(f"=== [Ppomppu] 크롤링 완료 ({count}건) ===")
 
 class FMKoreaCrawler(BaseCrawler):
+    def __init__(self, supabase_url, supabase_key):
+        super().__init__(supabase_url, supabase_key)
+        # 430 Error fix: Update impersonation and headers
+        self.session = cffi_requests.Session(impersonate="edge99")
+
     def crawl(self, limit=None):
-        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi) ===")
+        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi/edge99) ===")
         
         try:
             url = "https://www.fmkorea.com/hotdeal"
