@@ -467,8 +467,8 @@ class PpomppuCrawler(BaseCrawler):
 class FMKoreaCrawler(BaseCrawler):
     def __init__(self, supabase_url, supabase_key):
         super().__init__(supabase_url, supabase_key)
-        # 430 Error fix: Update impersonation and headers
-        self.session = cffi_requests.Session(impersonate="edge99")
+        # 430 Error fix: Update impersonation to chrome110 which is often more stable
+        self.session = cffi_requests.Session(impersonate="chrome110")
 
     def crawl(self, limit=None):
         logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi/edge99) ===")
