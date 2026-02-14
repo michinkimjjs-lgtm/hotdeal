@@ -4,3 +4,4 @@ supabase
 pydantic
 postgrest
 curl_cffi
+seleniumbase

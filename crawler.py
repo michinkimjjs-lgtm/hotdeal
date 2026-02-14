@@ -467,156 +467,129 @@ class PpomppuCrawler(BaseCrawler):
 class FMKoreaCrawler(BaseCrawler):
     def __init__(self, supabase_url, supabase_key):
         super().__init__(supabase_url, supabase_key)
-        # 430 Error fix: Update impersonation to safari15_3 (often better for Cloudflare)
-        self.session = cffi_requests.Session(impersonate="safari15_3")
 
     def crawl(self, limit=None):
-        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi/safari15_3) ===")
+        logger.info("=== [FMKorea] 크롤링 시작 (SeleniumBase) ===")
+        from seleniumbase import SB
         
         try:
-            url = "https://www.fmkorea.com/hotdeal"
-            
-            # Use curl_cffi for list page
-            html = self.fetch_page(url)
-            
-            if not html: return
-            soup = BeautifulSoup(html, 'html.parser')
-            items = soup.select('.fm_best_widget._bd_pc li.li')
-            if not items: items = soup.select('.bd_lst_wrp .bd_lst tr:not(.notice)')
-            count = 0
-            for item in items:
-                if limit and count >= limit: break
-                try:
-                    title_el = item.select_one('h3.title a.hotdeal_var8')
-                    if not title_el: continue
-                    link_suffix = title_el['href']
-                    
-                    link = ("https://www.fmkorea.com" + link_suffix) if link_suffix.startswith('/') else link_suffix
-                    title = title_el.get_text().strip()
-                    
-                    img_url = ""
-                    content_html = None
-                    buy_link = None
-                    
-                    # 1. Extract Price from List Page
-                    price = "가격미상"
-                    list_info_div = item.select_one('.hotdeal_info')
-                    if list_info_div:
-                        p_txt = list_info_div.get_text()
-                        p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
-                        if p_match: price = p_match.group(1)
-
-                    # Fetch Detail Page with curl_cffi
+            # UC=True for anti-bot bypass, Headless=False (handled by xvfb in CI)
+            with SB(uc=True, test=True, headless=False, locale_code="ko") as sb:
+                url = "https://www.fmkorea.com/hotdeal"
+                
+                # 1. Open List Page
+                sb.activate_cdp_mode(url) # Stronger bypass
+                sb.sleep(5) # Wait for Cloudflare
+                
+                # Check title/content
+                if "Just a moment" in sb.get_title():
+                    logger.warning("Still stuck on Cloudflare challenge...")
+                    sb.sleep(10)
+                
+                html = sb.get_page_source()
+                soup = BeautifulSoup(html, 'html.parser')
+                
+                items = soup.select('.fm_best_widget._bd_pc li.li')
+                if not items: items = soup.select('.bd_lst_wrp .bd_lst tr:not(.notice)')
+                
+                count = 0
+                for item in items:
+                    if limit and count >= limit: break
                     try:
-                        time.sleep(1.0) # Gentle delay
-                        d_html, _ = self.fetch_content_html(link, 'FMKorea') # Re-use common method (modified for FMKorea logic inside?)
-                        # Actually fetch_content_html is good but we need custom parsing for logic below
-                        # Let's just fetch manually to keep logic
-                        d_html = self.fetch_page(link)
+                        title_el = item.select_one('h3.title a.hotdeal_var8')
+                        if not title_el: continue
+                        link_suffix = title_el['href']
+                        link = ("https://www.fmkorea.com" + link_suffix) if link_suffix.startswith('/') else link_suffix
+                        title = title_el.get_text().strip()
                         
-                        if d_html:
-                            d_soup = BeautifulSoup(d_html, 'html.parser')
+                        # Detail Page
+                        sb.open(link)
+                        sb.sleep(2) # Gentle wait
+                        content_html = sb.get_page_source()
+                        d_soup = BeautifulSoup(content_html, 'html.parser')
+                        
+                        # Extract fields
+                        price = "가격미상"
+                        img_url = ""
+                        buy_link = None
+                        
+                        # Price
+                        info_div = d_soup.select_one('.hotdeal_info')
+                        if info_div:
+                            p_txt = info_div.get_text()
+                            p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
+                            if p_match: price = p_match.group(1)
                             
-                            # FMKorea Specific Information Section
-                            info_div = d_soup.select_one('.hotdeal_info')
-                            if info_div and price == "가격미상": 
-                                p_txt = info_div.get_text()
-                                p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
-                                if p_match: price = p_match.group(1)
-                            
-                            # Try to find the specific hotdeal URL (External Link)
-                            link_el = d_soup.select_one('a.hotdeal_url')
-                            if link_el:
-                                href = link_el.get('href')
-                                if href:
-                                    if 'link.fmkorea.org' in href and 'url=' in href:
-                                        try:
-                                            parsed = urllib.parse.urlparse(href)
-                                            qs = urllib.parse.parse_qs(parsed.query)
-                                            if 'url' in qs:
-                                                buy_link = qs['url'][0]
-                                        except:
-                                            buy_link = href
-                                    else:
-                                        buy_link = href
+                            # Mall Name from Info
+                            shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', p_txt)
+                            if shop_match and not buy_link:
+                                # We might set source or meta tag later
+                                pass
 
-                            # Image
-                            img_el = d_soup.select_one('article img')
-                            if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
+                        # Buy Link
+                        link_el = d_soup.select_one('a.hotdeal_url')
+                        if link_el:
+                            href = link_el.get('href')
+                            if href:
+                                if 'link.fmkorea.org' in href and 'url=' in href:
+                                    try:
+                                        parsed = urllib.parse.urlparse(href)
+                                        qs = urllib.parse.parse_qs(parsed.query)
+                                        if 'url' in qs: buy_link = qs['url'][0]
+                                    except: buy_link = href
+                                else:
+                                    buy_link = href
+                        
+                        # Image
+                        img_el = d_soup.select_one('article img')
+                        if img_el: img_url = img_el.get('src') or img_el.get('data-original') or ""
+                        if img_url.startswith('//'): img_url = "https:" + img_url
+                        
+                        # Normalize Content
+                        target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
+                        c_html = ""
+                        if target:
+                            for tag in target(['script', 'style']): tag.decompose()
+                            addr_div = target.select_one('.document_address')
+                            if addr_div: addr_div.decompose()
+                            for img in target.select('img'): img['referrerpolicy'] = 'no-referrer'
+                            c_html = str(target).replace('data-original=', 'src=')
                             
-                             # Content
-                            target = d_soup.select_one('.rd_body') or d_soup.select_one('div.rd_body')
-                            if target:
-                                 for tag in target(['script', 'style']): tag.decompose()
-                                 
-                                 # Remove link/copy bar
-                                 addr_div = target.select_one('.document_address')
-                                 if addr_div: addr_div.decompose()
-                                 
-                                 for img in target.select('img'):
-                                     img['referrerpolicy'] = 'no-referrer'
-                                     
-                                 content_html = str(target).replace('data-original=', 'src=')
-                                 
-                                 # If buy_link found, inject it
-                                 mall_name = None
-                                 if buy_link:
-                                     mall_name = self.extract_mall_name_from_url(buy_link)
-                                 
-                                 if not mall_name and info_div:
-                                      shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', info_div.get_text())
-                                      if shop_match:
-                                          mall_name = shop_match.group(1)
-                                 
-                                 # Construct Meta Tags (Order: MALL_NAME then BUY_URL)
-                                 meta_tags = ""
-                                 if mall_name:
-                                     meta_tags += f"<!-- MALL_NAME: {mall_name} -->"
-                                 if buy_link:
-                                     meta_tags += f"<!-- BUY_URL: {buy_link} -->"
-                                     
-                                 content_html = meta_tags + content_html
-                                 
+                            # Inject Meta
+                            mall_name = self.extract_mall_name_from_url(buy_link)
+                            meta_tags = ""
+                            if mall_name: meta_tags += f"<!-- MALL_NAME: {mall_name} -->"
+                            if buy_link: meta_tags += f"<!-- BUY_URL: {buy_link} -->"
+                            c_html = meta_tags + c_html
+
+                        # Fallback stats
+                        cat_el = item.select_one('.category a'); category = cat_el.get_text().strip() if cat_el else "기타"
+                        comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
+                        v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
+
+                        if self.save_deal({
+                            "title": title, 
+                            "url": link, 
+                            "img_url": img_url, 
+                            "source": "FMKorea", 
+                            "category": category, 
+                            "price": price, 
+                            "comment_count": comment, 
+                            "like_count": like,
+                            "content": c_html
+                        }): count += 1
+                        
+                        # Go back to list? No, we activated CDP mode on list url.
+                        # Actually SB usually manages one tab. We can just loop.
+                        # But for stability, let's just loop.
+                        
                     except Exception as e:
-                         logger.error(f"FMKorea Detail Parse Error: {e}")
-
-                    if not img_url:
-                        t_el = item.select_one('img.thumb')
-                        if t_el: img_url = (t_el.get('data-original') or t_el.get('src') or "").replace('70x50', '140x100')
-                    if img_url.startswith('//'): img_url = "https:" + img_url
-                    
-                    # List view fallback price
-                    if price == "가격미상":
-                         info_div = item.select_one('.hotdeal_info')
-                         if info_div:
-                            p_m = re.search(r'가격:\s*([0-9,]+원)', info_div.get_text())
-                            if p_m: price = p_m.group(1)
-
-                    cat_el = item.select_one('.category a'); category = cat_el.get_text().strip() if cat_el else "기타"
-                    comm_span = title_el.select_one('.comment_count'); comment = int(comm_span.get_text().strip('[] ')) if comm_span and comm_span.get_text().strip('[] ').isdigit() else 0
-                    v_el = item.select_one('.pc_voted_count .count'); like = int(v_el.get_text().strip()) if v_el and v_el.get_text().strip().isdigit() else 0
-                    
-                    source_name = "FMKorea"
-
-                    if self.save_deal({
-                        "title": title, 
-                        "url": link, 
-                        "img_url": img_url, 
-                        "source": source_name, 
-                        "category": category, 
-                        "price": price, 
-                        "comment_count": comment, 
-                        "like_count": like,
-                        "content": content_html
-                    }): count += 1
-                    
-                except Exception as e:
-                    logger.error(f"FMKorea Detail Fetch Error: {e}")
+                        logger.error(f"FMKorea Detail Error: {e}")
+                        
+        except Exception as e:
+            logger.error(f"SeleniumBase init error: {e}")
             
-            logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
-        
-        finally:
-            pass
+        logger.info(f"=== [FMKorea] 크롤링 완료 ({count}건) ===")
 
 
 
