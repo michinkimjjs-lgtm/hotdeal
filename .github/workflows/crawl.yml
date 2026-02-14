@@ -35,9 +35,11 @@ jobs:
       run: |
         python run_once.py
     
-    - name: Upload Debug Screenshot
+    - name: Upload Debug Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: fmkorea-debug
-        path: fmkorea_debug.png
+        path: |
+          fmkorea_screenshot.png
+          fmkorea_source.html
