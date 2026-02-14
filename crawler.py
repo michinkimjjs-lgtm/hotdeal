@@ -611,10 +611,6 @@ class FMKoreaCrawler(BaseCrawler):
                                     except: buy_link = href
                                 else:
                                     buy_link = href
-                                        if 'url' in qs: buy_link = qs['url'][0]
-                                    except: buy_link = href
-                                else:
-                                    buy_link = href
                         
                         # Image
                         img_el = d_soup.select_one('article img')
