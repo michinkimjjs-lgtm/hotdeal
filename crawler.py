@@ -548,6 +548,28 @@ class FMKoreaCrawler(BaseCrawler):
                         # Detail Page
                         sb.open(link)
                         sb.sleep(2) # Gentle wait
+
+                        # -----------------------------------------------------------
+                        # DETECT CLOUDFLARE ON DETAIL PAGE
+                        # -----------------------------------------------------------
+                        if "사람인지" in sb.get_page_source() or "보안" in sb.get_title():
+                            logger.warning(f"🚨 Security Check on Detail Page! Attempting to bypass...")
+                            try:
+                                sb.uc_gui_click_captcha()
+                                sb.sleep(5)
+                                # Fallback iframe click
+                                if "보안" in sb.get_title():
+                                    frames = sb.find_elements("iframe")
+                                    for frame in frames:
+                                        try:
+                                            sb.switch_to_frame(frame)
+                                            if sb.is_element_visible("input[type='checkbox']"):
+                                                sb.click("input[type='checkbox']"); sb.sleep(3); sb.switch_to_default_content(); break
+                                            sb.switch_to_default_content()
+                                        except: sb.switch_to_default_content()
+                            except: pass
+                        # -----------------------------------------------------------
+
                         content_html = sb.get_page_source()
                         d_soup = BeautifulSoup(content_html, 'html.parser')
                         
@@ -559,14 +581,21 @@ class FMKoreaCrawler(BaseCrawler):
                         # Price
                         info_div = d_soup.select_one('.hotdeal_info')
                         if info_div:
-                            p_txt = info_div.get_text()
-                            p_match = re.search(r'가격\s*:\s*(?:[^\d\s]*\s*)?([0-9,]+(?:원)?)', p_txt)
-                            if p_match: price = p_match.group(1)
+                            p_txt = info_div.get_text().strip()
+                            # logger.info(f"Price Raw Text: {p_txt}") # Debugging
+                            
+                            # Strict Regex: Only digits/commas/won immediately following '가격:'
+                            p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
+                            if p_match: 
+                                price = p_match.group(1)
+                            else:
+                                # Fallback: Try finding 12,345원 pattern anywhere if strict fails? 
+                                # No, '3,720' issue suggests we matched something wrong. Keep strict.
+                                pass
                             
                             # Mall Name from Info
                             shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', p_txt)
                             if shop_match and not buy_link:
-                                # We might set source or meta tag later
                                 pass
 
                         # Buy Link
@@ -578,6 +607,10 @@ class FMKoreaCrawler(BaseCrawler):
                                     try:
                                         parsed = urllib.parse.urlparse(href)
                                         qs = urllib.parse.parse_qs(parsed.query)
+                                        if 'url' in qs: buy_link = qs['url'][0]
+                                    except: buy_link = href
+                                else:
+                                    buy_link = href
                                         if 'url' in qs: buy_link = qs['url'][0]
                                     except: buy_link = href
                                 else:
