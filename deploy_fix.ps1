@@ -10,9 +10,10 @@ try {
     Write-Host "2. Staging all changes..."
     git add .
 
-    Write-Host "3. Committing (Allow empty to force update)..."
-    # Allow empty in case it's already committed but not pushed, or no changes but we want to trigger
-    git commit --allow-empty -m "Add Debug Screenshot & Cloudflare Bypass Logic"
+    Write-Host "3. Committing..."
+    # Use a unique message to ensure it's distinct
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    git commit --allow-empty -m "Add Enhanced Debugging: HTML Source & Screenshot (Retry $timestamp)"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main

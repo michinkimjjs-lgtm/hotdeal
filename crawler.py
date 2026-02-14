@@ -479,16 +479,32 @@ class FMKoreaCrawler(BaseCrawler):
                    chromium_arg="--disable-dev-shm-usage --no-sandbox --disable-gpu") as sb:
                 url = "https://www.fmkorea.com/hotdeal"
                 
-                # 1. Open List Page
-                sb.activate_cdp_mode(url) # Stronger bypass
-                sb.sleep(5) # Wait for Cloudflare
+                # 1. Access URL
+                logger.info(f"Connecting to {url}...")
+                sb.open(url)
+                sb.sleep(5) 
                 
-                # Check title/content
-                if "Just a moment" in sb.get_title():
-                    logger.warning("Still stuck on Cloudflare challenge...")
-                    sb.sleep(10)
+                # 2. Debugging: Save info
+                import os
+                cwd = os.getcwd()
+                logger.info(f"Current Working Directory: {cwd}")
                 
+                # Snapshot
+                screenshot_path = os.path.join(cwd, "fmkorea_screenshot.png")
+                sb.save_screenshot(screenshot_path)
+                logger.info(f"Saved screenshot to: {screenshot_path}")
+
+                # Source
+                html_path = os.path.join(cwd, "fmkorea_source.html")
                 html = sb.get_page_source()
+                with open(html_path, "w", encoding="utf-8") as f:
+                    f.write(html)
+                logger.info(f"Saved HTML source to: {html_path} (Length: {len(html)})")
+                
+                # 3. Check specific specific blockers
+                title = sb.get_title()
+                logger.info(f"Page Title: {title}")
+
                 soup = BeautifulSoup(html, 'html.parser')
                 
                 items = soup.select('.fm_best_widget._bd_pc li.li')
