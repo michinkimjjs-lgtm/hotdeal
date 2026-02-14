@@ -7,9 +7,9 @@ on:
 
 jobs:
   crawl:
-    runs-on: macos-latest
+    runs-on: windows-latest
     
-    # 시간대 설정 (KST)
+    # 시간대 설정 (KST) - Windows uses different timezone format or just relying on python TZ
     env:
       TZ: 'Asia/Seoul'
 
