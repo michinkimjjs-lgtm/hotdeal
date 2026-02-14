@@ -546,8 +546,27 @@ class FMKoreaCrawler(BaseCrawler):
                         title = title_el.get_text().strip()
                         
                         # Detail Page
+                        current_url = sb.get_current_url()
                         sb.open(link)
-                        sb.sleep(2) # Gentle wait
+                        
+                        # Wait for URL change
+                        url_changed = False
+                        for _ in range(20): # 10 seconds
+                            if sb.get_current_url() != current_url and sb.get_current_url() != "about:blank":
+                                url_changed = True
+                                break
+                            sb.sleep(0.5)
+                        
+                        if not url_changed:
+                            logger.warning(f"Failed to navigate to {link}. Skipping...")
+                            continue
+
+                        # Wait for content
+                        try:
+                            sb.wait_for_element("div.hotdeal_info", timeout=5)
+                        except:
+                            logger.warning(f"Detail page content not found for {link}. Skipping...")
+                            continue
 
                         # -----------------------------------------------------------
                         # DETECT CLOUDFLARE ON DETAIL PAGE
@@ -569,7 +588,7 @@ class FMKoreaCrawler(BaseCrawler):
                                         except: sb.switch_to_default_content()
                             except: pass
                         # -----------------------------------------------------------
-
+ 
                         content_html = sb.get_page_source()
                         d_soup = BeautifulSoup(content_html, 'html.parser')
                         
