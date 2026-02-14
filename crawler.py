@@ -492,23 +492,33 @@ class FMKoreaCrawler(BaseCrawler):
                     logger.warning("🚨 Cloudflare Challenge Detected! Attempting to bypass...")
                     
                     try:
-                        # Strategy A: Built-in UC Mode Click
-                        logger.info("Strategy A: uc_gui_click_captcha()")
-                        sb.uc_gui_click_captcha()
+                        # Strategy A: Built-in UC Mode Click + Mouse Move
+                        logger.info("Strategy A: UC Click with Mouse Move")
+                        sb.uc_gui_click_captcha() 
                         sb.sleep(5)
                     except Exception as e:
                         logger.error(f"Strategy A failed: {e}")
 
                     try:
-                        # Strategy B: Frame Switch & Click
-                        if not "fmkorea" in sb.get_current_url():
-                            logger.info("Strategy B: Switching to iframe...")
-                            sb.switch_to_frame("iframe") # Common CF iframe
-                            sb.click("input[type='checkbox']")
+                        # Strategy B: Manual Iframe Switch & Click
+                        # Cloudflare turnstile is often in an iframe with 'turnstile' in src or name
+                        if sb.is_element_visible("iframe[src*='turnstile']"):
+                            logger.info("Strategy B: Switching to Turnstile iframe...")
+                            sb.switch_to_frame("iframe[src*='turnstile']")
+                            sb.sleep(1)
+                            if sb.is_element_visible("input[type='checkbox']"):
+                                sb.click("input[type='checkbox']")
+                            else:
+                                # Sometimes it's a shadow root or body click
+                                sb.click("body")
                             sb.sleep(5)
                             sb.switch_to_default_content()
                     except Exception as e:
-                        logger.warning(f"Strategy B failed (might be normal): {e}")
+                        logger.warning(f"Strategy B failed: {e}")
+                
+                # Double check if we are through
+                if "fmkorea.com" not in sb.get_current_url() and "hotdeal" not in sb.get_current_url():
+                     logger.error("Still stuck. Saving final screenshot.")
 
                 # 3. Debugging: Save info (Keep this for verification)
                 import os
@@ -516,6 +526,9 @@ class FMKoreaCrawler(BaseCrawler):
                 sb.save_screenshot(os.path.join(cwd, "fmkorea_screenshot.png"))
 
                 html = sb.get_page_source()
+                with open(os.path.join(cwd, "fmkorea_source.html"), "w", encoding="utf-8") as f:
+                    f.write(html)
+
                 soup = BeautifulSoup(html, 'html.parser')
                 
                 items = soup.select('.fm_best_widget._bd_pc li.li')
