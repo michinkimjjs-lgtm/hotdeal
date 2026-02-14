@@ -42,7 +42,16 @@ def main():
         fmkorea.crawl(limit=10)
 
         logger.info("--- 루리웹 크롤링 시작 ---")
-        ruliweb.crawl(limit=10)
+        try:
+            from seleniumbase import SB
+            # Reuse similar args to FMKorea for consistency
+            with SB(uc=True, test=True, headless=True, locale_code="ko",
+                   chromium_arg="--disable-dev-shm-usage --no-sandbox --disable-gpu") as sb:
+                ruliweb.crawl(limit=10, sb=sb)
+        except Exception as e:
+            logger.error(f"Ruliweb SB Error: {e}")
+            # Fallback
+            ruliweb.crawl(limit=10)
         
         logger.info("✅ 모든 크롤링 작업이 완료되었습니다.")
 

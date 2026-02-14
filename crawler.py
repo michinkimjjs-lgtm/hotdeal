@@ -578,25 +578,25 @@ class FMKoreaCrawler(BaseCrawler):
                         img_url = ""
                         buy_link = None
                         
-                        # Price
+                        # Price (Improved Selector)
+                        # 1. Try .hotdeal_val (Most accurate)
+                        val_el = d_soup.select_one('.hotdeal_info .hotdeal_val')
+                        if val_el:
+                            price = val_el.get_text().strip()
+                        else:
+                            # 2. Fallback to regex on info_div
+                            info_div = d_soup.select_one('.hotdeal_info')
+                            if info_div:
+                                p_txt = info_div.get_text().strip()
+                                p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
+                                if p_match: price = p_match.group(1)
+
+                        # Mall Name from Info
                         info_div = d_soup.select_one('.hotdeal_info')
                         if info_div:
-                            p_txt = info_div.get_text().strip()
-                            # logger.info(f"Price Raw Text: {p_txt}") # Debugging
-                            
-                            # Strict Regex: Only digits/commas/won immediately following '가격:'
-                            p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
-                            if p_match: 
-                                price = p_match.group(1)
-                            else:
-                                # Fallback: Try finding 12,345원 pattern anywhere if strict fails? 
-                                # No, '3,720' issue suggests we matched something wrong. Keep strict.
-                                pass
-                            
-                            # Mall Name from Info
-                            shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', p_txt)
-                            if shop_match and not buy_link:
-                                pass
+                             shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', info_div.get_text())
+                             if shop_match and not buy_link:
+                                 pass
 
                         # Buy Link
                         link_el = d_soup.select_one('a.hotdeal_url')
@@ -670,12 +670,22 @@ class FMKoreaCrawler(BaseCrawler):
 
 
 class RuliwebCrawler(BaseCrawler):
-    def crawl(self, limit=None):
+    def crawl(self, limit=None, sb=None):
         logger.info("=== [Ruliweb] 크롤링 시작 ===")
         url = "https://bbs.ruliweb.com/market/board/1020?view=gallery"
-        html = self.fetch_page(url, encoding='auto')
-        if not html: return
-        soup = BeautifulSoup(html, 'html.parser')
+        
+        soup = None
+        if sb:
+            logger.info("Using SeleniumBase for Ruliweb...")
+            sb.open(url)
+            sb.sleep(3)
+            html = sb.get_page_source()
+            soup = BeautifulSoup(html, 'html.parser')
+        else:
+             html = self.fetch_page(url, encoding='auto')
+             if html: soup = BeautifulSoup(html, 'html.parser')
+        
+        if not soup: return
         items = soup.select('div.flex_item.article_wrapper')
         if not items:
             items = soup.select('table.board_list_table tr.table_body:not(.notice)')
