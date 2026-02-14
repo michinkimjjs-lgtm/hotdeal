@@ -488,38 +488,39 @@ class FMKoreaCrawler(BaseCrawler):
                 title = sb.get_title()
                 logger.info(f"Page Title: {title}")
                 
-                if "사람인지 확인하십시오" in sb.get_page_source() or "Just a moment" in title or "Cloudflare" in title:
-                    logger.warning("🚨 Cloudflare Challenge Detected! Attempting to bypass...")
+                # DETECT: Check for Korean title or specific security keywords
+                # Note: get_page_source() often cannot see inside the Turnstile iframe, so relying on Title is safer.
+                if "보안" in title or "Security" in title or "Cloudflare" in title or "Just a moment" in title:
+                    logger.warning(f"🚨 Security Check Detected ({title})! Attempting to bypass...")
                     
                     try:
-                        # Strategy A: Built-in UC Mode Click + Mouse Move
-                        logger.info("Strategy A: UC Click with Mouse Move")
+                        # Strategy A: Built-in UC Mode Click (Visual Detection)
+                        # This works best because it finds the checkbox visually, even in iframes.
+                        logger.info("Strategy A: uc_gui_click_captcha()")
                         sb.uc_gui_click_captcha() 
-                        sb.sleep(5)
+                        sb.sleep(10) # Wait for reload
                     except Exception as e:
                         logger.error(f"Strategy A failed: {e}")
 
-                    try:
-                        # Strategy B: Manual Iframe Switch & Click
-                        # Cloudflare turnstile is often in an iframe with 'turnstile' in src or name
-                        if sb.is_element_visible("iframe[src*='turnstile']"):
-                            logger.info("Strategy B: Switching to Turnstile iframe...")
-                            sb.switch_to_frame("iframe[src*='turnstile']")
-                            sb.sleep(1)
-                            if sb.is_element_visible("input[type='checkbox']"):
-                                sb.click("input[type='checkbox']")
-                            else:
-                                # Sometimes it's a shadow root or body click
-                                sb.click("body")
-                            sb.sleep(5)
-                            sb.switch_to_default_content()
-                    except Exception as e:
-                        logger.warning(f"Strategy B failed: {e}")
+                    # Re-check title after attempt
+                    if "보안" in sb.get_title():
+                        logger.warning("Still stuck. Trying explicit iframe switch...")
+                        try: 
+                             # Strategy B: Brute-force iframe search
+                             frames = sb.find_elements("iframe")
+                             for frame in frames:
+                                 try:
+                                     sb.switch_to_frame(frame)
+                                     if sb.is_element_visible("input[type='checkbox']"):
+                                         sb.click("input[type='checkbox']")
+                                         sb.sleep(5)
+                                         sb.switch_to_default_content()
+                                         break
+                                     sb.switch_to_default_content()
+                                 except:
+                                     sb.switch_to_default_content()
+                        except: pass
                 
-                # Double check if we are through
-                if "fmkorea.com" not in sb.get_current_url() and "hotdeal" not in sb.get_current_url():
-                     logger.error("Still stuck. Saving final screenshot.")
-
                 # 3. Debugging: Save info (Keep this for verification)
                 import os
                 cwd = os.getcwd()
