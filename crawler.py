@@ -467,11 +467,11 @@ class PpomppuCrawler(BaseCrawler):
 class FMKoreaCrawler(BaseCrawler):
     def __init__(self, supabase_url, supabase_key):
         super().__init__(supabase_url, supabase_key)
-        # 430 Error fix: Update impersonation to chrome110 which is often more stable
-        self.session = cffi_requests.Session(impersonate="chrome110")
+        # 430 Error fix: Update impersonation to safari15_3 (often better for Cloudflare)
+        self.session = cffi_requests.Session(impersonate="safari15_3")
 
     def crawl(self, limit=None):
-        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi/edge99) ===")
+        logger.info("=== [FMKorea] 크롤링 시작 (curl_cffi/safari15_3) ===")
         
         try:
             url = "https://www.fmkorea.com/hotdeal"
