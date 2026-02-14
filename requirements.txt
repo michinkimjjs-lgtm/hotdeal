@@ -4,4 +4,3 @@ supabase
 pydantic
 postgrest
 curl_cffi
-playwright
