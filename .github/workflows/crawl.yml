@@ -34,3 +34,10 @@ jobs:
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: |
         python run_once.py
+    
+    - name: Upload Debug Screenshot
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: fmkorea-debug
+        path: fmkorea_debug.png
