@@ -474,7 +474,9 @@ class FMKoreaCrawler(BaseCrawler):
         
         try:
             # UC=True for anti-bot bypass, Headless=False (handled by xvfb in CI)
-            with SB(uc=True, test=True, headless=False, locale_code="ko") as sb:
+            # Added args to prevent "Render process gone" (OOM/SHM crash)
+            with SB(uc=True, test=True, headless=False, locale_code="ko", 
+                   chromium_arg="--disable-dev-shm-usage --no-sandbox --disable-gpu") as sb:
                 url = "https://www.fmkorea.com/hotdeal"
                 
                 # 1. Open List Page
