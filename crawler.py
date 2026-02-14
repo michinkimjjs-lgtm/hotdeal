@@ -479,32 +479,43 @@ class FMKoreaCrawler(BaseCrawler):
                    chromium_arg="--disable-dev-shm-usage --no-sandbox --disable-gpu") as sb:
                 url = "https://www.fmkorea.com/hotdeal"
                 
-                # 1. Access URL
+                # 1. Access URL with Reconnect (Stronger initial connection)
                 logger.info(f"Connecting to {url}...")
-                sb.open(url)
+                sb.uc_open_with_reconnect(url, reconnect_time=3)
                 sb.sleep(5) 
                 
-                # 2. Debugging: Save info
-                import os
-                cwd = os.getcwd()
-                logger.info(f"Current Working Directory: {cwd}")
-                
-                # Snapshot
-                screenshot_path = os.path.join(cwd, "fmkorea_screenshot.png")
-                sb.save_screenshot(screenshot_path)
-                logger.info(f"Saved screenshot to: {screenshot_path}")
-
-                # Source
-                html_path = os.path.join(cwd, "fmkorea_source.html")
-                html = sb.get_page_source()
-                with open(html_path, "w", encoding="utf-8") as f:
-                    f.write(html)
-                logger.info(f"Saved HTML source to: {html_path} (Length: {len(html)})")
-                
-                # 3. Check specific specific blockers
+                # 2. Cloudflare Turnstile / Challenge Solver
                 title = sb.get_title()
                 logger.info(f"Page Title: {title}")
+                
+                if "사람인지 확인하십시오" in sb.get_page_source() or "Just a moment" in title or "Cloudflare" in title:
+                    logger.warning("🚨 Cloudflare Challenge Detected! Attempting to bypass...")
+                    
+                    try:
+                        # Strategy A: Built-in UC Mode Click
+                        logger.info("Strategy A: uc_gui_click_captcha()")
+                        sb.uc_gui_click_captcha()
+                        sb.sleep(5)
+                    except Exception as e:
+                        logger.error(f"Strategy A failed: {e}")
 
+                    try:
+                        # Strategy B: Frame Switch & Click
+                        if not "fmkorea" in sb.get_current_url():
+                            logger.info("Strategy B: Switching to iframe...")
+                            sb.switch_to_frame("iframe") # Common CF iframe
+                            sb.click("input[type='checkbox']")
+                            sb.sleep(5)
+                            sb.switch_to_default_content()
+                    except Exception as e:
+                        logger.warning(f"Strategy B failed (might be normal): {e}")
+
+                # 3. Debugging: Save info (Keep this for verification)
+                import os
+                cwd = os.getcwd()
+                sb.save_screenshot(os.path.join(cwd, "fmkorea_screenshot.png"))
+
+                html = sb.get_page_source()
                 soup = BeautifulSoup(html, 'html.parser')
                 
                 items = soup.select('.fm_best_widget._bd_pc li.li')

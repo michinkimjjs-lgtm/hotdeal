@@ -11,9 +11,8 @@ try {
     git add .
 
     Write-Host "3. Committing..."
-    # Use a unique message to ensure it's distinct
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Add Enhanced Debugging: HTML Source & Screenshot (Retry $timestamp)"
+    git commit --allow-empty -m "Add Cloudflare Anti-Turnstile Logic (Retry $timestamp)"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main
