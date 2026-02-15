@@ -546,32 +546,22 @@ class FMKoreaCrawler(BaseCrawler):
                         title = title_el.get_text().strip()
                         
                         # Detail Page
-                        current_url = sb.get_current_url()
+                        # Detail Page
+                        # CRITICAL FIX: Clear DOM to ensure we don't scrape stale content
+                        # This guarantees that if we find .hotdeal_info later, it's from the NEW page.
+                        try:
+                            sb.execute_script("document.body.innerHTML = '<body>Loading...</body>';")
+                        except: pass # If fails (e.g. alert open), we proceed anyway
+                        
                         sb.open(link)
                         
-                        # Wait for URL change
-                        url_changed = False
-                        for _ in range(20): # 10 seconds
-                            if sb.get_current_url() != current_url and sb.get_current_url() != "about:blank":
-                                url_changed = True
-                                break
-                            sb.sleep(0.5)
-                        
-                        if not url_changed:
-                            logger.warning(f"Failed to navigate to {link}. Skipping...")
-                            continue
-
-                        # Wait for content
-                        try:
-                            sb.wait_for_element("div.hotdeal_info", timeout=5)
-                        except:
-                            logger.warning(f"Detail page content not found for {link}. Skipping...")
-                            continue
+                        # Wait for potential page load (Cloudflare or Content)
+                        sb.sleep(2.5) 
 
                         # -----------------------------------------------------------
                         # DETECT CLOUDFLARE ON DETAIL PAGE
                         # -----------------------------------------------------------
-                        if "사람인지" in sb.get_page_source() or "보안" in sb.get_title():
+                        if "사람인지" in sb.get_page_source() or "보안" in sb.get_title() or "Just a moment" in sb.get_title():
                             logger.warning(f"🚨 Security Check on Detail Page! Attempting to bypass...")
                             try:
                                 sb.uc_gui_click_captcha()
@@ -588,6 +578,13 @@ class FMKoreaCrawler(BaseCrawler):
                                         except: sb.switch_to_default_content()
                             except: pass
                         # -----------------------------------------------------------
+
+                        # Wait for content (Now this GUARANTEES new page matches)
+                        try:
+                            sb.wait_for_element("div.hotdeal_info", timeout=5)
+                        except:
+                            logger.warning(f"Detail page content not found for {link}. Skipping...")
+                            continue
  
                         content_html = sb.get_page_source()
                         d_soup = BeautifulSoup(content_html, 'html.parser')

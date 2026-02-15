@@ -12,7 +12,7 @@ try {
 
     Write-Host "3. Committing..."
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Strict Navigation Check for FMKorea (Fix Duplicate Prices) $timestamp"
+    git commit --allow-empty -m "Fix FMKorea Stale DOM (Clear Body) $timestamp"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main
