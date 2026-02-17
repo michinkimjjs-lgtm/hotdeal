@@ -12,7 +12,7 @@ try {
 
     Write-Host "3. Committing..."
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Logic Fix: Filter Out List Items to Find Real Price $timestamp"
+    git commit --allow-empty -m "Deep Search Debug: Trace '쇼핑몰' path $timestamp"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main
