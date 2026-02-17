@@ -598,16 +598,26 @@ class FMKoreaCrawler(BaseCrawler):
                         buy_link = None
                         
                         # Price (Improved Selector)
+                        # Debugging: Check for multiple price tags (Sidebar interference?)
+                        candidates = d_soup.select('.hotdeal_info .hotdeal_val')
+                        logger.info(f"Found {len(candidates)} price candidates:")
+                        for idx, c in enumerate(candidates):
+                            logger.info(f"  [{idx}] {c.get_text().strip()} (Parent: {c.parent.name if c.parent else 'None'} class: {c.parent.get('class') if c.parent else 'N/A'})")
+
                         val_el = d_soup.select_one('.hotdeal_info .hotdeal_val')
                         if val_el:
                             price = val_el.get_text().strip()
+                            logger.info(f"Selected Price via Selector: {price}")
                         else:
                              # Fallback
                             info_div = d_soup.select_one('.hotdeal_info')
                             if info_div:
                                 p_txt = info_div.get_text().strip()
+                                logger.info(f"Fallback Search in info_div: {p_txt[:50]}...")
                                 p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
-                                if p_match: price = p_match.group(1)
+                                if p_match: 
+                                    price = p_match.group(1)
+                                    logger.info(f"Selected Price via Regex: {price}")
                         
                         logger.info(f"Extracted Price: {price}")
 
