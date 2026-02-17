@@ -12,7 +12,7 @@ try {
 
     Write-Host "3. Committing..."
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Target Main Content (.rd_header) to Avoid Sidebar Price Trap $timestamp"
+    git commit --allow-empty -m "Debug Layout: Log All .hotdeal_info Elements $timestamp"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main

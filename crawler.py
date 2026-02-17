@@ -578,17 +578,13 @@ class FMKoreaCrawler(BaseCrawler):
                                         except: sb.switch_to_default_content()
                             except: pass
 
-                        # Wait for content (Specific to Main Article)
+                        # Wait for content
                         try:
-                            # .rd_header is the standard wrapper for title/info in FMKorea PC view
-                            sb.wait_for_element(".rd_header .hotdeal_info", timeout=5)
+                            # Revert to generic wait to find WHAT is on the page
+                            sb.wait_for_element(".hotdeal_info", timeout=5)
                         except:
-                            try:
-                                # Fallback for some layouts
-                                sb.wait_for_element(".hotdeal_info", timeout=2)
-                            except:
-                                logger.warning(f"Detail page content not found for {link} (Title: {sb.get_title()}). Skipping...")
-                                continue
+                            logger.warning(f"Detail page content not found for {link} (Title: {sb.get_title()}). Skipping...")
+                            continue
  
                         content_html = sb.get_page_source()
                         d_soup = BeautifulSoup(content_html, 'html.parser')
@@ -602,31 +598,26 @@ class FMKoreaCrawler(BaseCrawler):
                         img_url = ""
                         buy_link = None
                         
-                        # Price Analysis (Targeting Main Content)
-                        # Structure: .rd_header > .hotdeal_info > .hotdeal_val
-                        main_info = d_soup.select_one('.rd_header .hotdeal_info') or d_soup.select_one('.rd_hd .hotdeal_info')
+                        # LAYOUT DEBUGGING
+                        infos = d_soup.select('.hotdeal_info')
+                        logger.info(f"Found {len(infos)} .hotdeal_info elements:")
+                        for idx, info in enumerate(infos):
+                            parent = info.parent
+                            p_class = parent.get('class') if parent else 'NoParent'
+                            p_id = parent.get('id') if parent else 'NoID'
+                            txt = info.get_text().strip().replace('\n', ' ')[:100]
+                            logger.info(f"  [{idx}] Parent: <{parent.name} class={p_class} id={p_id}> | Text: {txt}...")
                         
-                        if main_info:
-                            # 1. Try .hotdeal_val inside main info
-                            val_el = main_info.select_one('.hotdeal_val')
-                            if val_el:
-                                price = val_el.get_text().strip()
-                                logger.info(f"Price found via Main Selector: {price}")
-                            else:
-                                # 2. Fallback regex on main info text
-                                p_txt = main_info.get_text().strip()
-                                p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
-                                if p_match: 
-                                    price = p_match.group(1)
-                                    logger.info(f"Price found via Main Regex: {price}")
-                        else:
-                             # Last resort: Try global but exclude known sidebars if possible?
-                             # For now, just log failure to avoid sidebar trap
-                             logger.warning("Main .hotdeal_info not found! (Avoided sidebar trap)")
-                             
-                             # VERY Risky Fallback: Only if we are desperate
-                             # info_div = d_soup.select_one('.hotdeal_info') ... NO, leads to duplicates.
-                             pass
+                        # Temporary Fallback to keep existing behavior (first one)
+                        if infos:
+                            p_txt = infos[0].get_text().strip()
+                            p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
+                            if p_match: price = p_match.group(1)
+                            
+                        # Mall Name from Info
+                        if infos:
+                            shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', infos[0].get_text())
+                            if shop_match: pass
 
                         # Mall Name from Info
                         info_div = d_soup.select_one('.hotdeal_info')
