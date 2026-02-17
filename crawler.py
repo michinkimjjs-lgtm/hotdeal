@@ -598,71 +598,65 @@ class FMKoreaCrawler(BaseCrawler):
                         img_url = ""
                         buy_link = None
                         
-                        # DEEP LAYOUT INSPECTION
-                        # The standard .hotdeal_info selector only found list items (div.li). 
-                        # We need to find where the ACTUAL main content is hiding.
+                        # SPECIFIC TABLE EXTRACTION (Based on Deep Search Findings)
+                        # We confirmed the main info is in 'table.hotdeal_table'
+                        # Structure is likely:
+                        # <tr><th>쇼핑몰</th><td>...</td></tr>
+                        # <tr><th>가격</th><td>...</td></tr>
                         
-                        logger.info("--- DEEP LAYOUT INSPECTION START ---")
-                        
-                        # Find all text nodes containing "쇼핑몰"
-                        # This word is always present in the info block.
-                        candidates = d_soup.find_all(string=re.compile("쇼핑몰"))
-                        
-                        found_main = False
-                        
-                        for i, c in enumerate(candidates):
-                            # Traverse up to build path
-                            path = []
-                            curr = c.parent
-                            is_list_item = False
-                            
-                            for _ in range(6): # Go up 6 levels
-                                if not curr: break
-                                name = curr.name
-                                classes = ".".join(curr.get('class', []))
-                                desc = f"{name}"
-                                if classes: desc += f".{classes}"
-                                
-                                path.append(desc)
-                                
-                                # Check if inside list
-                                if name == 'li' or 'li' in curr.get('class', []):
-                                    is_list_item = True
-                                
-                                curr = curr.parent
-                                
-                            path_str = " > ".join(path)
-                            txt_content = c.strip()[:30]
-                            
-                            logger.info(f"Match [{i}]: '{txt_content}'")
-                            logger.info(f"  Path: {path_str}")
-                            
-                            if not is_list_item:
-                                logger.info(f"  ✅ CANDIDATE FOR MAIN CONTENT! (Not in List)")
-                                # Attempt experimental extraction from this node's container
-                                try:
-                                    # Assuming the container is the direct parent or grand-parent
-                                    # Try to find '가격' sibling or regular text
-                                    container = c.parent.parent # conservative
-                                    full_text = container.get_text().strip()
-                                    price_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', full_text)
-                                    if price_match:
-                                        found_price = price_match.group(1)
-                                        logger.info(f"  💰 Extracted Price from Deep Search Candidate: {found_price}")
-                                        price = found_price
-                                        found_main = True
-                                except: pass
-                            else:
-                                logger.info(f"  (Skipping List Item)")
+                        main_table = d_soup.select_one('.hotdeal_table')
+                        if main_table:
+                            logger.info("Found main info table (.hotdeal_table)")
+                            rows = main_table.select('tr')
+                            for row in rows:
+                                row_txt = row.get_text().strip()
+                                # Price
+                                if '가격' in row_txt:
+                                    # Try to find value in specific cell if possible, otherwise regex whole row
+                                    cells = row.select('td')
+                                    if cells:
+                                        # Assume value is in the first td
+                                        val_txt = cells[0].get_text().strip()
+                                        # Cleanup "13,860원" -> "13,860"
+                                        p_match = re.search(r'([0-9,]+)(?:원)?', val_txt)
+                                        if p_match:
+                                            price = p_match.group(1) + "원" # Append Won standardized
+                                            logger.info(f"  💰 Price found in table: {price}")
+                                    else:
+                                        # Fallback regex on row
+                                        p_match = re.search(r'가격\s*[:]?\s*([0-9,]+(?:원)?)', row_txt)
+                                        if p_match:
+                                            price = p_match.group(1)
+                                            logger.info(f"  💰 Price found in row text: {price}")
 
-                        if not found_main:
-                            logger.warning("❌ No main content found via Deep Search (All '쇼핑몰' texts were in lists).")
+                                # Mall Name - If we haven't found it yet or want to confirm
+                                if '쇼핑몰' in row_txt:
+                                    cells = row.select('td')
+                                    if cells:
+                                        # e.g. "롯데온" might be text or link
+                                        mall_txt = cells[0].get_text().strip()
+                                        if mall_txt:
+                                            logger.info(f"  🏪 Mall found in table: {mall_txt}")
+                                            # We don't have a mall variable to store this yet but good to know
+                        else:
+                            logger.warning("❌ .hotdeal_table not found. Falling back to legacy list search (unreliable).")
                             
-                        logger.info("--- DEEP LAYOUT INSPECTION END ---")
-                        
-                        # Fallback for Mall Name (just use first found for now)
-                        if candidates:
-                            pass # Mall extraction logic is implicit in future steps if needed
+                            # FALLBACK: Try to find ANY price format if table is missing
+                            # This helps if the layout changes again
+                            candidates = d_soup.find_all(string=re.compile("가격"))
+                            for c in candidates:
+                                if "댓글" in c: continue # Skip comment counts
+                                parent = c.parent
+                                while parent and parent.name not in ['div', 'tr', 'p']:
+                                    parent = parent.parent
+                                if parent:
+                                    txt = parent.get_text()
+                                    if 'li' in parent.get('class', []): continue # Skip sidebar
+                                    
+                                    p_match = re.search(r'([0-9,]+)(?:원)', txt)
+                                    if p_match:
+                                        price = p_match.group(1) + "원"
+                                        break
 
                         # Mall Name from Info
                         info_div = d_soup.select_one('.hotdeal_info')

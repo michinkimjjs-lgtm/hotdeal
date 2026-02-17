@@ -12,7 +12,7 @@ try {
 
     Write-Host "3. Committing..."
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Deep Search Retry 5: Fix apply error and trace '쇼핑몰' path $timestamp"
+    git commit --allow-empty -m "Fix Price Extraction: Target .hotdeal_table directly based on deep search $timestamp"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main
