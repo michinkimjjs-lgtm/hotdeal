@@ -12,7 +12,7 @@ try {
 
     Write-Host "3. Committing..."
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git commit --allow-empty -m "Debug Layout: Log All .hotdeal_info Elements $timestamp"
+    git commit --allow-empty -m "Logic Fix: Filter Out List Items to Find Real Price $timestamp"
     
     Write-Host "4. Pushing to GitHub..."
     git push origin main
