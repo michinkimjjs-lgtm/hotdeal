@@ -547,26 +547,26 @@ class FMKoreaCrawler(BaseCrawler):
                         
                         # Detail Page
                         # Detail Page
+                        # Detail Page
                         # CRITICAL FIX: Clear DOM to ensure we don't scrape stale content
-                        # This guarantees that if we find .hotdeal_info later, it's from the NEW page.
                         try:
                             sb.execute_script("document.body.innerHTML = '<body>Loading...</body>';")
-                        except: pass # If fails (e.g. alert open), we proceed anyway
+                        except: pass
                         
-                        sb.open(link)
+                        logger.info(f"Navigating to: {link}")
+                        sb.driver.get(link)
                         
-                        # Wait for potential page load (Cloudflare or Content)
-                        sb.sleep(2.5) 
+                        # Wait for potential page load
+                        sb.sleep(3) 
 
                         # -----------------------------------------------------------
-                        # DETECT CLOUDFLARE ON DETAIL PAGE
+                        # DETECT CLOUDFLARE
                         # -----------------------------------------------------------
                         if "사람인지" in sb.get_page_source() or "보안" in sb.get_title() or "Just a moment" in sb.get_title():
-                            logger.warning(f"🚨 Security Check on Detail Page! Attempting to bypass...")
+                            logger.warning(f"🚨 Security Check! Bypassing...")
                             try:
                                 sb.uc_gui_click_captcha()
                                 sb.sleep(5)
-                                # Fallback iframe click
                                 if "보안" in sb.get_title():
                                     frames = sb.find_elements("iframe")
                                     for frame in frames:
@@ -577,35 +577,39 @@ class FMKoreaCrawler(BaseCrawler):
                                             sb.switch_to_default_content()
                                         except: sb.switch_to_default_content()
                             except: pass
-                        # -----------------------------------------------------------
 
-                        # Wait for content (Now this GUARANTEES new page matches)
+                        # Wait for content
                         try:
                             sb.wait_for_element("div.hotdeal_info", timeout=5)
                         except:
-                            logger.warning(f"Detail page content not found for {link}. Skipping...")
+                            logger.warning(f"Detail page content not found for {link} (Title: {sb.get_title()}). Skipping...")
                             continue
  
                         content_html = sb.get_page_source()
                         d_soup = BeautifulSoup(content_html, 'html.parser')
                         
+                        # Debugging Log
+                        page_title = d_soup.select_one('title').get_text() if d_soup.select_one('title') else "No Title"
+                        logger.info(f"Loaded Page: {page_title} | URL: {sb.get_current_url()}")
+
                         # Extract fields
                         price = "가격미상"
                         img_url = ""
                         buy_link = None
                         
                         # Price (Improved Selector)
-                        # 1. Try .hotdeal_val (Most accurate)
                         val_el = d_soup.select_one('.hotdeal_info .hotdeal_val')
                         if val_el:
                             price = val_el.get_text().strip()
                         else:
-                            # 2. Fallback to regex on info_div
+                             # Fallback
                             info_div = d_soup.select_one('.hotdeal_info')
                             if info_div:
                                 p_txt = info_div.get_text().strip()
                                 p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
                                 if p_match: price = p_match.group(1)
+                        
+                        logger.info(f"Extracted Price: {price}")
 
                         # Mall Name from Info
                         info_div = d_soup.select_one('.hotdeal_info')
