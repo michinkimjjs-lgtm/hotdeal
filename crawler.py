@@ -598,26 +598,71 @@ class FMKoreaCrawler(BaseCrawler):
                         img_url = ""
                         buy_link = None
                         
-                        # LAYOUT DEBUGGING
-                        infos = d_soup.select('.hotdeal_info')
-                        logger.info(f"Found {len(infos)} .hotdeal_info elements:")
-                        for idx, info in enumerate(infos):
-                            parent = info.parent
-                            p_class = parent.get('class') if parent else 'NoParent'
-                            p_id = parent.get('id') if parent else 'NoID'
-                            txt = info.get_text().strip().replace('\n', ' ')[:100]
-                            logger.info(f"  [{idx}] Parent: <{parent.name} class={p_class} id={p_id}> | Text: {txt}...")
+                        # DEEP LAYOUT INSPECTION
+                        # The standard .hotdeal_info selector only found list items (div.li). 
+                        # We need to find where the ACTUAL main content is hiding.
                         
-                        # Temporary Fallback to keep existing behavior (first one)
-                        if infos:
-                            p_txt = infos[0].get_text().strip()
-                            p_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', p_txt)
-                            if p_match: price = p_match.group(1)
+                        logger.info("--- DEEP LAYOUT INSPECTION START ---")
+                        
+                        # Find all text nodes containing "쇼핑몰"
+                        # This word is always present in the info block.
+                        candidates = d_soup.find_all(string=re.compile("쇼핑몰"))
+                        
+                        found_main = False
+                        
+                        for i, c in enumerate(candidates):
+                            # Traverse up to build path
+                            path = []
+                            curr = c.parent
+                            is_list_item = False
                             
-                        # Mall Name from Info
-                        if infos:
-                            shop_match = re.search(r'쇼핑몰\s*:\s*([^\s<]+)', infos[0].get_text())
-                            if shop_match: pass
+                            for _ in range(6): # Go up 6 levels
+                                if not curr: break
+                                name = curr.name
+                                classes = ".".join(curr.get('class', []))
+                                desc = f"{name}"
+                                if classes: desc += f".{classes}"
+                                
+                                path.append(desc)
+                                
+                                # Check if inside list
+                                if name == 'li' or 'li' in curr.get('class', []):
+                                    is_list_item = True
+                                
+                                curr = curr.parent
+                                
+                            path_str = " > ".join(path)
+                            txt_content = c.strip()[:30]
+                            
+                            logger.info(f"Match [{i}]: '{txt_content}'")
+                            logger.info(f"  Path: {path_str}")
+                            
+                            if not is_list_item:
+                                logger.info(f"  ✅ CANDIDATE FOR MAIN CONTENT! (Not in List)")
+                                # Attempt experimental extraction from this node's container
+                                try:
+                                    # Assuming the container is the direct parent or grand-parent
+                                    # Try to find '가격' sibling or regular text
+                                    container = c.parent.parent # conservative
+                                    full_text = container.get_text().strip()
+                                    price_match = re.search(r'가격\s*:\s*([0-9,]+(?:원)?)', full_text)
+                                    if price_match:
+                                        found_price = price_match.group(1)
+                                        logger.info(f"  💰 Extracted Price from Deep Search Candidate: {found_price}")
+                                        price = found_price
+                                        found_main = True
+                                except: pass
+                            else:
+                                logger.info(f"  (Skipping List Item)")
+
+                        if not found_main:
+                            logger.warning("❌ No main content found via Deep Search (All '쇼핑몰' texts were in lists).")
+                            
+                        logger.info("--- DEEP LAYOUT INSPECTION END ---")
+                        
+                        # Fallback for Mall Name (just use first found for now)
+                        if candidates:
+                            pass # Mall extraction logic is implicit in future steps if needed
 
                         # Mall Name from Info
                         info_div = d_soup.select_one('.hotdeal_info')
