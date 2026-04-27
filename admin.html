@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드 - 핫딜모아</title>
+    <link rel="stylesheet" href="admin.css?v=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- 상단 내비게이션 바 -->
+        <header class="admin-header">
+            <div class="logo">HOTDEAL ADMIN</div>
+        </header>
+
+        <main class="admin-main">
+            <!-- 대시보드 타이틀 -->
+            <div class="page-title-row">
+                <h1 class="page-title">📊 어드민 대시보드</h1>
+                <button class="refresh-btn" id="refresh-btn">🔄 새로고침</button>
+            </div>
+
+            <!-- 검색 기간 필터 섹션 -->
+            <div class="filter-panel">
+                <span class="filter-label">기간</span>
+                <input type="date" id="date-start" class="date-input">
+                <span class="filter-separator">~</span>
+                <input type="date" id="date-end" class="date-input">
+                <button class="search-btn" id="search-filter-btn">검색</button>
+                
+                <div class="quick-dates">
+                    <button class="quick-btn" data-days="0">오늘</button>
+                    <button class="quick-btn" data-days="7">7일</button>
+                    <button class="quick-btn" data-days="30">30일</button>
+                    <button class="quick-btn" data-days="90">90일</button>
+                </div>
+            </div>
+
+            <!-- 핵심 지표 요약 카드 -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-title">오늘 수집된 핫딜</div>
+                    <div class="stat-value" id="stat-hotdeals">0</div>
+                </div>
+                <!-- <div class="stat-card">
+                    <div class="stat-title">오늘 누적 방문자</div>
+                    <div class="stat-value" id="stat-visitors">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">오늘 전체 검색량</div>
+                    <div class="stat-value" id="stat-searches">0</div>
+                </div> -->
+            </div>
+
+            <!-- 검색 로그 테이블 -->
+            <div class="table-section">
+                <h2 class="section-title">검색 로그 (<span id="search-log-count">0</span>개)</h2>
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>시간</th>
+                                <th>IP</th>
+                                <th>검색어</th>
+                                <th>결과</th>
+                            </tr>
+                        </thead>
+                        <tbody id="search-log-tbody">
+                            <tr><td colspan="4" class="text-center">데이터를 불러오는 중...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 접속 로그 테이블 -->
+            <div class="table-section" style="margin-top: 30px;">
+                <h2 class="section-title">접속 로그 (<span id="visit-log-count">0</span>개)</h2>
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IP</th>
+                                <th>접속 경로</th>
+                                <th>브라우저</th>
+                                <th>OS</th>
+                                <th>일시</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visit-log-tbody">
+                            <tr><td colspan="5" class="text-center">데이터를 불러오는 중...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 어드민 전용 스크립트 -->
+    <script src="admin.js?v=1.0"></script>
+</body>
+</html>

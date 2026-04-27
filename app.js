@@ -230,6 +230,17 @@ async function searchDeals(query) {
 
         if (error) throw error;
 
+        // --- SEARCH LOG TRACKING ---
+        try {
+            await supabaseClient.from('search_logs').insert([{
+                ip: window.cachedIP || 'Unknown',
+                keyword: query,
+                result_count: count || 0,
+                searched_at: new Date().toISOString()
+            }]);
+        } catch(e) { console.error('Search track error', e); }
+        // ---------------------------
+
         allDeals = data;
         totalCount = count; // Result count
         renderDeals(allDeals);
@@ -279,3 +290,37 @@ const channel = supabaseClient
         }
     })
     .subscribe();
+
+// --- VISIT LOG TRACKING ---
+window.cachedIP = 'Unknown';
+async function logVisit() {
+    try {
+        // Fetch IP address
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        window.cachedIP = ipData.ip;
+
+        // Parse basic Browser / OS
+        let os = 'Unknown OS';
+        if (navigator.userAgent.indexOf("Win") !== -1) os = "Windows";
+        if (navigator.userAgent.indexOf("Mac") !== -1) os = "MacOS";
+        if (navigator.userAgent.indexOf("Android") !== -1) os = "Android";
+        if (navigator.userAgent.indexOf("like Mac") !== -1) os = "iOS";
+
+        let browser = 'Unknown Browser';
+        if (navigator.userAgent.indexOf("Chrome") !== -1) browser = "Chrome";
+        else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
+        else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = "Firefox";
+        else if (navigator.userAgent.indexOf("SamsungBrowser") !== -1) browser = "Samsung Internet";
+
+        await supabaseClient.from('visit_logs').insert([{
+            ip: window.cachedIP,
+            browser: browser,
+            os: os,
+            visited_at: new Date().toISOString(),
+            source_path: 'hotdealmoa.co.kr'
+        }]);
+    } catch(e) { console.error('Visit track error', e); }
+}
+logVisit();
+// ----------------------------
