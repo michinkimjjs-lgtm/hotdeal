@@ -12,7 +12,7 @@ const visitLogCount = document.getElementById('visit-log-count');
 const refreshBtn = document.getElementById('refresh-btn');
 
 // --- Login Logic ---
-const ADMIN_PW = "hotdeal123!"; // 임시 비밀번호
+const ADMIN_PW = "michin2002@"; // 임시 비밀번호
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginOverlay = document.getElementById('login-overlay');
