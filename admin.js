@@ -11,32 +11,66 @@ const searchLogCount = document.getElementById('search-log-count');
 const visitLogCount = document.getElementById('visit-log-count');
 const refreshBtn = document.getElementById('refresh-btn');
 
+// --- Login Logic ---
+const ADMIN_PW = "hotdeal123!"; // 임시 비밀번호
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 날짜 기본 설정
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('date-start').value = today;
-    document.getElementById('date-end').value = today;
+    const loginOverlay = document.getElementById('login-overlay');
+    const adminContent = document.getElementById('admin-content');
+    const pwInput = document.getElementById('admin-password');
+    const loginBtn = document.getElementById('login-btn');
+    const loginError = document.getElementById('login-error');
 
-    // 데이터 로드
-    fetchData();
+    // Check localStorage for session
+    if (localStorage.getItem('admin_auth') === 'true') {
+        initAdmin();
+    }
 
-    refreshBtn.addEventListener('click', fetchData);
-    document.getElementById('search-filter-btn').addEventListener('click', fetchData);
-
-    // 날짜 퀵 필터 설정
-    document.querySelectorAll('.quick-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const daysToSubtract = parseInt(e.target.getAttribute('data-days'));
-            const endDate = new Date();
-            const startDate = new Date();
-            startDate.setDate(endDate.getDate() - daysToSubtract);
-            
-            document.getElementById('date-start').value = startDate.toISOString().split('T')[0];
-            document.getElementById('date-end').value = endDate.toISOString().split('T')[0];
-            
-            fetchData();
-        });
+    loginBtn.addEventListener('click', attemptLogin);
+    pwInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') attemptLogin();
     });
+
+    function attemptLogin() {
+        if (pwInput.value === ADMIN_PW) {
+            localStorage.setItem('admin_auth', 'true');
+            initAdmin();
+        } else {
+            loginError.style.display = 'block';
+            pwInput.value = '';
+            pwInput.focus();
+        }
+    }
+
+    function initAdmin() {
+        loginOverlay.style.display = 'none';
+        adminContent.style.display = 'flex'; // 컨테이너 보이게
+
+        // 날짜 기본 설정 및 데이터 로드 시작
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date-start').value = today;
+        document.getElementById('date-end').value = today;
+
+        fetchData();
+
+        refreshBtn.addEventListener('click', fetchData);
+        document.getElementById('search-filter-btn').addEventListener('click', fetchData);
+
+        // 날짜 퀵 필터 설정
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const daysToSubtract = parseInt(e.target.getAttribute('data-days'));
+                const endDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(endDate.getDate() - daysToSubtract);
+                
+                document.getElementById('date-start').value = startDate.toISOString().split('T')[0];
+                document.getElementById('date-end').value = endDate.toISOString().split('T')[0];
+                
+                fetchData();
+            });
+        });
+    }
 });
 
 function formatDateTime(isoString) {

@@ -11,7 +11,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="admin-container">
+    <!-- 로그인 오버레이 -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-box">
+            <div class="login-logo">🔥 HOTDEAL ADMIN</div>
+            <h2>관리자 로그인</h2>
+            <p>관리자 비밀번호를 입력해주세요.</p>
+            <input type="password" id="admin-password" placeholder="비밀번호..." autocomplete="off">
+            <button id="login-btn">접속하기</button>
+            <div id="login-error" class="login-error" style="display: none;">비밀번호가 일치하지 않습니다.</div>
+        </div>
+    </div>
+
+    <div class="admin-container" id="admin-content" style="display: none;">
         <!-- 상단 내비게이션 바 -->
         <header class="admin-header">
             <div class="logo">HOTDEAL ADMIN</div>

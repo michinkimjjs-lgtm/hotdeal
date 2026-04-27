@@ -232,3 +232,84 @@ tr:hover td {
 .text-center {
     text-align: center;
 }
+
+/* 로그인 오버레이 스타일 */
+.login-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--bg-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.login-box {
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.login-logo {
+    color: var(--accent-color);
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.login-box h2 {
+    color: var(--text-primary);
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.login-box p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    background-color: #1A202C;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    outline: none;
+    color-scheme: dark;
+}
+
+.login-box input:focus {
+    border-color: var(--accent-color);
+}
+
+.login-box button {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-box button:hover {
+    background-color: var(--accent-hover);
+}
+
+.login-error {
+    color: var(--error-color);
+    font-size: 13px;
+    margin-top: 15px;
+}
