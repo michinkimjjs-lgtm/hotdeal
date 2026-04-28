@@ -46,7 +46,7 @@ class BaseCrawler:
     def __init__(self, supabase_url, supabase_key):
         self.supabase: Client = create_client(supabase_url, supabase_key)
         # Use curl_cffi for better impersonation and encoding handling
-        self.session = cffi_requests.Session(impersonate="chrome120")
+        self.session = cffi_requests.Session(impersonate="chrome110")
         
     def fetch_page(self, url, encoding='utf-8', retries=3, referer=None, custom_headers=None):
         for i in range(retries):
@@ -471,6 +471,7 @@ class FMKoreaCrawler(BaseCrawler):
     def crawl(self, limit=None):
         logger.info("=== [FMKorea] 크롤링 시작 (SeleniumBase) ===")
         from seleniumbase import SB
+        count = 0
         
         try:
             # UC=True for anti-bot bypass, Headless=False (handled by xvfb in CI)
