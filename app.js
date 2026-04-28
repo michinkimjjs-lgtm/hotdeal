@@ -180,7 +180,7 @@ function renderDeals(deals) {
                         <span class="deal-comment">💬 ${deal.comment_count || 0}</span>
                     </div>
                     <div class="deal-price">${deal.price || '가격미상'}</div>
-                    <a href="detail.html?id=${deal.id}" class="view-btn">상세보기</a>
+                    <a href="detail.html?id=${deal.id}" class="view-btn" onclick="trackClick(${deal.id}, \`${(deal.title || '').replace(/`/g, '')}\`)">상세보기</a>
                 </div>
             </div>
         </div>
@@ -323,4 +323,17 @@ async function logVisit() {
     } catch(e) { console.error('Visit track error', e); }
 }
 logVisit();
+// ----------------------------
+
+// --- CLICK LOG TRACKING ---
+window.trackClick = function(dealId, title) {
+    try {
+        supabaseClient.from('click_logs').insert([{
+            ip: window.cachedIP || 'Unknown',
+            deal_id: dealId,
+            deal_title: title,
+            clicked_at: new Date().toISOString()
+        }]).then();
+    } catch(e) { console.error('Click track error', e); }
+};
 // ----------------------------

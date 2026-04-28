@@ -11,6 +11,13 @@ const searchLogCount = document.getElementById('search-log-count');
 const visitLogCount = document.getElementById('visit-log-count');
 const refreshBtn = document.getElementById('refresh-btn');
 
+// Chart globals
+let trafficChartInstance = null;
+let browserChartInstance = null;
+let visitDataForChart = [];
+let searchDataForChart = [];
+let browserDataForChart = {};
+
 // --- Login Logic ---
 const ADMIN_PW = "michin2002@"; // 임시 비밀번호
 
@@ -95,11 +102,19 @@ async function fetchData() {
     const startDate = document.getElementById('date-start').value + "T00:00:00.000Z";
     const endDate = document.getElementById('date-end').value + "T23:59:59.999Z";
 
+    visitDataForChart = [];
+    searchDataForChart = [];
+    browserDataForChart = {};
+
     await Promise.all([
         fetchSearchLogs(startDate, endDate),
         fetchVisitLogs(startDate, endDate),
-        fetchHotdealsCount(startDate, endDate)
+        fetchHotdealsCount(startDate, endDate),
+        fetchClickLogs(startDate, endDate),
+        fetchCrawlerStatus()
     ]);
+
+    updateCharts();
 }
 
 async function fetchHotdealsCount(startDate, endDate) {
@@ -128,7 +143,6 @@ async function fetchSearchLogs(startDate, endDate) {
 
         if (error) {
             console.error('Error fetching search logs:', error);
-            // 테이블이 아직 없으면 무시
             if(error.code === '42P01') {
                 searchLogTbody.innerHTML = '<tr><td colspan="4" class="text-center">Supabase에 search_logs 테이블이 없습니다.</td></tr>';
                 return;
@@ -140,13 +154,22 @@ async function fetchSearchLogs(startDate, endDate) {
         
         if (!data || data.length === 0) {
             searchLogTbody.innerHTML = '<tr><td colspan="4" class="text-center">조회된 검색 로그가 없습니다.</td></tr>';
+            document.getElementById('top-keywords-tbody').innerHTML = '<tr><td colspan="3" class="text-center">데이터 없음</td></tr>';
             return;
         }
+
+        const keywordCounts = {};
 
         searchLogTbody.innerHTML = data.map(log => {
             const hasResult = log.result_count > 0;
             const resultText = hasResult ? '찾음' : '없음';
             const resultClass = hasResult ? 'text-success' : 'text-error';
+
+            if (log.searched_at) {
+                const day = log.searched_at.split('T')[0];
+                searchDataForChart.push(day);
+            }
+            keywordCounts[log.keyword] = (keywordCounts[log.keyword] || 0) + 1;
 
             return `
                 <tr>
@@ -157,6 +180,15 @@ async function fetchSearchLogs(startDate, endDate) {
                 </tr>
             `;
         }).join('');
+
+        const topKeywords = Object.entries(keywordCounts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        document.getElementById('top-keywords-tbody').innerHTML = topKeywords.map((kw, i) => `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${kw[0]}</td>
+                <td>${kw[1]}</td>
+            </tr>
+        `).join('');
 
     } catch (err) {
         searchLogTbody.innerHTML = '<tr><td colspan="4" class="text-center">오류가 발생했습니다.</td></tr>';
@@ -188,6 +220,13 @@ async function fetchVisitLogs(startDate, endDate) {
         }
 
         visitLogTbody.innerHTML = data.map(log => {
+            if (log.visited_at) {
+                const day = log.visited_at.split('T')[0];
+                visitDataForChart.push(day);
+            }
+            const b = log.browser || 'Unknown';
+            browserDataForChart[b] = (browserDataForChart[b] || 0) + 1;
+
             return `
                 <tr>
                     <td>${log.ip || '-'}</td>
@@ -202,4 +241,133 @@ async function fetchVisitLogs(startDate, endDate) {
     } catch (err) {
         visitLogTbody.innerHTML = '<tr><td colspan="5" class="text-center">오류가 발생했습니다.</td></tr>';
     }
+}
+
+async function fetchClickLogs(startDate, endDate) {
+    try {
+        const { data, error } = await supabaseClient
+            .from('click_logs')
+            .select('*')
+            .gte('clicked_at', startDate)
+            .lte('clicked_at', endDate);
+            
+        const tbody = document.getElementById('top-deals-tbody');
+        if (error || !data || data.length === 0) {
+            if(error && error.code === '42P01') {
+                 tbody.innerHTML = '<tr><td colspan="3" class="text-center">click_logs 테이블이 없습니다.</td></tr>';
+                 return;
+            }
+            tbody.innerHTML = '<tr><td colspan="3" class="text-center">데이터 없음</td></tr>';
+            return;
+        }
+
+        const dealCounts = {};
+        data.forEach(log => {
+            const key = log.deal_id + "|||" + log.deal_title;
+            dealCounts[key] = (dealCounts[key] || 0) + 1;
+        });
+
+        const topDeals = Object.entries(dealCounts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+        tbody.innerHTML = topDeals.map((item, i) => {
+            const [id, title] = item[0].split("|||");
+            return `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><a href="../detail.html?id=${id}" target="_blank" style="color: var(--text-primary); text-decoration: underline;">${title}</a></td>
+                    <td>${item[1]}</td>
+                </tr>
+            `;
+        }).join('');
+    } catch(err) {
+        document.getElementById('top-deals-tbody').innerHTML = '<tr><td colspan="3" class="text-center">오류 발생</td></tr>';
+    }
+}
+
+async function fetchCrawlerStatus() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('hotdeals')
+            .select('created_at')
+            .order('created_at', { ascending: false })
+            .limit(1);
+            
+        const statEl = document.getElementById('stat-crawler');
+        if (error || !data || data.length === 0) {
+            statEl.textContent = '데이터 없음';
+            return;
+        }
+        
+        const lastTime = new Date(data[0].created_at);
+        const diffMinutes = Math.floor((new Date() - lastTime) / (1000 * 60));
+        
+        if (diffMinutes > 60) {
+            statEl.innerHTML = `<span style="color: var(--error-color)">🚨 ${diffMinutes}분 전 (장애 의심)</span>`;
+        } else {
+            statEl.innerHTML = `<span style="color: var(--success-color)">🟢 ${diffMinutes}분 전 (정상)</span>`;
+        }
+    } catch(err) {
+        document.getElementById('stat-crawler').textContent = '오류';
+    }
+}
+
+function updateCharts() {
+    // defaults
+    Chart.defaults.color = '#94A3B8';
+    Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+
+    // 1. Traffic Chart (Line)
+    const dates = Array.from(new Set([...visitDataForChart, ...searchDataForChart])).sort();
+    const visitCounts = dates.map(d => visitDataForChart.filter(x => x === d).length);
+    const searchCounts = dates.map(d => searchDataForChart.filter(x => x === d).length);
+    
+    const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+    if (trafficChartInstance) trafficChartInstance.destroy();
+    
+    trafficChartInstance = new Chart(ctxTraffic, {
+        type: 'line',
+        data: {
+            labels: dates.length ? dates : ['오늘'],
+            datasets: [
+                {
+                    label: '방문자',
+                    data: visitCounts.length ? visitCounts : [0],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.3, fill: true
+                },
+                {
+                    label: '검색량',
+                    data: searchCounts.length ? searchCounts : [0],
+                    borderColor: '#E83E8C',
+                    backgroundColor: 'rgba(232, 62, 140, 0.1)',
+                    tension: 0.3, fill: true
+                }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 2. Browser Chart (Doughnut)
+    const ctxBrowser = document.getElementById('browserChart').getContext('2d');
+    if (browserChartInstance) browserChartInstance.destroy();
+
+    const bLabels = Object.keys(browserDataForChart);
+    const bData = Object.values(browserDataForChart);
+    
+    browserChartInstance = new Chart(ctxBrowser, {
+        type: 'doughnut',
+        data: {
+            labels: bLabels.length ? bLabels : ['데이터 없음'],
+            datasets: [{
+                data: bData.length ? bData : [1],
+                backgroundColor: ['#E83E8C', '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'right' } }
+        }
+    });
 }

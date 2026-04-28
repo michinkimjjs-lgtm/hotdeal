@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- 로그인 오버레이 -->
@@ -58,14 +59,65 @@
                     <div class="stat-title">오늘 수집된 핫딜</div>
                     <div class="stat-value" id="stat-hotdeals">0</div>
                 </div>
-                <!-- <div class="stat-card">
+                <div class="stat-card">
                     <div class="stat-title">오늘 누적 방문자</div>
                     <div class="stat-value" id="stat-visitors">0</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-title">오늘 전체 검색량</div>
-                    <div class="stat-value" id="stat-searches">0</div>
-                </div> -->
+                    <div class="stat-title">수집 서버 상태 (마지막 인서트)</div>
+                    <div class="stat-value" id="stat-crawler" style="font-size: 1.2rem;">로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- 시각화 차트 영역 -->
+            <div class="charts-section" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                <div class="chart-card" style="flex: 2; min-width: 400px; background: var(--card-bg); border-radius: 12px; padding: 20px;">
+                    <h2 class="section-title">일별 트래픽 추이 (방문/검색)</h2>
+                    <canvas id="trafficChart" height="200"></canvas>
+                </div>
+                <div class="chart-card" style="flex: 1; min-width: 300px; background: var(--card-bg); border-radius: 12px; padding: 20px;">
+                    <h2 class="section-title">접속 브라우저 환경</h2>
+                    <canvas id="browserChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <!-- 랭킹 섹션 -->
+            <div class="ranking-section" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                <div class="table-section" style="flex: 1; min-width: 300px; margin-top: 0;">
+                    <h2 class="section-title">🏆 인기 핫딜 Top 10 (클릭순)</h2>
+                    <div class="table-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>순위</th>
+                                    <th>상품명</th>
+                                    <th>클릭수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-deals-tbody">
+                                <tr><td colspan="3" class="text-center">데이터를 불러오는 중...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-section" style="flex: 1; min-width: 300px; margin-top: 0;">
+                    <h2 class="section-title">🔥 인기 검색어 Top 10</h2>
+                    <div class="table-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>순위</th>
+                                    <th>검색어</th>
+                                    <th>검색횟수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-keywords-tbody">
+                                <tr><td colspan="3" class="text-center">데이터를 불러오는 중...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- 검색 로그 테이블 -->
