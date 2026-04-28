@@ -160,16 +160,18 @@ async function fetchSearchLogs(startDate, endDate) {
 
         const keywordCounts = {};
 
-        searchLogTbody.innerHTML = data.map(log => {
-            const hasResult = log.result_count > 0;
-            const resultText = hasResult ? '찾음' : '없음';
-            const resultClass = hasResult ? 'text-success' : 'text-error';
-
+        data.forEach(log => {
             if (log.searched_at) {
                 const day = log.searched_at.split('T')[0];
                 searchDataForChart.push(day);
             }
             keywordCounts[log.keyword] = (keywordCounts[log.keyword] || 0) + 1;
+        });
+
+        searchLogTbody.innerHTML = data.slice(0, 50).map(log => {
+            const hasResult = log.result_count > 0;
+            const resultText = hasResult ? '찾음' : '없음';
+            const resultClass = hasResult ? 'text-success' : 'text-error';
 
             return `
                 <tr>
@@ -219,14 +221,16 @@ async function fetchVisitLogs(startDate, endDate) {
             return;
         }
 
-        visitLogTbody.innerHTML = data.map(log => {
+        data.forEach(log => {
             if (log.visited_at) {
                 const day = log.visited_at.split('T')[0];
                 visitDataForChart.push(day);
             }
             const b = log.browser || 'Unknown';
             browserDataForChart[b] = (browserDataForChart[b] || 0) + 1;
+        });
 
+        visitLogTbody.innerHTML = data.slice(0, 50).map(log => {
             return `
                 <tr>
                     <td>${log.ip || '-'}</td>
